@@ -1,0 +1,29 @@
+body {
+  font-family: Arial;
+  padding: 20px;
+  max-width: 700px;
+  margin: auto;
+}
+label,
+select,
+input {
+  display: block;
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 8px;
+}
+.course {
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 8px;
+}
+.eligible {
+  background-color: #e0ffe0;
+}
+.ineligible {
+  background-color: #ffe0e0;
+}
+.hidden {
+  display: none;
+}
