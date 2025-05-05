@@ -9,6 +9,7 @@
   <body>
     <h2>Course Course Recomendation System</h2>
 
+    <!-- Department Selector -->
     <label for="deptSelect">Select Department:</label>
     <select id="deptSelect">
       <option value="">-- Choose a department --</option>
@@ -19,17 +20,70 @@
       <option value="IPE">IPE</option>
     </select>
 
+    <!-- Input Section Grouped Side-by-Side -->
     <div id="courseInputs" class="hidden">
-      <label for="completed"
-        >Enter Completed Course IDs (e.g., 1,2,5-10):</label
-      >
-      <input id="completed" placeholder="e.g., 1, 2, 5-10" />
-
-      <label for="searchName">Enter Course Name to Search:</label>
-      <input id="searchName" placeholder="e.g., Data Structures" />
+      <div class="input-grid">
+        <div>
+          <label for="completed"
+            >Enter Completed Course IDs (e.g., 1,2,5-10):</label
+          >
+          <input id="completed" placeholder="e.g., 1, 2, 5-10" />
+        </div>
+        <div>
+          <label for="searchName">Enter Course Name to Search:</label>
+          <input id="searchName" placeholder="e.g., Data Structures" />
+        </div>
+      </div>
 
       <div id="courses"></div>
     </div>
+    <!-- Beautiful Developer & Download Section -->
+    <section id="dev-section">
+      <div class="download-area">
+        <h3>🎯 Get the Application</h3>
+        <p class="download-description">
+          Experience seamless course planning with our AIUB Course
+          Recommendation System. Click below to download the latest Windows
+          release directly from GitHub:
+        </p>
+        <a
+          href="https://github.com/basharulalammazu/AIUB-Offered-Courses/releases/download/v3.3.0/AIUBOfferedCourse-V3.3.0.zip"
+          target="_blank"
+          class="download-btn"
+        >
+          ⬇️ Download for Windows
+        </a>
+      </div>
+
+      <div class="developer-area">
+        <h3>👨‍💻 Meet the Creators</h3>
+        <p class="dev-intro">
+          Developed with dedication by passionate engineers from AIUB.
+        </p>
+        <div class="dev-cards">
+          <div class="dev-card">
+            <img
+              src="https://avatars.githubusercontent.com/basharulalammazu"
+              alt="Basharul Alam Mazu"
+            />
+            <h4>Basharul - Alam - Mazu</h4>
+            <a href="https://github.com/basharulalammazu" target="_blank"
+              >@basharulalammazu</a
+            >
+          </div>
+          <div class="dev-card">
+            <img
+              src="https://avatars.githubusercontent.com/mdtanjimrahman"
+              alt="Md Tanjim Rahman"
+            />
+            <h4>Md Tanjim Rahman</h4>
+            <a href="https://github.com/mdtanjimrahman" target="_blank"
+              >@mdtanjimrahman</a
+            >
+          </div>
+        </div>
+      </div>
+    </section>
 
     <script src="script.js"></script>
   </body>

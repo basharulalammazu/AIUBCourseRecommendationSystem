@@ -3,9 +3,23 @@ const courseInputs = document.getElementById("courseInputs");
 const completedInput = document.getElementById("completed");
 const searchNameInput = document.getElementById("searchName");
 const coursesDiv = document.getElementById("courses");
+
+// ✅ Add this line to target the dev section
+const devSection = document.getElementById("dev-section");
+
 console.log("Screen width:", window.innerWidth);
 window.addEventListener("resize", () => {
   console.log("Resized screen width:", window.innerWidth);
+});
+
+deptSelect.addEventListener("change", () => {
+  if (deptSelect.value === "") {
+    devSection.style.display = "block"; // Show when no dept is selected
+    courseInputs.classList.add("hidden");
+  } else {
+    devSection.style.display = "none"; // Hide when a dept is selected
+    courseInputs.classList.remove("hidden");
+  }
 });
 
 let currentCourses = [];
