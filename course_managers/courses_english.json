@@ -1,0 +1,471 @@
+[
+  {
+    "id": 1,
+    "name": "ENGLISH READING SKILLS & PUBLIC SPEAKING",
+    "credit": 3.0,
+    "prerequisites": [],
+    "elective": 0
+  },
+  {
+    "id": 2,
+    "name": "BANGLA LANGUAGE AND LITERATURE",
+    "credit": 3.0,
+    "prerequisites": [],
+    "elective": 0
+  },
+  {
+    "id": 3,
+    "name": "FOUNDATIONS OF SOCIOLOGY",
+    "credit": 3.0,
+    "prerequisites": [],
+    "elective": 0
+  },
+  {
+    "id": 4,
+    "name": "COMPUTER FUNDAMENTALS",
+    "credit": 3.0,
+    "prerequisites": [],
+    "elective": 0
+  },
+  {
+    "id": 5,
+    "name": "INTRODUCTION TO ENGLISH LITERATURE",
+    "credit": 3.0,
+    "prerequisites": [],
+    "elective": 0
+  },
+  {
+    "id": 6,
+    "name": "INTRODUCTION TO LINGUISTICS",
+    "credit": 3.0,
+    "prerequisites": [],
+    "elective": 0
+  },
+  {
+    "id": 7,
+    "name": "ENGLISH WRITING",
+    "credit": 3.0,
+    "prerequisites": [1],
+    "elective": 0
+  },
+  {
+    "id": 8,
+    "name": "MORPHOLOGY",
+    "credit": 3.0,
+    "prerequisites": [],
+    "elective": 0
+  },
+  {
+    "id": 9,
+    "name": "HISTORY OF EMERGENCE OF BANGLADESH",
+    "credit": 3.0,
+    "prerequisites": [],
+    "elective": 0
+  },
+  {
+    "id": 10,
+    "name": "APPRECIATION OF POETRY",
+    "credit": 3.0,
+    "prerequisites": [],
+    "elective": 0
+  },
+  {
+    "id": 11,
+    "name": "FUNDAMENTALS OF ECONOMICS",
+    "credit": 3.0,
+    "prerequisites": [],
+    "elective": 0
+  },
+  {
+    "id": 12,
+    "name": "NATURAL SCIENCE",
+    "credit": 3.0,
+    "prerequisites": [],
+    "elective": 0
+  },
+  {
+    "id": 13,
+    "name": "WRITING FOR ARTS AND SOCIAL SCIENCES",
+    "credit": 3.0,
+    "prerequisites": [7],
+    "elective": 0
+  },
+  {
+    "id": 14,
+    "name": "BANGLADESH STUDIES",
+    "credit": 3.0,
+    "prerequisites": [8],
+    "elective": 0
+  },
+  {
+    "id": 15,
+    "name": "ARTS AND AESTHETICS",
+    "credit": 3.0,
+    "prerequisites": [],
+    "elective": 0
+  },
+  {
+    "id": 16,
+    "name": "STATISTICS FOR SOCIAL SCIENCE",
+    "credit": 3.0,
+    "prerequisites": [],
+    "elective": 0
+  },
+  {
+    "id": 17,
+    "name": "HISTORY OF ENGLISH LANGUAGE",
+    "credit": 3.0,
+    "prerequisites": [],
+    "elective": 0
+  },
+  {
+    "id": 18,
+    "name": "ELEMENTARY ACCOUNTING",
+    "credit": 3.0,
+    "prerequisites": [],
+    "elective": 0
+  },
+  {
+    "id": 19,
+    "name": "APPRECIATION OF PROSE",
+    "credit": 3.0,
+    "prerequisites": [],
+    "elective": 0
+  },
+  {
+    "id": 20,
+    "name": "CLASSROOM MANAGEMENT TECHNIQUES IN ELT",
+    "credit": 3.0,
+    "prerequisites": [6],
+    "elective": 0
+  },
+  {
+    "id": 21,
+    "name": "APPRECIATION OF DRAMA",
+    "credit": 3.0,
+    "prerequisites": [],
+    "elective": 0
+  },
+  {
+    "id": 22,
+    "name": "PROFESSIONAL ENGLISH",
+    "credit": 3.0,
+    "prerequisites": [7],
+    "elective": 0
+  },
+  {
+    "id": 23,
+    "name": "SOCIAL SCIENCE RESEARCH METHODOLOGY",
+    "credit": 3.0,
+    "prerequisites": [16],
+    "elective": 0
+  },
+  {
+    "id": 24,
+    "name": "COGNITIVE AND SOCIAL PSYCHOLOGY",
+    "credit": 3.0,
+    "prerequisites": [],
+    "elective": 0
+  },
+  {
+    "id": 25,
+    "name": "PHILOSOPHY AND ETHICS",
+    "credit": 3.0,
+    "prerequisites": [],
+    "elective": 0
+  },
+  {
+    "id": 26,
+    "name": "CLASSICAL LITERATURE",
+    "credit": 3.0,
+    "prerequisites": [21],
+    "elective": 0
+  },
+  {
+    "id": 27,
+    "name": "FIRST LANGUAGE DEVELOPMENT",
+    "credit": 3.0,
+    "prerequisites": [],
+    "elective": 0
+  },
+  {
+    "id": 28,
+    "name": "TEACHING GRAMMAR AND VOCABULARY",
+    "credit": 3.0,
+    "prerequisites": [],
+    "elective": 0
+  },
+  {
+    "id": 29,
+    "name": "PHONETICS AND PHONOLOGY",
+    "credit": 3.0,
+    "prerequisites": [8],
+    "elective": 0
+  },
+  {
+    "id": 30,
+    "name": "CONTEMPORARY SOUTH ASIAN LITERATURE IN ENGLISH",
+    "credit": 3.0,
+    "prerequisites": [],
+    "elective": 0
+  },
+  {
+    "id": 31,
+    "name": "ELT APPROACHES AND METHODS",
+    "credit": 3.0,
+    "prerequisites": [20],
+    "elective": 0
+  },
+  {
+    "id": 32,
+    "name": "SOUTH ASIAN HISTORY AND DEVELOPMENT",
+    "credit": 3.0,
+    "prerequisites": [],
+    "elective": 0
+  },
+  {
+    "id": 33,
+    "name": "SHAKESPEARE",
+    "credit": 3.0,
+    "prerequisites": [],
+    "elective": 0
+  },
+  {
+    "id": 34,
+    "name": "LITERARY THEORY AND CRITICISM",
+    "credit": 3.0,
+    "prerequisites": [],
+    "elective": 0
+  },
+  {
+    "id": 35,
+    "name": "SOCIOLINGUISTICS",
+    "credit": 3.0,
+    "prerequisites": [],
+    "elective": 0
+  },
+  {
+    "id": 36,
+    "name": "PROFESSIONAL DEVELOPMENT",
+    "credit": 3.0,
+    "prerequisites": [],
+    "elective": 0
+  },
+  {
+    "id": 37,
+    "name": "PROFESSIONAL DEVELOPMENT",
+    "credit": 3.0,
+    "prerequisites": [],
+    "elective": 0
+  },
+  {
+    "id": 38,
+    "name": "TEACHING PRACTICUM",
+    "credit": 3.0,
+    "prerequisites": [],
+    "elective": 0
+  },
+  {
+    "id": 39,
+    "name": "ENGLISH SYNTAX",
+    "credit": 3.0,
+    "prerequisites": [],
+    "elective": 1
+  },
+  {
+    "id": 40,
+    "name": "SEMANTICS AND PRAGMATICS",
+    "credit": 3.0,
+    "prerequisites": [],
+    "elective": 1
+  },
+  {
+    "id": 41,
+    "name": "DISCOURSE ANALYSIS",
+    "credit": 3.0,
+    "prerequisites": [],
+    "elective": 0
+  },
+  {
+    "id": 42,
+    "name": "GLOBAL ENGLISHES",
+    "credit": 3.0,
+    "prerequisites": [],
+    "elective": 1
+  },
+  {
+    "id": 43,
+    "name": "SECOND LANGUAGE ACQUISITION",
+    "credit": 3.0,
+    "prerequisites": [],
+    "elective": 1
+  },
+  {
+    "id": 44,
+    "name": "BILINGUALISM",
+    "credit": 3.0,
+    "prerequisites": [],
+    "elective": 1
+  },
+  {
+    "id": 45,
+    "name": "TECHNOLOGY IN LANGUAGE LEARNING",
+    "credit": 3.0,
+    "prerequisites": [],
+    "elective": 1
+  },
+  {
+    "id": 46,
+    "name": "LANGUAGE TESTING",
+    "credit": 3.0,
+    "prerequisites": [],
+    "elective": 1
+  },
+  {
+    "id": 47,
+    "name": "ENGLISH FOR SPECIFIC PURPOSES",
+    "credit": 3.0,
+    "prerequisites": [],
+    "elective": 1
+  },
+  {
+    "id": 48,
+    "name": "TEACHING READING",
+    "credit": 3.0,
+    "prerequisites": [],
+    "elective": 1
+  },
+  {
+    "id": 49,
+    "name": "TEACHING LISTENING AND SPEAKING",
+    "credit": 3.0,
+    "prerequisites": [],
+    "elective": 1
+  },
+  {
+    "id": 50,
+    "name": "GLOBAL LANGUAGE",
+    "credit": 3.0,
+    "prerequisites": [],
+    "elective": 1
+  },
+  {
+    "id": 51,
+    "name": "INDEPENDENT PROJECT",
+    "credit": 3.0,
+    "prerequisites": [],
+    "elective": 1
+  },
+  {
+    "id": 52,
+    "name": "OLD AND MIDDLE ENGLISH LITERATURE",
+    "credit": 3.0,
+    "prerequisites": [],
+    "elective": 2
+  },
+  {
+    "id": 53,
+    "name": "ROMANTIC POETRY",
+    "credit": 3.0,
+    "prerequisites": [],
+    "elective": 2
+  },
+  {
+    "id": 54,
+    "name": "VICTORIAN LITERATURE",
+    "credit": 3.0,
+    "prerequisites": [],
+    "elective": 2
+  },
+  {
+    "id": 55,
+    "name": "MODERN FICTION AND NON-FICTION",
+    "credit": 3.0,
+    "prerequisites": [],
+    "elective": 2
+  },
+  {
+    "id": 56,
+    "name": "MODERN DRAMA AND POETRY",
+    "credit": 3.0,
+    "prerequisites": [],
+    "elective": 2
+  },
+  {
+    "id": 57,
+    "name": "AMERICAN LITERATURE",
+    "credit": 3.0,
+    "prerequisites": [],
+    "elective": 2
+  },
+  {
+    "id": 58,
+    "name": "AFRICAN LITERATURE IN ENGLISH",
+    "credit": 3.0,
+    "prerequisites": [],
+    "elective": 2
+  },
+  {
+    "id": 59,
+    "name": "16TH AND 17TH CENTURY ENGLISH LITERATURE",
+    "credit": 3.0,
+    "prerequisites": [],
+    "elective": 2
+  },
+  {
+    "id": 60,
+    "name": "TRANSLATION STUDIES",
+    "credit": 3.0,
+    "prerequisites": [],
+    "elective": 2
+  },
+  {
+    "id": 61,
+    "name": "EUROPEAN LITERATURE IN ENGLISH",
+    "credit": 3.0,
+    "prerequisites": [],
+    "elective": 2
+  },
+  {
+    "id": 62,
+    "name": "CARIBBEAN LITERATURE IN ENGLISH",
+    "credit": 3.0,
+    "prerequisites": [],
+    "elective": 2
+  },
+  {
+    "id": 63,
+    "name": "TEACHING ENGLISH LITERATURE",
+    "credit": 3.0,
+    "prerequisites": [],
+    "elective": 2
+  },
+  {
+    "id": 64,
+    "name": "BANGLADESHI LITERATURE IN ENGLISH",
+    "credit": 3.0,
+    "prerequisites": [],
+    "elective": 2
+  },
+  {
+    "id": 65,
+    "name": "CREATIVE WRITING",
+    "credit": 3.0,
+    "prerequisites": [],
+    "elective": 2
+  },
+  {
+    "id": 66,
+    "name": "GLOBAL LANGUAGES",
+    "credit": 3.0,
+    "prerequisites": [],
+    "elective": 2
+  },
+  {
+    "id": 67,
+    "name": "INDEPENDENT PROJECT",
+    "credit": 3.0,
+    "prerequisites": [],
+    "elective": 2
+  }
+]

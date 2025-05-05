@@ -1,0 +1,674 @@
+[
+  {
+    "id": 1,
+    "name": "DIFFERENTIAL CALCULUS & CO-ORDINATE GEOMETRY",
+    "credit": 3.0,
+    "prerequisites": [],
+    "elective": 0
+  },
+  {
+    "id": 2,
+    "name": "PHYSICS 1",
+    "credit": 3.0,
+    "prerequisites": [],
+    "elective": 0
+  },
+  {
+    "id": 3,
+    "name": "PHYSICS 1 LAB",
+    "credit": 1.0,
+    "prerequisites": [],
+    "elective": 0
+  },
+  {
+    "id": 4,
+    "name": "ENGLISH READING SKILLS & PUBLIC SPEAKING",
+    "credit": 3.0,
+    "prerequisites": [],
+    "elective": 0
+  },
+  {
+    "id": 5,
+    "name": "INTRODUCTION TO PROGRAMMING",
+    "credit": 3.0,
+    "prerequisites": [],
+    "elective": 0
+  },
+  {
+    "id": 6,
+    "name": "INTRODUCTION TO PROGRAMMING LAB",
+    "credit": 1.0,
+    "prerequisites": [],
+    "elective": 0
+  },
+  {
+    "id": 7,
+    "name": "INTRODUCTION TO COMPUTER STUDIES",
+    "credit": 1.0,
+    "prerequisites": [],
+    "elective": 0
+  },
+  {
+    "id": 8,
+    "name": "DISCRETE MATHEMATICS",
+    "credit": 3.0,
+    "prerequisites": [1, 5],
+    "elective": 0
+  },
+  {
+    "id": 9,
+    "name": "INTEGRAL CALCULUS & ORDINARY DIFFERENTIAL EQUATIONS",
+    "credit": 3.0,
+    "prerequisites": [1],
+    "elective": 0
+  },
+  {
+    "id": 10,
+    "name": "OBJECT ORIENTED PROGRAMMING 1",
+    "credit": 3.0,
+    "prerequisites": [5, 6],
+    "elective": 0
+  },
+  {
+    "id": 11,
+    "name": "PHYSICS 2",
+    "credit": 3.0,
+    "prerequisites": [2],
+    "elective": 0
+  },
+  {
+    "id": 12,
+    "name": "PHYSICS 2 LAB",
+    "credit": 1.0,
+    "prerequisites": [3],
+    "elective": 0
+  },
+  {
+    "id": 13,
+    "name": "ENGLISH WRITING SKILLS & COMMUNICATION",
+    "credit": 3.0,
+    "prerequisites": [4],
+    "elective": 0
+  },
+  {
+    "id": 14,
+    "name": "INTRODUCTION TO ELECTRICAL CIRCUITS",
+    "credit": 3.0,
+    "prerequisites": [2],
+    "elective": 0
+  },
+  {
+    "id": 15,
+    "name": "INTRODUCTION TO ELECTRICAL CIRCUITS LAB",
+    "credit": 1.0,
+    "prerequisites": [3],
+    "elective": 0
+  },
+  {
+    "id": 16,
+    "name": "CHEMISTRY",
+    "credit": 3.0,
+    "prerequisites": [11],
+    "elective": 0
+  },
+  {
+    "id": 17,
+    "name": "COMPLEX VARIABLE, LAPLACE & Z-TRANSFORMATION",
+    "credit": 3.0,
+    "prerequisites": [9],
+    "elective": 0
+  },
+  {
+    "id": 18,
+    "name": "INTRODUCTION TO DATABASE",
+    "credit": 3.0,
+    "prerequisites": [10],
+    "elective": 0
+  },
+  {
+    "id": 19,
+    "name": "ELECTRONIC DEVICES",
+    "credit": 3.0,
+    "prerequisites": [14],
+    "elective": 0
+  },
+  {
+    "id": 20,
+    "name": "ELECTRONIC DEVICES LAB",
+    "credit": 1.0,
+    "prerequisites": [15],
+    "elective": 0
+  },
+  {
+    "id": 21,
+    "name": "PRINCIPLES OF ACCOUNTING",
+    "credit": 3.0,
+    "prerequisites": [9],
+    "elective": 0
+  },
+  {
+    "id": 22,
+    "name": "DATA STRUCTURE",
+    "credit": 3.0,
+    "prerequisites": [8, 10],
+    "elective": 0
+  },
+  {
+    "id": 23,
+    "name": "DATA STRUCTURE LAB",
+    "credit": 1.0,
+    "prerequisites": [8, 10],
+    "elective": 0
+  },
+  {
+    "id": 24,
+    "name": "COMPUTER AIDED DESIGN & DRAFTING",
+    "credit": 1.0,
+    "prerequisites": [],
+    "elective": 0
+  },
+  {
+    "id": 25,
+    "name": "ALGORITHMS",
+    "credit": 3.0,
+    "prerequisites": [22, 23],
+    "elective": 0
+  },
+  {
+    "id": 26,
+    "name": "MATRICES, VECTORS, FOURIER ANALYSIS",
+    "credit": 3.0,
+    "prerequisites": [17],
+    "elective": 0
+  },
+  {
+    "id": 27,
+    "name": "OBJECT ORIENTED PROGRAMMING 2",
+    "credit": 3.0,
+    "prerequisites": [18, 22],
+    "elective": 0
+  },
+  {
+    "id": 28,
+    "name": "OBJECT ORIENTED ANALYSIS AND DESIGN",
+    "credit": 3.0,
+    "prerequisites": [18],
+    "elective": 0
+  },
+  {
+    "id": 29,
+    "name": "BANGLADESH STUDIES",
+    "credit": 3.0,
+    "prerequisites": [7],
+    "elective": 0
+  },
+  {
+    "id": 30,
+    "name": "DIGITAL LOGIC AND CIRCUITS",
+    "credit": 3.0,
+    "prerequisites": [19],
+    "elective": 0
+  },
+  {
+    "id": 31,
+    "name": "DIGITAL LOGIC AND CIRCUITS LAB",
+    "credit": 1.0,
+    "prerequisites": [20],
+    "elective": 0
+  },
+  {
+    "id": 32,
+    "name": "COMPUTATIONAL STATISTICS AND PROBABILITY",
+    "credit": 3.0,
+    "prerequisites": [17],
+    "elective": 0
+  },
+  {
+    "id": 33,
+    "name": "THEORY OF COMPUTATION",
+    "credit": 3.0,
+    "prerequisites": [25],
+    "elective": 0
+  },
+  {
+    "id": 34,
+    "name": "PRINCIPLES OF ECONOMICS",
+    "credit": 2.0,
+    "prerequisites": [32],
+    "elective": 0
+  },
+  {
+    "id": 35,
+    "name": "BUSINESS COMMUNICATION",
+    "credit": 3.0,
+    "prerequisites": [29],
+    "elective": 0
+  },
+  {
+    "id": 36,
+    "name": "NUMERICAL METHODS FOR SCIENCE AND ENGINEERING",
+    "credit": 3.0,
+    "prerequisites": [26],
+    "elective": 0
+  },
+  {
+    "id": 37,
+    "name": "DATA COMMUNICATION",
+    "credit": 3.0,
+    "prerequisites": [30, 31],
+    "elective": 0
+  },
+  {
+    "id": 38,
+    "name": "MICROPROCESSOR AND EMBEDDED SYSTEM",
+    "credit": 3.0,
+    "prerequisites": [30, 31],
+    "elective": 0
+  },
+  {
+    "id": 39,
+    "name": "SOFTWARE ENGINEERING",
+    "credit": 3.0,
+    "prerequisites": [27, 28],
+    "elective": 0
+  },
+  {
+    "id": 40,
+    "name": "ARTIFICIAL INTELLIGENCE AND EXPERT SYS.",
+    "credit": 3.0,
+    "prerequisites": [32, 33],
+    "elective": 0
+  },
+  {
+    "id": 41,
+    "name": "COMPUTER NETWORKS",
+    "credit": 3.0,
+    "prerequisites": [37],
+    "elective": 0
+  },
+  {
+    "id": 42,
+    "name": "COMPUTER ORGANIZATION AND ARCHITECTURE",
+    "credit": 3.0,
+    "prerequisites": [38],
+    "elective": 0
+  },
+  {
+    "id": 43,
+    "name": "OPERATING SYSTEM",
+    "credit": 3.0,
+    "prerequisites": [33, 38],
+    "elective": 0
+  },
+  {
+    "id": 44,
+    "name": "WEB TECHNOLOGIES",
+    "credit": 3.0,
+    "prerequisites": [39],
+    "elective": 0
+  },
+  {
+    "id": 45,
+    "name": "ENGINEERING ETHICS",
+    "credit": 2.0,
+    "prerequisites": [38, 39],
+    "elective": 0
+  },
+  {
+    "id": 46,
+    "name": "COMPILER DESIGN",
+    "credit": 3.0,
+    "prerequisites": [33],
+    "elective": 0
+  },
+  {
+    "id": 47,
+    "name": "COMPUTER GRAPHICS",
+    "credit": 3.0,
+    "prerequisites": [26, 33],
+    "elective": 0
+  },
+  {
+    "id": 48,
+    "name": "ENGINEERING MANAGEMENT",
+    "credit": 3.0,
+    "prerequisites": [45],
+    "elective": 0
+  },
+  {
+    "id": 49,
+    "name": "RESEARCH METHODOLOGY",
+    "credit": 3.0,
+    "prerequisites": [],
+    "elective": 0
+  },
+  {
+    "id": 50,
+    "name": "THESIS",
+    "credit": 3.0,
+    "prerequisites": [49],
+    "elective": 0
+  },
+  {
+    "id": 51,
+    "name": "INTERNSHIP",
+    "credit": 3.0,
+    "prerequisites": [],
+    "elective": 0
+  },
+  {
+    "id": 52,
+    "name": "ADVANCE DATABASE MANAGEMENT SYSTEM",
+    "credit": 3.0,
+    "prerequisites": [18],
+    "elective": 1
+  },
+  {
+    "id": 53,
+    "name": "MANAGEMENT INFORMATION SYSTEM",
+    "credit": 3.0,
+    "prerequisites": [39],
+    "elective": 1
+  },
+  {
+    "id": 54,
+    "name": "ENTERPRISE RESOURCE PLANNING",
+    "credit": 3.0,
+    "prerequisites": [39, 53],
+    "elective": 1
+  },
+  {
+    "id": 55,
+    "name": "DATA WAREHOUSE AND DATA MINING",
+    "credit": 3.0,
+    "prerequisites": [58],
+    "elective": 1
+  },
+  {
+    "id": 56,
+    "name": "HUMAN COMPUTER INTERACTION",
+    "credit": 3.0,
+    "prerequisites": [40, 44],
+    "elective": 1
+  },
+  {
+    "id": 57,
+    "name": "BUSINESS INTELLIGENCE AND DECISION SUPPORT",
+    "credit": 3.0,
+    "prerequisites": [54],
+    "elective": 1
+  },
+  {
+    "id": 58,
+    "name": "INTRODUCTION TO DATA SCIENCE",
+    "credit": 3.0,
+    "prerequisites": [40],
+    "elective": 1
+  },
+  {
+    "id": 59,
+    "name": "CYBER LAWS & INFORMATION SECURITY",
+    "credit": 3.0,
+    "prerequisites": [44],
+    "elective": 1
+  },
+  {
+    "id": 60,
+    "name": "DIGITAL MARKETING",
+    "credit": 3.0,
+    "prerequisites": [44, 53],
+    "elective": 1
+  },
+  {
+    "id": 61,
+    "name": "E-COMMERCE, E-GOVERNANCE & E-SERIES",
+    "credit": 3.0,
+    "prerequisites": [44],
+    "elective": 1
+  },
+  {
+    "id": 62,
+    "name": "SOFTWARE DEVELOPMENT PROJECT MANAGEMENT",
+    "credit": 3.0,
+    "prerequisites": [63],
+    "elective": 2
+  },
+  {
+    "id": 63,
+    "name": "SOFTWARE REQUIREMENT ENGINEERING",
+    "credit": 3.0,
+    "prerequisites": [39],
+    "elective": 2
+  },
+  {
+    "id": 64,
+    "name": "SOFTWARE QUALITY AND TESTING",
+    "credit": 3.0,
+    "prerequisites": [63],
+    "elective": 2
+  },
+  {
+    "id": 65,
+    "name": "PROGRAMMING IN PYTHON",
+    "credit": 3.0,
+    "prerequisites": [44],
+    "elective": 2
+  },
+  {
+    "id": 66,
+    "name": "VIRTUAL REALITY SYSTEMS DESIGN",
+    "credit": 3.0,
+    "prerequisites": [27],
+    "elective": 2
+  },
+  {
+    "id": 67,
+    "name": "ADVANCED PROGRAMMING WITH JAVA",
+    "credit": 3.0,
+    "prerequisites": [44],
+    "elective": 2
+  },
+  {
+    "id": 68,
+    "name": "ADVANCED PROGRAMMING WITH .NET",
+    "credit": 3.0,
+    "prerequisites": [44],
+    "elective": 2
+  },
+  {
+    "id": 69,
+    "name": "ADVANCED PROGRAMMING IN WEB TECHNOLOGY",
+    "credit": 3.0,
+    "prerequisites": [44],
+    "elective": 2
+  },
+  {
+    "id": 70,
+    "name": "MOBILE APPLICATION DEVELOPMENT",
+    "credit": 3.0,
+    "prerequisites": [44],
+    "elective": 2
+  },
+  {
+    "id": 71,
+    "name": "SOFTWARE ARCHITECTURE AND DESIGN PATTERNS",
+    "credit": 3.0,
+    "prerequisites": [64],
+    "elective": 2
+  },
+  {
+    "id": 72,
+    "name": "COMPUTER SCIENCE MATHEMATICS",
+    "credit": 3.0,
+    "prerequisites": [25, 36],
+    "elective": 3
+  },
+  {
+    "id": 73,
+    "name": "BASIC GRAPH THEORY",
+    "credit": 3.0,
+    "prerequisites": [25],
+    "elective": 3
+  },
+  {
+    "id": 74,
+    "name": "ADVANCED ALGORITHM TECHNIQUES",
+    "credit": 3.0,
+    "prerequisites": [40],
+    "elective": 3
+  },
+  {
+    "id": 75,
+    "name": "NATURAL LANGUAGE PROCESSING",
+    "credit": 3.0,
+    "prerequisites": [40, 65],
+    "elective": 3
+  },
+  {
+    "id": 76,
+    "name": "LINEAR PROGRAMMING",
+    "credit": 3.0,
+    "prerequisites": [40, 32],
+    "elective": 3
+  },
+  {
+    "id": 77,
+    "name": "PARALLEL COMPUTING",
+    "credit": 3.0,
+    "prerequisites": [25, 40],
+    "elective": 3
+  },
+  {
+    "id": 78,
+    "name": "MACHINE LEARNING",
+    "credit": 3.0,
+    "prerequisites": [40],
+    "elective": 3
+  },
+  {
+    "id": 79,
+    "name": "BASIC MECHANICAL ENGG.",
+    "credit": 3.0,
+    "prerequisites": [11],
+    "elective": 4
+  },
+  {
+    "id": 80,
+    "name": "SIGNALS & LINEAR SYSTEM",
+    "credit": 3.0,
+    "prerequisites": [26],
+    "elective": 4
+  },
+  {
+    "id": 81,
+    "name": "DIGITAL SYSTEM DESIGN",
+    "credit": 3.0,
+    "prerequisites": [42],
+    "elective": 4
+  },
+  {
+    "id": 82,
+    "name": "IMAGE PROCESSING",
+    "credit": 3.0,
+    "prerequisites": [47],
+    "elective": 4
+  },
+  {
+    "id": 83,
+    "name": "MULTIMEDIA SYSTEMS",
+    "credit": 3.0,
+    "prerequisites": [44],
+    "elective": 4
+  },
+  {
+    "id": 84,
+    "name": "SIMULATION & MODELING",
+    "credit": 3.0,
+    "prerequisites": [40],
+    "elective": 4
+  },
+  {
+    "id": 85,
+    "name": "ADVANCED COMPUTER NETWORKS",
+    "credit": 3.0,
+    "prerequisites": [41],
+    "elective": 4
+  },
+  {
+    "id": 86,
+    "name": "COMPUTER VISION AND PATTERN RECOGNITION",
+    "credit": 3.0,
+    "prerequisites": [40, 47],
+    "elective": 4
+  },
+  {
+    "id": 87,
+    "name": "NETWORK SECURITY",
+    "credit": 3.0,
+    "prerequisites": [41],
+    "elective": 4
+  },
+  {
+    "id": 88,
+    "name": "ADVANCED OPERATING SYSTEM",
+    "credit": 3.0,
+    "prerequisites": [43],
+    "elective": 4
+  },
+  {
+    "id": 89,
+    "name": "DIGITAL DESIGN WITH SYSTEM [VERILOG, VHDL & FPGAS]",
+    "credit": 3.0,
+    "prerequisites": [96],
+    "elective": 4
+  },
+  {
+    "id": 90,
+    "name": "ROBOTICS ENGINEERING",
+    "credit": 3.0,
+    "prerequisites": [40],
+    "elective": 4
+  },
+  {
+    "id": 91,
+    "name": "TELECOMMUNICATIONS ENGINEERING",
+    "credit": 3.0,
+    "prerequisites": [37],
+    "elective": 4
+  },
+  {
+    "id": 92,
+    "name": "NETWORK RESOURCE MANAGEMENT & ORGANIZATION",
+    "credit": 3.0,
+    "prerequisites": [37, 41],
+    "elective": 4
+  },
+  {
+    "id": 93,
+    "name": "WIRELESS SENSOR NETWORKS",
+    "credit": 3.0,
+    "prerequisites": [37, 41],
+    "elective": 4
+  },
+  {
+    "id": 94,
+    "name": "INDUSTRIAL ELECTRONICS, DRIVES & INSTRUMENTATION",
+    "credit": 3.0,
+    "prerequisites": [30],
+    "elective": 4
+  },
+  {
+    "id": 95,
+    "name": "DIGITAL SIGNAL PROCESSING",
+    "credit": 3.0,
+    "prerequisites": [52],
+    "elective": 4
+  },
+  {
+    "id": 96,
+    "name": "VLSI CIRCUIT DESIGN",
+    "credit": 3.0,
+    "prerequisites": [94],
+    "elective": 4
+  }
+]

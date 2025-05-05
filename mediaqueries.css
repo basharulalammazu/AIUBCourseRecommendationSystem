@@ -1,0 +1,51 @@
+@media (max-width: 999px) {
+  body {
+    padding: 30px 60px;
+  }
+
+  label,
+  select,
+  input {
+    width: 100%;
+  }
+
+  #courses {
+    display: contents;
+  }
+
+  #courses h3 {
+    grid-column: span 1;
+  }
+}
+
+@media (min-width: 1000px) {
+  label,
+  select,
+  input {
+    width: 45%;
+  }
+
+  #courses {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  #courses h3 {
+    grid-column: span 2;
+  }
+}
+
+@media (min-width: 1200px) {
+  label,
+  select,
+  input {
+    width: 30%;
+  }
+
+  #courses {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  #courses h3 {
+    grid-column: span 3;
+  }
+}

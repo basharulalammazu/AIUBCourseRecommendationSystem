@@ -1,0 +1,583 @@
+[
+  {
+    "id": 1,
+    "name": "INTRODUCTION TO ENGINEERING STUDIES",
+    "credit": 1.0,
+    "prerequisites": [],
+    "elective": 0
+  },
+  {
+    "id": 2,
+    "name": "CHEMISTRY",
+    "credit": 3.0,
+    "prerequisites": [],
+    "elective": 0
+  },
+  {
+    "id": 3,
+    "name": "PHYSICS 1",
+    "credit": 3.0,
+    "prerequisites": [],
+    "elective": 0
+  },
+  {
+    "id": 4,
+    "name": "PHYSICS 1 LAB",
+    "credit": 1.0,
+    "prerequisites": [],
+    "elective": 0
+  },
+  {
+    "id": 5,
+    "name": "ENGINEERING DRAWING",
+    "credit": 1.0,
+    "prerequisites": [],
+    "elective": 0
+  },
+  {
+    "id": 6,
+    "name": "DIFFERENTIAL CALCULUS AND COORDINATE GEOMETRY",
+    "credit": 3.0,
+    "prerequisites": [],
+    "elective": 0
+  },
+  {
+    "id": 7,
+    "name": "ENGLISH READING SKILLS & PUBLIC SPEAKING",
+    "credit": 3.0,
+    "prerequisites": [],
+    "elective": 0
+  },
+  {
+    "id": 8,
+    "name": "BANGLADESH STUDIES",
+    "credit": 3.0,
+    "prerequisites": [],
+    "elective": 0
+  },
+  {
+    "id": 9,
+    "name": "MACHINE JOB SHOP- I (DRILLING, WELDING, MILLING AND TURNING)",
+    "credit": 1.0,
+    "prerequisites": [],
+    "elective": 0
+  },
+  {
+    "id": 10,
+    "name": "ENGINEERING MATERIALS",
+    "credit": 3.0,
+    "prerequisites": [9],
+    "elective": 0
+  },
+  {
+    "id": 11,
+    "name": "ENGINEERING MATERIALS LAB",
+    "credit": 1.0,
+    "prerequisites": [9],
+    "elective": 0
+  },
+  {
+    "id": 12,
+    "name": "ENGINEERING MECHANICS",
+    "credit": 3.0,
+    "prerequisites": [6],
+    "elective": 0
+  },
+  {
+    "id": 13,
+    "name": "ENGINEERING MECHANICS LAB",
+    "credit": 1.0,
+    "prerequisites": [6],
+    "elective": 0
+  },
+  {
+    "id": 14,
+    "name": "ENGLISH WRITING SKILLS & COMMUNICATIONS",
+    "credit": 3.0,
+    "prerequisites": [7],
+    "elective": 0
+  },
+  {
+    "id": 15,
+    "name": "INTEGRAL CALCULUS & ORDINARY DIFFERENTIAL EQUATION",
+    "credit": 3.0,
+    "prerequisites": [6],
+    "elective": 0
+  },
+  {
+    "id": 16,
+    "name": "BASIC MECHANICAL ENGINEERING",
+    "credit": 3.0,
+    "prerequisites": [1],
+    "elective": 0
+  },
+  {
+    "id": 17,
+    "name": "COMPUTER AIDED DRAWING",
+    "credit": 1.0,
+    "prerequisites": [5],
+    "elective": 0
+  },
+  {
+    "id": 18,
+    "name": "MACHINE JOB SHOP- II (SHEET METAL FORMING AND CASTING)",
+    "credit": 1.0,
+    "prerequisites": [9],
+    "elective": 0
+  },
+  {
+    "id": 19,
+    "name": "INTRODUCTION TO ELECTRICAL CIRCUITS",
+    "credit": 3.0,
+    "prerequisites": [3],
+    "elective": 0
+  },
+  {
+    "id": 20,
+    "name": "INTRODUCTION TO ELECTRICAL CIRCUITS LAB",
+    "credit": 1.0,
+    "prerequisites": [4],
+    "elective": 0
+  },
+  {
+    "id": 21,
+    "name": "COMPLEX VARIABLE, LAPLACE & Z-TRANSFORMATION",
+    "credit": 3.0,
+    "prerequisites": [6],
+    "elective": 0
+  },
+  {
+    "id": 22,
+    "name": "PHYSICS 2",
+    "credit": 3.0,
+    "prerequisites": [3],
+    "elective": 0
+  },
+  {
+    "id": 23,
+    "name": "PHYSICS 2 LAB",
+    "credit": 1.0,
+    "prerequisites": [4],
+    "elective": 0
+  },
+  {
+    "id": 24,
+    "name": "PRINCIPLES OF ACCOUNTING [IPE]",
+    "credit": 2.0,
+    "prerequisites": [15],
+    "elective": 0
+  },
+  {
+    "id": 25,
+    "name": "MECHANICS OF SOLIDS",
+    "credit": 3.0,
+    "prerequisites": [12],
+    "elective": 0
+  },
+  {
+    "id": 26,
+    "name": "MECHANICS OF SOLIDS LAB",
+    "credit": 1.0,
+    "prerequisites": [13],
+    "elective": 0
+  },
+  {
+    "id": 27,
+    "name": "PROGRAMMING LANGUAGE 1 (STRUCTURED PROGRAMMING LANGUAGE)",
+    "credit": 3.0,
+    "prerequisites": [15],
+    "elective": 0
+  },
+  {
+    "id": 28,
+    "name": "MANUFACTURING AND PRODUCTION PROCESS I",
+    "credit": 3.0,
+    "prerequisites": [18],
+    "elective": 0
+  },
+  {
+    "id": 29,
+    "name": "MANUFACTURING AND PRODUCTION PROCESS I LAB",
+    "credit": 1.0,
+    "prerequisites": [18],
+    "elective": 0
+  },
+  {
+    "id": 30,
+    "name": "STATISTICAL DECISION MAKING FOR ENGINEERS",
+    "credit": 3.0,
+    "prerequisites": [21],
+    "elective": 0
+  },
+  {
+    "id": 31,
+    "name": "MATRICES, VECTORS, FOURIER ANALYSIS",
+    "credit": 3.0,
+    "prerequisites": [21],
+    "elective": 0
+  },
+  {
+    "id": 32,
+    "name": "MACHINE TOOLS",
+    "credit": 3.0,
+    "prerequisites": [18],
+    "elective": 0
+  },
+  {
+    "id": 33,
+    "name": "MACHINE TOOLS LAB",
+    "credit": 1.0,
+    "prerequisites": [18],
+    "elective": 0
+  },
+  {
+    "id": 34,
+    "name": "PRINCIPLES OF ECONOMICS",
+    "credit": 2.0,
+    "prerequisites": [24],
+    "elective": 0
+  },
+  {
+    "id": 35,
+    "name": "FLUID MECHANICS AND MACHINERY",
+    "credit": 3.0,
+    "prerequisites": [16],
+    "elective": 0
+  },
+  {
+    "id": 36,
+    "name": "FLUID MECHANICS AND MACHINERY LAB",
+    "credit": 1.0,
+    "prerequisites": [16],
+    "elective": 0
+  },
+  {
+    "id": 37,
+    "name": "NUMERICAL METHODS FOR SCIENCE AND ENGINEERING",
+    "credit": 3.0,
+    "prerequisites": [31],
+    "elective": 0
+  },
+  {
+    "id": 38,
+    "name": "TECH ELECTIVE 1",
+    "credit": 3.0,
+    "prerequisites": [30],
+    "elective": 0
+  },
+  {
+    "id": 39,
+    "name": "LOGISTICS AND DISTRIBUTION MANAGEMENT",
+    "credit": 3.0,
+    "prerequisites": [24],
+    "elective": 0
+  },
+  {
+    "id": 40,
+    "name": "PRODUCT DESIGN AND DEVELOPMENT",
+    "credit": 3.0,
+    "prerequisites": [30],
+    "elective": 0
+  },
+  {
+    "id": 41,
+    "name": "MANUFACTURING AND PRODUCTION PROCESS II",
+    "credit": 3.0,
+    "prerequisites": [28],
+    "elective": 0
+  },
+  {
+    "id": 42,
+    "name": "COMPUTER INTEGRATED MANUFACTURING",
+    "credit": 3.0,
+    "prerequisites": [17],
+    "elective": 0
+  },
+  {
+    "id": 43,
+    "name": "ENGINEERING ECONOMY [IPE]",
+    "credit": 3.0,
+    "prerequisites": [24],
+    "elective": 0
+  },
+  {
+    "id": 44,
+    "name": "BUSINESS COMMUNICATION",
+    "credit": 3.0,
+    "prerequisites": [13],
+    "elective": 0
+  },
+  {
+    "id": 45,
+    "name": "TECH ELECTIVE 2",
+    "credit": 3.0,
+    "prerequisites": [43],
+    "elective": 0
+  },
+  {
+    "id": 46,
+    "name": "OPERATIONS MANAGEMENT [IPE]",
+    "credit": 3.0,
+    "prerequisites": [39],
+    "elective": 0
+  },
+  {
+    "id": 47,
+    "name": "OPERATIONS RESEARCH [IPE]",
+    "credit": 3.0,
+    "prerequisites": [39],
+    "elective": 0
+  },
+  {
+    "id": 48,
+    "name": "QUALITY MANAGEMENT",
+    "credit": 3.0,
+    "prerequisites": [39],
+    "elective": 0
+  },
+  {
+    "id": 49,
+    "name": "PROJECT MANAGEMENT [IPE]",
+    "credit": 3.0,
+    "prerequisites": [39],
+    "elective": 0
+  },
+  {
+    "id": 50,
+    "name": "MODERN CONTROL SYSTEMS",
+    "credit": 3.0,
+    "prerequisites": [31],
+    "elective": 0
+  },
+  {
+    "id": 51,
+    "name": "MODERN CONTROL SYSTEMS LAB",
+    "credit": 1.0,
+    "prerequisites": [31],
+    "elective": 0
+  },
+  {
+    "id": 52,
+    "name": "SUPPLY CHAIN MANAGEMENT [IPE]",
+    "credit": 3.0,
+    "prerequisites": [46],
+    "elective": 0
+  },
+  {
+    "id": 53,
+    "name": "TECH ELECTIVE 3",
+    "credit": 3.0,
+    "prerequisites": [49],
+    "elective": 0
+  },
+  {
+    "id": 54,
+    "name": "DESIGN AND SIMULATION IN IE",
+    "credit": 3.0,
+    "prerequisites": [42],
+    "elective": 0
+  },
+  {
+    "id": 55,
+    "name": "DESIGN AND SIMULATION IN IE LAB",
+    "credit": 1.0,
+    "prerequisites": [42],
+    "elective": 0
+  },
+  {
+    "id": 56,
+    "name": "ENGINEERING ETHICS AND ENVIRONMENTAL PROTECTION",
+    "credit": 1.0,
+    "prerequisites": [49],
+    "elective": 0
+  },
+  {
+    "id": 57,
+    "name": "CAPSTONE PROJECT [IPE]",
+    "credit": 3.0,
+    "prerequisites": [49],
+    "elective": 0
+  },
+  {
+    "id": 58,
+    "name": "TECH ELECTIVE 4",
+    "credit": 3.0,
+    "prerequisites": [56],
+    "elective": 0
+  },
+  {
+    "id": 59,
+    "name": "INDUSTRIAL ERGONOMICS AND OCCUPATIONAL SAFETY",
+    "credit": 3.0,
+    "prerequisites": [41],
+    "elective": 0
+  },
+  {
+    "id": 60,
+    "name": "MAINTENANCE MANAGEMENT",
+    "credit": 3.0,
+    "prerequisites": [41],
+    "elective": 0
+  },
+  {
+    "id": 61,
+    "name": "VALUE CHAIN MANAGEMENT",
+    "credit": 3.0,
+    "prerequisites": [52],
+    "elective": 0
+  },
+  {
+    "id": 62,
+    "name": "INDUSTRIAL TRAINING / INTERNSHIP",
+    "credit": 1.0,
+    "prerequisites": [44],
+    "elective": 0
+  },
+  {
+    "id": 63,
+    "name": "ENGINEERING MANAGEMENT [IPE]",
+    "credit": 3.0,
+    "prerequisites": [49],
+    "elective": 1
+  },
+  {
+    "id": 64,
+    "name": "HUMAN FACTORS ENGINEERING",
+    "credit": 3.0,
+    "prerequisites": [39],
+    "elective": 1
+  },
+  {
+    "id": 65,
+    "name": "OCCUPATIONAL ERGONOMICS",
+    "credit": 3.0,
+    "prerequisites": [59],
+    "elective": 1
+  },
+  {
+    "id": 66,
+    "name": "MANAGERIAL COMMUNICATION FOR ENGINEERS",
+    "credit": 3.0,
+    "prerequisites": [49],
+    "elective": 1
+  },
+  {
+    "id": 67,
+    "name": "FACILITY DESIGN AND MATERIAL HANDLING",
+    "credit": 3.0,
+    "prerequisites": [59],
+    "elective": 1
+  },
+  {
+    "id": 68,
+    "name": "MARKETING MANAGEMENT [IPE]",
+    "credit": 3.0,
+    "prerequisites": [52],
+    "elective": 1
+  },
+  {
+    "id": 69,
+    "name": "MANAGEMENT OF TECHNOLOGY [IPE]",
+    "credit": 3.0,
+    "prerequisites": [60],
+    "elective": 1
+  },
+  {
+    "id": 70,
+    "name": "PRODUCTION SYSTEMS PLANNING",
+    "credit": 3.0,
+    "prerequisites": [54],
+    "elective": 2
+  },
+  {
+    "id": 71,
+    "name": "AUTOMATED SYSTEM ENGINEERING",
+    "credit": 3.0,
+    "prerequisites": [42],
+    "elective": 2
+  },
+  {
+    "id": 72,
+    "name": "DESIGN AND ANALYSIS OF INDUSTRIAL SYSTEMS WITH SIMULATION",
+    "credit": 3.0,
+    "prerequisites": [54],
+    "elective": 2
+  },
+  {
+    "id": 73,
+    "name": "PRINCIPLES OF PROGRAMMABLE AUTOMATION",
+    "credit": 3.0,
+    "prerequisites": [50],
+    "elective": 2
+  },
+  {
+    "id": 74,
+    "name": "MANUFACTURING SYSTEMS DESIGN",
+    "credit": 3.0,
+    "prerequisites": [41],
+    "elective": 2
+  },
+  {
+    "id": 75,
+    "name": "ENGINEERING DATABASE DESIGN",
+    "credit": 3.0,
+    "prerequisites": [46],
+    "elective": 2
+  },
+  {
+    "id": 76,
+    "name": "IE SYSTEMS DESIGN",
+    "credit": 3.0,
+    "prerequisites": [37],
+    "elective": 2
+  },
+  {
+    "id": 77,
+    "name": "MODERN MANUFACTURING TECHNOLOGY",
+    "credit": 3.0,
+    "prerequisites": [28],
+    "elective": 3
+  },
+  {
+    "id": 78,
+    "name": "METAL CUTTING PROCESS",
+    "credit": 3.0,
+    "prerequisites": [10],
+    "elective": 3
+  },
+  {
+    "id": 79,
+    "name": "MECHATRONICS ENGINEERING",
+    "credit": 3.0,
+    "prerequisites": [37],
+    "elective": 3
+  },
+  {
+    "id": 80,
+    "name": "PRODUCTION PLANNING & PROCESS CONTROL",
+    "credit": 3.0,
+    "prerequisites": [41],
+    "elective": 3
+  },
+  {
+    "id": 81,
+    "name": "MICRO MANUFACTURING",
+    "credit": 3.0,
+    "prerequisites": [28],
+    "elective": 3
+  },
+  {
+    "id": 82,
+    "name": "GREEN TECHNOLOGY",
+    "credit": 3.0,
+    "prerequisites": [2],
+    "elective": 3
+  },
+  {
+    "id": 83,
+    "name": "ADVANCE MATERIAL AND PROCESS",
+    "credit": 3.0,
+    "prerequisites": [28],
+    "elective": 3
+  }
+]

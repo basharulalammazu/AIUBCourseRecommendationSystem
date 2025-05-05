@@ -1,0 +1,1479 @@
+[
+  {
+    "id": 1,
+    "name": "Foundation Course",
+    "credit": 3.0,
+    "prerequisites": [],
+    "elective": 0
+  },
+  {
+    "id": 2,
+    "name": "Introduction to Business",
+    "credit": 3.0,
+    "prerequisites": [],
+    "elective": 0
+  },
+  {
+    "id": 3,
+    "name": "Financial Accounting",
+    "credit": 3.0,
+    "prerequisites": [],
+    "elective": 0
+  },
+  {
+    "id": 4,
+    "name": "Business Mathematics 1",
+    "credit": 3.0,
+    "prerequisites": [],
+    "elective": 0
+  },
+  {
+    "id": 5,
+    "name": "English Reading",
+    "credit": 3.0,
+    "prerequisites": [],
+    "elective": 0
+  },
+  {
+    "id": 6,
+    "name": "Bangladesh Studies",
+    "credit": 3.0,
+    "prerequisites": [],
+    "elective": 0
+  },
+  {
+    "id": 7,
+    "name": "Business Management",
+    "credit": 3.0,
+    "prerequisites": [1, 2],
+    "elective": 0
+  },
+  {
+    "id": 8,
+    "name": "Principles of Marketing",
+    "credit": 3.0,
+    "prerequisites": [2],
+    "elective": 0
+  },
+  {
+    "id": 9,
+    "name": "Business Mathematics 2",
+    "credit": 3.0,
+    "prerequisites": [4],
+    "elective": 0
+  },
+  {
+    "id": 10,
+    "name": "English Writing",
+    "credit": 3.0,
+    "prerequisites": [5],
+    "elective": 0
+  },
+  {
+    "id": 11,
+    "name": "Micro Economics",
+    "credit": 3.0,
+    "prerequisites": [4],
+    "elective": 0
+  },
+  {
+    "id": 12,
+    "name": "Introduction to Information Technology",
+    "credit": 3.0,
+    "prerequisites": [2],
+    "elective": 0
+  },
+  {
+    "id": 13,
+    "name": "Organizational Behavior",
+    "credit": 3.0,
+    "prerequisites": [7],
+    "elective": 0
+  },
+  {
+    "id": 14,
+    "name": "Managerial Accounting",
+    "credit": 3.0,
+    "prerequisites": [3],
+    "elective": 0
+  },
+  {
+    "id": 15,
+    "name": "Business Statistics",
+    "credit": 3.0,
+    "prerequisites": [9],
+    "elective": 0
+  },
+  {
+    "id": 16,
+    "name": "Basic in Social Science",
+    "credit": 3.0,
+    "prerequisites": [6],
+    "elective": 0
+  },
+  {
+    "id": 17,
+    "name": "Office Management Technology",
+    "credit": 3.0,
+    "prerequisites": [12],
+    "elective": 0
+  },
+  {
+    "id": 18,
+    "name": "Global Languages",
+    "credit": 3.0,
+    "prerequisites": [10],
+    "elective": 0
+  },
+  {
+    "id": 19,
+    "name": "Principles of Finance",
+    "credit": 3.0,
+    "prerequisites": [14],
+    "elective": 0
+  },
+  {
+    "id": 20,
+    "name": "Advanced Business Statistics",
+    "credit": 3.0,
+    "prerequisites": [15],
+    "elective": 0
+  },
+  {
+    "id": 21,
+    "name": "Business Law",
+    "credit": 3.0,
+    "prerequisites": [13],
+    "elective": 0
+  },
+  {
+    "id": 22,
+    "name": "Macro Economics",
+    "credit": 3.0,
+    "prerequisites": [11],
+    "elective": 0
+  },
+  {
+    "id": 23,
+    "name": "Basics in Natural Science",
+    "credit": 3.0,
+    "prerequisites": [9, 16],
+    "elective": 0
+  },
+  {
+    "id": 24,
+    "name": "Politics Philosophy and Public Affairs",
+    "credit": 3.0,
+    "prerequisites": [16],
+    "elective": 0
+  },
+  {
+    "id": 25,
+    "name": "Human Resource Management",
+    "credit": 3.0,
+    "prerequisites": [13],
+    "elective": 0
+  },
+  {
+    "id": 26,
+    "name": "Financial Management",
+    "credit": 3.0,
+    "prerequisites": [19],
+    "elective": 0
+  },
+  {
+    "id": 27,
+    "name": "Marketing Management",
+    "credit": 3.0,
+    "prerequisites": [8, 22],
+    "elective": 0
+  },
+  {
+    "id": 28,
+    "name": "Operations and Supply Chain Management",
+    "credit": 3.0,
+    "prerequisites": [15],
+    "elective": 0
+  },
+  {
+    "id": 29,
+    "name": "Management Information Systems",
+    "credit": 3.0,
+    "prerequisites": [17],
+    "elective": 0
+  },
+  {
+    "id": 30,
+    "name": "International Business",
+    "credit": 3.0,
+    "prerequisites": [21],
+    "elective": 0
+  },
+  {
+    "id": 31,
+    "name": "Business Research",
+    "credit": 3.0,
+    "prerequisites": [20, 27],
+    "elective": 0
+  },
+  {
+    "id": 32,
+    "name": "Principles and Practices of Taxation",
+    "credit": 3.0,
+    "prerequisites": [19, 21],
+    "elective": 0
+  },
+  {
+    "id": 33,
+    "name": "Ethics, Sustainability, and Communication for Development",
+    "credit": 3.0,
+    "prerequisites": [24],
+    "elective": 0
+  },
+  {
+    "id": 34,
+    "name": "Innovation and Entrepreneurship Development",
+    "credit": 3.0,
+    "prerequisites": [13],
+    "elective": 0
+  },
+  {
+    "id": 35,
+    "name": "Project Management",
+    "credit": 3.0,
+    "prerequisites": [28, 29],
+    "elective": 0
+  },
+  {
+    "id": 36,
+    "name": "Business Communication",
+    "credit": 3.0,
+    "prerequisites": [18, 33],
+    "elective": 0
+  },
+  {
+    "id": 37,
+    "name": "Corporate Governance and Social Responsibility",
+    "credit": 3.0,
+    "prerequisites": [26, 33],
+    "elective": 0
+  },
+  {
+    "id": 38,
+    "name": "Strategic Management",
+    "credit": 3.0,
+    "prerequisites": [35, 36],
+    "elective": 0
+  },
+  {
+    "id": 39,
+    "name": "Professional Development Course",
+    "credit": 3.0,
+    "prerequisites": [],
+    "elective": 0
+  },
+  {
+    "id": 40,
+    "name": "Internship",
+    "credit": 3.0,
+    "prerequisites": [],
+    "elective": 0
+  },
+  {
+    "id": 41,
+    "name": "Intermediate Accounting",
+    "credit": 3.0,
+    "prerequisites": [26],
+    "elective": 1
+  },
+  {
+    "id": 42,
+    "name": "Cost Accounting",
+    "credit": 3.0,
+    "prerequisites": [26],
+    "elective": 1
+  },
+  {
+    "id": 43,
+    "name": "Financial Statement Analysis",
+    "credit": 3.0,
+    "prerequisites": [26],
+    "elective": 1
+  },
+  {
+    "id": 44,
+    "name": "Accounting Information Systems",
+    "credit": 3.0,
+    "prerequisites": [26],
+    "elective": 1
+  },
+  {
+    "id": 45,
+    "name": "Auditing",
+    "credit": 3.0,
+    "prerequisites": [26],
+    "elective": 1
+  },
+  {
+    "id": 46,
+    "name": "Financial and Corporate Reporting",
+    "credit": 3.0,
+    "prerequisites": [26],
+    "elective": 1
+  },
+  {
+    "id": 47,
+    "name": "Advanced Cost Accounting",
+    "credit": 3.0,
+    "prerequisites": [26],
+    "elective": 1
+  },
+  {
+    "id": 48,
+    "name": "Advanced Financial Accounting",
+    "credit": 3.0,
+    "prerequisites": [26],
+    "elective": 1
+  },
+  {
+    "id": 49,
+    "name": "Strategic Management Accounting",
+    "credit": 3.0,
+    "prerequisites": [26],
+    "elective": 1
+  },
+  {
+    "id": 50,
+    "name": "Accounting Theory and Policy",
+    "credit": 3.0,
+    "prerequisites": [26],
+    "elective": 1
+  },
+  {
+    "id": 51,
+    "name": "Accounting for Specialized Institutions",
+    "credit": 3.0,
+    "prerequisites": [26],
+    "elective": 1
+  },
+  {
+    "id": 52,
+    "name": "Corporate Finance",
+    "credit": 3.0,
+    "prerequisites": [26],
+    "elective": 1
+  },
+  {
+    "id": 53,
+    "name": "Analytics for Business Professionals",
+    "credit": 3.0,
+    "prerequisites": [17],
+    "elective": 2
+  },
+  {
+    "id": 54,
+    "name": "Technology Adoption Theories and Models",
+    "credit": 3.0,
+    "prerequisites": [17],
+    "elective": 2
+  },
+  {
+    "id": 55,
+    "name": "Visualization and Communication of Business Data",
+    "credit": 3.0,
+    "prerequisites": [17],
+    "elective": 2
+  },
+  {
+    "id": 56,
+    "name": "Analytics for Sports Management",
+    "credit": 3.0,
+    "prerequisites": [17],
+    "elective": 2
+  },
+  {
+    "id": 57,
+    "name": "Legal and Ethical Issues in Data Management",
+    "credit": 3.0,
+    "prerequisites": [17],
+    "elective": 2
+  },
+  {
+    "id": 58,
+    "name": "Analyzing Exploratory Data in Business",
+    "credit": 3.0,
+    "prerequisites": [17],
+    "elective": 2
+  },
+  {
+    "id": 59,
+    "name": "Analytics for Healthcare and Medical Industries",
+    "credit": 3.0,
+    "prerequisites": [17],
+    "elective": 2
+  },
+  {
+    "id": 60,
+    "name": "Data and Web Analytics",
+    "credit": 3.0,
+    "prerequisites": [17],
+    "elective": 2
+  },
+  {
+    "id": 61,
+    "name": "Financial Analytics",
+    "credit": 3.0,
+    "prerequisites": [17],
+    "elective": 2
+  },
+  {
+    "id": 62,
+    "name": "Retail Analytics",
+    "credit": 3.0,
+    "prerequisites": [17],
+    "elective": 2
+  },
+  {
+    "id": 63,
+    "name": "Analytics for Talent Management",
+    "credit": 3.0,
+    "prerequisites": [17],
+    "elective": 2
+  },
+  {
+    "id": 64,
+    "name": "Seminar (Business Analytics)",
+    "credit": 3.0,
+    "prerequisites": [17],
+    "elective": 2
+  },
+  {
+    "id": 65,
+    "name": "Capstone Project (Business Analytics)",
+    "credit": 3.0,
+    "prerequisites": [17],
+    "elective": 2
+  },
+  {
+    "id": 66,
+    "name": "Database Analysis and Design",
+    "credit": 3.0,
+    "prerequisites": [17],
+    "elective": 2
+  },
+  {
+    "id": 67,
+    "name": "Object Oriented Programming",
+    "credit": 3.0,
+    "prerequisites": [17],
+    "elective": 2
+  },
+  {
+    "id": 68,
+    "name": "Data Warehouse and Data Mining",
+    "credit": 3.0,
+    "prerequisites": [17],
+    "elective": 2
+  },
+  {
+    "id": 69,
+    "name": "Social Media and Digital Marketing",
+    "credit": 3.0,
+    "prerequisites": [17],
+    "elective": 2
+  },
+  {
+    "id": 70,
+    "name": "Supply Chain Analytics",
+    "credit": 3.0,
+    "prerequisites": [17],
+    "elective": 2
+  },
+  {
+    "id": 71,
+    "name": "Microeconomic Theory",
+    "credit": 3.0,
+    "prerequisites": [22],
+    "elective": 3
+  },
+  {
+    "id": 72,
+    "name": "Macroeconomics of Developing Countries",
+    "credit": 3.0,
+    "prerequisites": [22],
+    "elective": 3
+  },
+  {
+    "id": 73,
+    "name": "Mathematical Economics",
+    "credit": 3.0,
+    "prerequisites": [22],
+    "elective": 3
+  },
+  {
+    "id": 74,
+    "name": "Applied Econometric Models",
+    "credit": 3.0,
+    "prerequisites": [22],
+    "elective": 3
+  },
+  {
+    "id": 75,
+    "name": "Development Economics",
+    "credit": 3.0,
+    "prerequisites": [22],
+    "elective": 3
+  },
+  {
+    "id": 76,
+    "name": "Political Economy",
+    "credit": 3.0,
+    "prerequisites": [22],
+    "elective": 3
+  },
+  {
+    "id": 77,
+    "name": "Economics of Natural Resources and Environment",
+    "credit": 3.0,
+    "prerequisites": [22],
+    "elective": 3
+  },
+  {
+    "id": 78,
+    "name": "Comparative Economic Analysis",
+    "credit": 3.0,
+    "prerequisites": [22],
+    "elective": 3
+  },
+  {
+    "id": 79,
+    "name": "Bangladesh Economy",
+    "credit": 3.0,
+    "prerequisites": [22],
+    "elective": 3
+  },
+  {
+    "id": 80,
+    "name": "Introduction to Game Theory",
+    "credit": 3.0,
+    "prerequisites": [22],
+    "elective": 3
+  },
+  {
+    "id": 81,
+    "name": "Labor Economics",
+    "credit": 3.0,
+    "prerequisites": [22],
+    "elective": 3
+  },
+  {
+    "id": 82,
+    "name": "Health Economics",
+    "credit": 3.0,
+    "prerequisites": [22],
+    "elective": 3
+  },
+  {
+    "id": 83,
+    "name": "Corporate Finance",
+    "credit": 3.0,
+    "prerequisites": [26],
+    "elective": 4
+  },
+  {
+    "id": 84,
+    "name": "Financial Institutions and Markets",
+    "credit": 3.0,
+    "prerequisites": [26],
+    "elective": 4
+  },
+  {
+    "id": 85,
+    "name": "Investment Analysis and Portfolio Management",
+    "credit": 3.0,
+    "prerequisites": [26],
+    "elective": 4
+  },
+  {
+    "id": 86,
+    "name": "Capital Budgeting",
+    "credit": 3.0,
+    "prerequisites": [26],
+    "elective": 4
+  },
+  {
+    "id": 87,
+    "name": "Bank Fund Management",
+    "credit": 3.0,
+    "prerequisites": [26],
+    "elective": 4
+  },
+  {
+    "id": 88,
+    "name": "Working Capital Management",
+    "credit": 3.0,
+    "prerequisites": [26],
+    "elective": 4
+  },
+  {
+    "id": 89,
+    "name": "Islamic Finance and Banking",
+    "credit": 3.0,
+    "prerequisites": [26],
+    "elective": 4
+  },
+  {
+    "id": 90,
+    "name": "Global Finance",
+    "credit": 3.0,
+    "prerequisites": [26],
+    "elective": 4
+  },
+  {
+    "id": 91,
+    "name": "Financial Derivatives",
+    "credit": 3.0,
+    "prerequisites": [26],
+    "elective": 4
+  },
+  {
+    "id": 92,
+    "name": "Comprehensive Financial Case Analysis",
+    "credit": 3.0,
+    "prerequisites": [26],
+    "elective": 4
+  },
+  {
+    "id": 93,
+    "name": "Financial Statement Analysis",
+    "credit": 3.0,
+    "prerequisites": [26],
+    "elective": 4
+  },
+  {
+    "id": 94,
+    "name": "Human Resource Planning and Forecasting",
+    "credit": 3.0,
+    "prerequisites": [25],
+    "elective": 5
+  },
+  {
+    "id": 95,
+    "name": "Performance Appraisal and Management",
+    "credit": 3.0,
+    "prerequisites": [25],
+    "elective": 5
+  },
+  {
+    "id": 96,
+    "name": "Selection and Staffing",
+    "credit": 3.0,
+    "prerequisites": [25],
+    "elective": 5
+  },
+  {
+    "id": 97,
+    "name": "Training and Development",
+    "credit": 3.0,
+    "prerequisites": [25],
+    "elective": 5
+  },
+  {
+    "id": 98,
+    "name": "Labor Law of Bangladesh",
+    "credit": 3.0,
+    "prerequisites": [25],
+    "elective": 5
+  },
+  {
+    "id": 99,
+    "name": "Compensation and Benefit Management",
+    "credit": 3.0,
+    "prerequisites": [25],
+    "elective": 5
+  },
+  {
+    "id": 100,
+    "name": "Industrial Relations Management",
+    "credit": 3.0,
+    "prerequisites": [25],
+    "elective": 5
+  },
+  {
+    "id": 101,
+    "name": "Human Resource Information System (HRIS)",
+    "credit": 3.0,
+    "prerequisites": [25],
+    "elective": 5
+  },
+  {
+    "id": 102,
+    "name": "Human Resource in Global Business Environment",
+    "credit": 3.0,
+    "prerequisites": [25],
+    "elective": 5
+  },
+  {
+    "id": 103,
+    "name": "Occupational Health and Safety Management",
+    "credit": 3.0,
+    "prerequisites": [25],
+    "elective": 5
+  },
+  {
+    "id": 104,
+    "name": "Organizational Theory and Development",
+    "credit": 3.0,
+    "prerequisites": [25],
+    "elective": 5
+  },
+  {
+    "id": 105,
+    "name": "Strategic Human Resource Management",
+    "credit": 3.0,
+    "prerequisites": [25],
+    "elective": 5
+  },
+  {
+    "id": 106,
+    "name": "Entrepreneurial Mindset and Behavior",
+    "credit": 3.0,
+    "prerequisites": [34],
+    "elective": 6
+  },
+  {
+    "id": 107,
+    "name": "Accounting for Entrepreneurs",
+    "credit": 3.0,
+    "prerequisites": [34],
+    "elective": 6
+  },
+  {
+    "id": 108,
+    "name": "New Venture Development",
+    "credit": 3.0,
+    "prerequisites": [34],
+    "elective": 6
+  },
+  {
+    "id": 109,
+    "name": "Entrepreneurial Finance",
+    "credit": 3.0,
+    "prerequisites": [34],
+    "elective": 6
+  },
+  {
+    "id": 110,
+    "name": "Economics for the Entrepreneurs",
+    "credit": 3.0,
+    "prerequisites": [34],
+    "elective": 6
+  },
+  {
+    "id": 111,
+    "name": "Consumer Behavior and Digital Marketing",
+    "credit": 3.0,
+    "prerequisites": [34],
+    "elective": 6
+  },
+  {
+    "id": 112,
+    "name": "E-commerce",
+    "credit": 3.0,
+    "prerequisites": [34],
+    "elective": 6
+  },
+  {
+    "id": 113,
+    "name": "Marketing Research for Entrepreneurs",
+    "credit": 3.0,
+    "prerequisites": [34],
+    "elective": 6
+  },
+  {
+    "id": 114,
+    "name": "Business Risk Management",
+    "credit": 3.0,
+    "prerequisites": [34],
+    "elective": 6
+  },
+  {
+    "id": 115,
+    "name": "Enterprise Resource Planning",
+    "credit": 3.0,
+    "prerequisites": [34],
+    "elective": 6
+  },
+  {
+    "id": 116,
+    "name": "Business Intelligence and Decision Support System",
+    "credit": 3.0,
+    "prerequisites": [34],
+    "elective": 6
+  },
+  {
+    "id": 117,
+    "name": "International Banking",
+    "credit": 3.0,
+    "prerequisites": [30],
+    "elective": 7
+  },
+  {
+    "id": 118,
+    "name": "Global Business Strategy",
+    "credit": 3.0,
+    "prerequisites": [30],
+    "elective": 7
+  },
+  {
+    "id": 119,
+    "name": "International Enterprises and Transactions",
+    "credit": 3.0,
+    "prerequisites": [30],
+    "elective": 7
+  },
+  {
+    "id": 120,
+    "name": "International Business Governance, Ethics and Law",
+    "credit": 3.0,
+    "prerequisites": [30],
+    "elective": 7
+  },
+  {
+    "id": 121,
+    "name": "Development Economics",
+    "credit": 3.0,
+    "prerequisites": [30],
+    "elective": 7
+  },
+  {
+    "id": 122,
+    "name": "Labor Economics",
+    "credit": 3.0,
+    "prerequisites": [30],
+    "elective": 7
+  },
+  {
+    "id": 123,
+    "name": "Global Finance",
+    "credit": 3.0,
+    "prerequisites": [30],
+    "elective": 7
+  },
+  {
+    "id": 124,
+    "name": "Human Resource in Global Business Environment",
+    "credit": 3.0,
+    "prerequisites": [30],
+    "elective": 7
+  },
+  {
+    "id": 125,
+    "name": "Negotiation Theory and Practice",
+    "credit": 3.0,
+    "prerequisites": [30],
+    "elective": 7
+  },
+  {
+    "id": 126,
+    "name": "Enterprise Resource Planning",
+    "credit": 3.0,
+    "prerequisites": [30],
+    "elective": 7
+  },
+  {
+    "id": 127,
+    "name": "International Marketing",
+    "credit": 3.0,
+    "prerequisites": [30],
+    "elective": 7
+  },
+  {
+    "id": 128,
+    "name": "Logistics Management",
+    "credit": 3.0,
+    "prerequisites": [30],
+    "elective": 7
+  },
+  {
+    "id": 130,
+    "name": "Regulations and Investment",
+    "credit": 3.0,
+    "prerequisites": [26],
+    "elective": 8
+  },
+  {
+    "id": 131,
+    "name": "Doing Business in Bangladesh",
+    "credit": 3.0,
+    "prerequisites": [26],
+    "elective": 8
+  },
+  {
+    "id": 132,
+    "name": "Macroeconomic Conditions for Investment",
+    "credit": 3.0,
+    "prerequisites": [26],
+    "elective": 8
+  },
+  {
+    "id": 133,
+    "name": "Economics and Law",
+    "credit": 3.0,
+    "prerequisites": [26],
+    "elective": 8
+  },
+  {
+    "id": 134,
+    "name": "Business Risk Management",
+    "credit": 3.0,
+    "prerequisites": [26],
+    "elective": 8
+  },
+  {
+    "id": 135,
+    "name": "Development Economics",
+    "credit": 3.0,
+    "prerequisites": [26],
+    "elective": 8
+  },
+  {
+    "id": 136,
+    "name": "Labor Economics",
+    "credit": 3.0,
+    "prerequisites": [26],
+    "elective": 8
+  },
+  {
+    "id": 137,
+    "name": "Financial Institutions and Markets",
+    "credit": 3.0,
+    "prerequisites": [26],
+    "elective": 8
+  },
+  {
+    "id": 138,
+    "name": "Investment Analysis and Portfolio Management",
+    "credit": 3.0,
+    "prerequisites": [26],
+    "elective": 8
+  },
+  {
+    "id": 139,
+    "name": "Global Finance",
+    "credit": 3.0,
+    "prerequisites": [26],
+    "elective": 8
+  },
+  {
+    "id": 140,
+    "name": "Financial Derivatives",
+    "credit": 3.0,
+    "prerequisites": [26],
+    "elective": 8
+  },
+  {
+    "id": 141,
+    "name": "Agri-business Management",
+    "credit": 3.0,
+    "prerequisites": [26],
+    "elective": 8
+  },
+  {
+    "id": 142,
+    "name": "Negotiation Theory and Practice",
+    "credit": 3.0,
+    "prerequisites": [26],
+    "elective": 8
+  },
+  {
+    "id": 143,
+    "name": "Management of Change and Technology",
+    "credit": 3.0,
+    "prerequisites": [13],
+    "elective": 9
+  },
+  {
+    "id": 144,
+    "name": "Public Sector Management",
+    "credit": 3.0,
+    "prerequisites": [13],
+    "elective": 9
+  },
+  {
+    "id": 145,
+    "name": "Environment Management",
+    "credit": 3.0,
+    "prerequisites": [13],
+    "elective": 9
+  },
+  {
+    "id": 146,
+    "name": "Managing of NGOs and Small Business",
+    "credit": 3.0,
+    "prerequisites": [13],
+    "elective": 9
+  },
+  {
+    "id": 147,
+    "name": "Cooperative Management",
+    "credit": 3.0,
+    "prerequisites": [13],
+    "elective": 9
+  },
+  {
+    "id": 148,
+    "name": "Disaster Management",
+    "credit": 3.0,
+    "prerequisites": [13],
+    "elective": 9
+  },
+  {
+    "id": 150,
+    "name": "Agri-business Management",
+    "credit": 3.0,
+    "prerequisites": [13],
+    "elective": 9
+  },
+  {
+    "id": 151,
+    "name": "Negotiation Theory and Practice",
+    "credit": 3.0,
+    "prerequisites": [13],
+    "elective": 9
+  },
+  {
+    "id": 152,
+    "name": "Labor Law of Bangladesh",
+    "credit": 3.0,
+    "prerequisites": [13],
+    "elective": 9
+  },
+  {
+    "id": 153,
+    "name": "Industrial Relations Management",
+    "credit": 3.0,
+    "prerequisites": [13],
+    "elective": 9
+  },
+  {
+    "id": 154,
+    "name": "Occupational Health and Safety Management",
+    "credit": 3.0,
+    "prerequisites": [13],
+    "elective": 9
+  },
+  {
+    "id": 155,
+    "name": "Organization Theory and Development",
+    "credit": 3.0,
+    "prerequisites": [13],
+    "elective": 9
+  },
+  {
+    "id": 156,
+    "name": "Global Business Strategy",
+    "credit": 3.0,
+    "prerequisites": [13],
+    "elective": 9
+  },
+  {
+    "id": 157,
+    "name": "Inventory Management",
+    "credit": 3.0,
+    "prerequisites": [13],
+    "elective": 9
+  },
+  {
+    "id": 158,
+    "name": "Hospitality Management",
+    "credit": 3.0,
+    "prerequisites": [13],
+    "elective": 9
+  },
+  {
+    "id": 159,
+    "name": "Enterprise Resource Planning",
+    "credit": 3.0,
+    "prerequisites": [29],
+    "elective": 10
+  },
+  {
+    "id": 160,
+    "name": "Database Analysis and Design",
+    "credit": 3.0,
+    "prerequisites": [29],
+    "elective": 10
+  },
+  {
+    "id": 161,
+    "name": "Object Oriented Programming",
+    "credit": 3.0,
+    "prerequisites": [29],
+    "elective": 10
+  },
+  {
+    "id": 162,
+    "name": "Digital Marketing",
+    "credit": 3.0,
+    "prerequisites": [29],
+    "elective": 10
+  },
+  {
+    "id": 163,
+    "name": "Data Warehouse and Data Mining",
+    "credit": 3.0,
+    "prerequisites": [29],
+    "elective": 10
+  },
+  {
+    "id": 164,
+    "name": "Business Intelligence and Decision Support System",
+    "credit": 3.0,
+    "prerequisites": [29],
+    "elective": 10
+  },
+  {
+    "id": 165,
+    "name": "Special Topic in MIS",
+    "credit": 3.0,
+    "prerequisites": [29],
+    "elective": 10
+  },
+  {
+    "id": 166,
+    "name": "Web Technology",
+    "credit": 3.0,
+    "prerequisites": [29],
+    "elective": 10
+  },
+  {
+    "id": 167,
+    "name": "Business Graphics and Animation",
+    "credit": 3.0,
+    "prerequisites": [29],
+    "elective": 10
+  },
+  {
+    "id": 168,
+    "name": "Network Resource Management",
+    "credit": 3.0,
+    "prerequisites": [29],
+    "elective": 10
+  },
+  {
+    "id": 169,
+    "name": "E-Commerce and E-Governance",
+    "credit": 3.0,
+    "prerequisites": [29],
+    "elective": 10
+  },
+  {
+    "id": 170,
+    "name": "Introduction to Data Science",
+    "credit": 3.0,
+    "prerequisites": [29],
+    "elective": 10
+  },
+  {
+    "id": 171,
+    "name": "Cyber Security",
+    "credit": 3.0,
+    "prerequisites": [29],
+    "elective": 10
+  },
+  {
+    "id": 172,
+    "name": "Blockchain Technologies in Business",
+    "credit": 3.0,
+    "prerequisites": [29],
+    "elective": 10
+  },
+  {
+    "id": 173,
+    "name": "Consumer Behavior",
+    "credit": 3.0,
+    "prerequisites": [27],
+    "elective": 11
+  },
+  {
+    "id": 174,
+    "name": "Integrated Marketing Communication",
+    "credit": 3.0,
+    "prerequisites": [27],
+    "elective": 11
+  },
+  {
+    "id": 175,
+    "name": "Social Media and Digital Marketing",
+    "credit": 3.0,
+    "prerequisites": [27],
+    "elective": 11
+  },
+  {
+    "id": 176,
+    "name": "Services Marketing",
+    "credit": 3.0,
+    "prerequisites": [27],
+    "elective": 11
+  },
+  {
+    "id": 177,
+    "name": "Sales Management",
+    "credit": 3.0,
+    "prerequisites": [27],
+    "elective": 11
+  },
+  {
+    "id": 178,
+    "name": "International Marketing",
+    "credit": 3.0,
+    "prerequisites": [27],
+    "elective": 11
+  },
+  {
+    "id": 179,
+    "name": "Distribution and Channel Management",
+    "credit": 3.0,
+    "prerequisites": [27],
+    "elective": 11
+  },
+  {
+    "id": 180,
+    "name": "Brand and Product Management",
+    "credit": 3.0,
+    "prerequisites": [27],
+    "elective": 11
+  },
+  {
+    "id": 181,
+    "name": "Rural Marketing",
+    "credit": 3.0,
+    "prerequisites": [27],
+    "elective": 11
+  },
+  {
+    "id": 182,
+    "name": "Agro-based Product Marketing",
+    "credit": 3.0,
+    "prerequisites": [27],
+    "elective": 11
+  },
+  {
+    "id": 183,
+    "name": "Marketing Strategy",
+    "credit": 3.0,
+    "prerequisites": [27],
+    "elective": 11
+  },
+  {
+    "id": 184,
+    "name": "Marketing Research",
+    "credit": 3.0,
+    "prerequisites": [27],
+    "elective": 11
+  },
+  {
+    "id": 185,
+    "name": "Product Innovation and Management",
+    "credit": 3.0,
+    "prerequisites": [27],
+    "elective": 11
+  },
+  {
+    "id": 186,
+    "name": "Tourism and Hospitality Marketing",
+    "credit": 3.0,
+    "prerequisites": [27],
+    "elective": 11
+  },
+  {
+    "id": 187,
+    "name": "Introduction to Tourism and Hospitality Industry",
+    "credit": 3.0,
+    "prerequisites": [27],
+    "elective": 12
+  },
+  {
+    "id": 188,
+    "name": "Tourism and Hospitality Marketing",
+    "credit": 3.0,
+    "prerequisites": [27],
+    "elective": 12
+  },
+  {
+    "id": 189,
+    "name": "Housekeeping Management",
+    "credit": 3.0,
+    "prerequisites": [27],
+    "elective": 12
+  },
+  {
+    "id": 190,
+    "name": "Recreation Management",
+    "credit": 3.0,
+    "prerequisites": [27],
+    "elective": 12
+  },
+  {
+    "id": 191,
+    "name": "Tourism and Hospitality Law",
+    "credit": 3.0,
+    "prerequisites": [27],
+    "elective": 12
+  },
+  {
+    "id": 192,
+    "name": "Travel Agency and Tour Operation Management",
+    "credit": 3.0,
+    "prerequisites": [27],
+    "elective": 12
+  },
+  {
+    "id": 193,
+    "name": "Event and MICE (Meeting, Incentives, Convention and Exhibitions) Management",
+    "credit": 3.0,
+    "prerequisites": [23],
+    "elective": 12
+  },
+  {
+    "id": 194,
+    "name": "Airline Reservation and Ticketing",
+    "credit": 3.0,
+    "prerequisites": [27],
+    "elective": 12
+  },
+  {
+    "id": 195,
+    "name": "Food and Beverage Service Management",
+    "credit": 3.0,
+    "prerequisites": [27],
+    "elective": 12
+  },
+  {
+    "id": 196,
+    "name": "Destination Planning and Development",
+    "credit": 3.0,
+    "prerequisites": [27],
+    "elective": 12
+  },
+  {
+    "id": 197,
+    "name": "Hospitality Management",
+    "credit": 3.0,
+    "prerequisites": [27],
+    "elective": 12
+  },
+  {
+    "id": 198,
+    "name": "Consumer Behavior",
+    "credit": 3.0,
+    "prerequisites": [27],
+    "elective": 12
+  },
+  {
+    "id": 199,
+    "name": "Services Marketing",
+    "credit": 3.0,
+    "prerequisites": [27],
+    "elective": 12
+  },
+  {
+    "id": 200,
+    "name": "Marketing Strategy",
+    "credit": 3.0,
+    "prerequisites": [27],
+    "elective": 12
+  },
+  {
+    "id": 201,
+    "name": "Marketing Research",
+    "credit": 3.0,
+    "prerequisites": [27],
+    "elective": 12
+  },
+  {
+    "id": 202,
+    "name": "Advanced Supply Chain Management",
+    "credit": 3.0,
+    "prerequisites": [28],
+    "elective": 13
+  },
+  {
+    "id": 203,
+    "name": "Inventory Management",
+    "credit": 3.0,
+    "prerequisites": [28],
+    "elective": 13
+  },
+  {
+    "id": 204,
+    "name": "Sourcing and Negotiation",
+    "credit": 3.0,
+    "prerequisites": [28],
+    "elective": 13
+  },
+  {
+    "id": 205,
+    "name": "Logistics Management",
+    "credit": 3.0,
+    "prerequisites": [28],
+    "elective": 13
+  },
+  {
+    "id": 206,
+    "name": "Managerial Forecasting",
+    "credit": 3.0,
+    "prerequisites": [28],
+    "elective": 13
+  },
+  {
+    "id": 207,
+    "name": "Purchasing and Procurement",
+    "credit": 3.0,
+    "prerequisites": [28],
+    "elective": 13
+  },
+  {
+    "id": 208,
+    "name": "Supply Chain Analytics",
+    "credit": 3.0,
+    "prerequisites": [28],
+    "elective": 13
+  },
+  {
+    "id": 209,
+    "name": "Service Operations Management",
+    "credit": 3.0,
+    "prerequisites": [28],
+    "elective": 13
+  },
+  {
+    "id": 210,
+    "name": "Total Quality Management",
+    "credit": 3.0,
+    "prerequisites": [28],
+    "elective": 13
+  },
+  {
+    "id": 211,
+    "name": "Product Strategy Management",
+    "credit": 3.0,
+    "prerequisites": [28],
+    "elective": 13
+  },
+  {
+    "id": 212,
+    "name": "Enterprise Resource Planning",
+    "credit": 3.0,
+    "prerequisites": [28],
+    "elective": 13
+  },
+  {
+    "id": 213,
+    "name": "Blockchain Technologies in Business",
+    "credit": 3.0,
+    "prerequisites": [28],
+    "elective": 13
+  }
+]

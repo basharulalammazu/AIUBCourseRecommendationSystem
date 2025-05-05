@@ -1,9 +1,24 @@
-body {
-  font-family: Arial;
-  padding: 20px;
-  max-width: 700px;
-  margin: auto;
+/* Basic Reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
+
+/* Body Styling */
+body {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  background-color: #f5f5f5;
+}
+
+/* Heading */
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Form Elements */
 label,
 select,
 input {
@@ -11,19 +26,51 @@ input {
   width: 100%;
   margin-bottom: 10px;
   padding: 8px;
+  font-size: 1rem;
 }
+
+input::placeholder {
+  color: #999;
+}
+
+/* Course Container */
+#courses {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: 1fr; /* Mobile default */
+  gap: 10px;
+}
+
+/* Individual Course Card */
 .course {
+  background-color: #fff;
   border: 1px solid #ccc;
-  padding: 10px;
-  border-radius: 5px;
-  margin-bottom: 8px;
+  border-left: 5px solid #007bff;
+  padding: 12px;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
-.eligible {
-  background-color: #e0ffe0;
+
+/* Eligible / Ineligible */
+.course.eligible {
+  border-left-color: #28a745;
 }
-.ineligible {
-  background-color: #ffe0e0;
+
+.course.ineligible {
+  border-left-color: #dc3545;
 }
+
+/* Category Titles */
+#courses h3 {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-size: 1.2rem;
+  color: #333;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 5px;
+  grid-column: span 1;
+}
+
 .hidden {
   display: none;
 }
