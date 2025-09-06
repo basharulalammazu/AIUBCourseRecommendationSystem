@@ -237,11 +237,15 @@ function addAvailableCourse(course, completedSet) {
         completedInput.value = newCompleted;
         displayAvailableCourses();
       } else if (!hasAllPrereqs) {
-        // Show warning modal
+        // Show warning modal with prerequisite names
         pendingCourse = course;
         const missingPrereqs = course.prerequisites.filter(pr => !completedSet.has(pr));
-        document.getElementById("warningMessage").textContent = 
-          `This course requires prerequisites: ${missingPrereqs.join(", ")}. Are you sure you want to mark it as completed?`;
+        const missingDetails = missingPrereqs.map(id => {
+          const pc = currentCourses.find(c => c.id === id);
+          return pc ? `[${id}] ${pc.name}` : id;
+        });
+        document.getElementById("warningMessage").innerHTML =
+          `This course requires the following prerequisites:<br><strong>${missingDetails.join(', ')}</strong><br><br>Are you sure you want to mark it as completed?`;
         warningModal.style.display = "block";
       } else {
         // Add the course to completed

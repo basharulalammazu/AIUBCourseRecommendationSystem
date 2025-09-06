@@ -14,12 +14,10 @@ window.addEventListener("resize", () => {
 deptSelect.addEventListener("change", () => {
   const dept = deptSelect.value.trim();
   if (!dept) {
-    devSection.style.display = "block";
     offerCoursesBtn.classList.add('disabled');
     offerCoursesBtn.setAttribute('aria-disabled','true');
     offerCoursesBtn.href = 'javascript:void(0)';
   } else {
-    devSection.style.display = "none";
     offerCoursesBtn.classList.remove('disabled');
     offerCoursesBtn.removeAttribute('aria-disabled');
     offerCoursesBtn.href = `offer_courses.html?dept=${dept}`;
