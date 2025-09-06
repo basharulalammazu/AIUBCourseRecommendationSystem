@@ -3,21 +3,34 @@
   <head>
     <meta charset="UTF-8" />
     <title>AIUB Course Recomendation System</title>
-    <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="mediaqueries.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/mediaqueries.css" />
   </head>
   <body>
-    <button id="themeToggleBtn" class="theme-toggle" aria-label="Toggle dark mode" title="Toggle theme">🌙</button>
+    <button
+      id="themeToggleBtn"
+      class="theme-toggle"
+      aria-label="Toggle dark mode"
+      title="Toggle theme"
+    >
+      🌙
+    </button>
 
     <main class="container">
       <header class="hero fade-in">
         <h1 class="app-title">AIUB Course Recommendation System</h1>
-        <p class="subtitle">Plan smarter. Pick the right courses. Generate optimized routines effortlessly.</p>
+        <p class="subtitle">
+          Plan smarter. Pick the right courses. Generate optimized routines
+          effortlessly.
+        </p>
       </header>
 
-      <section class="selection-card glass fade-in" style="--delay:0.1s">
+      <section class="selection-card glass fade-in" style="--delay: 0.1s">
         <h2 class="section-title">Start Planning</h2>
-        <p class="helper-text">Choose your department to explore offered courses and generate a routine.</p>
+        <p class="helper-text">
+          Choose your department to explore offered courses and generate a
+          routine.
+        </p>
         <!-- Department Selector -->
         <div class="form-row">
           <label for="deptSelect">Department</label>
@@ -33,13 +46,25 @@
 
         <!-- Action Buttons -->
         <div class="links-stack">
-          <a href="routine.html" id="routineGeneratorBtn" class="btn secondary" data-independent="true">🗓️ Routine Generator (No Dept Needed)</a>
-          <a href="javascript:void(0)" id="offerCoursesBtn" class="btn primary disabled" aria-disabled="true">� Offered Courses (Select Dept)</a>
+          <a
+            href="routine.html"
+            id="routineGeneratorBtn"
+            class="btn secondary"
+            data-independent="true"
+            >🗓️ Routine Generator (No Dept Needed)</a
+          >
+          <a
+            href="javascript:void(0)"
+            id="offerCoursesBtn"
+            class="btn primary disabled"
+            aria-disabled="true"
+            >� Offered Courses (Select Dept)</a
+          >
         </div>
       </section>
     </main>
     <!-- Beautiful Developer & Download Section -->
-  <section id="dev-section" class="fade-in" style="--delay:0.2s">
+    <section id="dev-section" class="fade-in" style="--delay: 0.2s">
       <div class="download-area">
         <h3>🎯 Get the Application</h3>
         <p class="download-description">
@@ -50,7 +75,7 @@
         <a
           href="https://github.com/basharulalammazu/AIUB-Offered-Courses/releases/download/v3.3.0/AIUBOfferedCourse-V3.3.0.zip"
           target="_blank"
-      class="btn accent"
+          class="btn accent"
         >
           ⬇️ Download for Windows
         </a>
@@ -68,7 +93,12 @@
               alt="Basharul Alam Mazu"
             />
             <h4>Basharul - Alam - Mazu</h4>
-            <a href="https://github.com/basharulalammazu" target="_blank" class="profile-link">@basharulalammazu</a>
+            <a
+              href="https://github.com/basharulalammazu"
+              target="_blank"
+              class="profile-link"
+              >@basharulalammazu</a
+            >
           </div>
           <div class="dev-card">
             <img
@@ -76,16 +106,24 @@
               alt="Md Tanjim Rahman"
             />
             <h4>Md Tanjim Rahman</h4>
-            <a href="https://github.com/mdtanjimrahman" target="_blank" class="profile-link">@mdtanjimrahman</a>
+            <a
+              href="https://github.com/mdtanjimrahman"
+              target="_blank"
+              class="profile-link"
+              >@mdtanjimrahman</a
+            >
           </div>
         </div>
       </div>
     </section>
 
-    <footer class="app-footer fade-in" style="--delay:0.3s">
-      <p>© <span id="year"></span> AIUB Course Recommendation System • Crafted with focus on student success.</p>
+    <footer class="app-footer fade-in" style="--delay: 0.3s">
+      <p>
+        © <span id="year"></span> AIUB Course Recommendation System • Crafted
+        with focus on student success.
+      </p>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="js/script.js"></script>
   </body>
 </html>

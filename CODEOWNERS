@@ -1,0 +1,25 @@
+# CODEOWNERS
+
+# Lines define owners for files/folders. The last matching pattern takes precedence.
+
+# When someone opens a PR that modifies matching paths, these owners are requested for review.
+
+# Global ownership
+
+-       @basharulalammazu
+
+# JSON course data
+
+/course_managers/ @basharulalammazu
+
+# CSS styles
+
+/css/ @basharulalammazu
+
+# JavaScript logic
+
+/js/ @basharulalammazu
+
+# Documentation
+
+/\*.md @basharulalammazu

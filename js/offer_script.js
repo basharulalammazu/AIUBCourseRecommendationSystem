@@ -23,7 +23,9 @@ cancelSelect.onclick = () => {
 confirmSelect.onclick = () => {
   if (pendingCourse) {
     const currentCompleted = completedInput.value.trim();
-    const newCompleted = currentCompleted ? `${currentCompleted}, ${pendingCourse.id}` : `${pendingCourse.id}`;
+    const newCompleted = currentCompleted
+      ? `${currentCompleted}, ${pendingCourse.id}`
+      : `${pendingCourse.id}`;
     completedInput.value = newCompleted;
     displayAvailableCourses();
   }
@@ -41,7 +43,7 @@ window.onclick = (event) => {
 
 // Get department from URL
 const urlParams = new URLSearchParams(window.location.search);
-const dept = urlParams.get('dept');
+const dept = urlParams.get("dept");
 
 if (dept) {
   fetch(`course_managers/courses_${dept}.json`)
@@ -104,7 +106,8 @@ function displayAvailableCourses() {
 
   // Filter courses based on search
   const filteredCourses = currentCourses.filter((course) => {
-    const nameMatches = !searchTerm || course.name.toLowerCase().includes(searchTerm);
+    const nameMatches =
+      !searchTerm || course.name.toLowerCase().includes(searchTerm);
     return nameMatches;
   });
 
@@ -182,9 +185,11 @@ function groupAndDisplayCourses(courses, searchTerm, completedSet) {
 
 function addAvailableCourse(course, completedSet) {
   const isCompleted = completedSet.has(course.id);
-  const hasAllPrereqs = course.prerequisites.every((pr) => completedSet.has(pr));
+  const hasAllPrereqs = course.prerequisites.every((pr) =>
+    completedSet.has(pr)
+  );
   const completedCredits = Array.from(completedSet).reduce((sum, id) => {
-    const c = currentCourses.find(c => c.id === id);
+    const c = currentCourses.find((c) => c.id === id);
     return sum + (c ? c.credit : 0);
   }, 0);
 
@@ -202,7 +207,10 @@ function addAvailableCourse(course, completedSet) {
   } else if (course.id === 49 && completedCredits < 100) {
     status = "Not enough credits";
     bgColor = "#fff3cd";
-  } else if (course.name.toLowerCase().includes("internship") && completedCredits < 140) {
+  } else if (
+    course.name.toLowerCase().includes("internship") &&
+    completedCredits < 140
+  ) {
     status = "Not enough credits";
     bgColor = "#fff3cd";
   }
@@ -232,25 +240,35 @@ function addAvailableCourse(course, completedSet) {
       if (isCompleted) {
         // Remove the course from completed
         const currentCompleted = completedInput.value.trim();
-        const ids = currentCompleted.split(",").map(s => s.trim()).filter(id => id !== course.id.toString());
+        const ids = currentCompleted
+          .split(",")
+          .map((s) => s.trim())
+          .filter((id) => id !== course.id.toString());
         const newCompleted = ids.join(", ");
         completedInput.value = newCompleted;
         displayAvailableCourses();
       } else if (!hasAllPrereqs) {
         // Show warning modal with prerequisite names
         pendingCourse = course;
-        const missingPrereqs = course.prerequisites.filter(pr => !completedSet.has(pr));
-        const missingDetails = missingPrereqs.map(id => {
-          const pc = currentCourses.find(c => c.id === id);
+        const missingPrereqs = course.prerequisites.filter(
+          (pr) => !completedSet.has(pr)
+        );
+        const missingDetails = missingPrereqs.map((id) => {
+          const pc = currentCourses.find((c) => c.id === id);
           return pc ? `[${id}] ${pc.name}` : id;
         });
-        document.getElementById("warningMessage").innerHTML =
-          `This course requires the following prerequisites:<br><strong>${missingDetails.join(', ')}</strong><br><br>Are you sure you want to mark it as completed?`;
+        document.getElementById(
+          "warningMessage"
+        ).innerHTML = `This course requires the following prerequisites:<br><strong>${missingDetails.join(
+          ", "
+        )}</strong><br><br>Are you sure you want to mark it as completed?`;
         warningModal.style.display = "block";
       } else {
         // Add the course to completed
         const currentCompleted = completedInput.value.trim();
-        const newCompleted = currentCompleted ? `${currentCompleted}, ${course.id}` : `${course.id}`;
+        const newCompleted = currentCompleted
+          ? `${currentCompleted}, ${course.id}`
+          : `${course.id}`;
         completedInput.value = newCompleted;
         displayAvailableCourses();
       }
