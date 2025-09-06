@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Offer Courses</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="mediaqueries.css" />
+</head>
+<body>
+    <h2>Offer Courses</h2>
+    <a href="index.html" class="download-btn">Back to Home</a>
+
+    <div id="courseInputs">
+      <div class="input-grid">
+        <div>
+          <label for="completed"
+            >Enter Completed Course IDs (e.g., 1,2,5-10):</label
+          >
+          <input id="completed" placeholder="e.g., 1, 2, 5-10" />
+        </div>
+        <div>
+          <label for="searchName">Enter Course Name to Search:</label>
+          <input id="searchName" placeholder="e.g., Data Structures" />
+        </div>
+      </div>
+
+      <!-- Course Status Legend -->
+      <div class="legend">
+        <h3>Course Status Legend</h3>
+        <div class="legend-item">
+          <span class="color-box" style="background-color: #e6ffe6;"></span>
+          <span>🟢 Green: Available to take (prerequisites met, not completed).</span>
+        </div>
+        <div class="legend-item">
+          <span class="color-box" style="background-color: #fff3cd;"></span>
+          <span>🟡 Yellow: Prerequisites not met or insufficient credits.</span>
+        </div>
+        <div class="legend-item">
+          <span class="color-box" style="background-color: #ffe6e6;"></span>
+          <span>🔴 Red: Already completed.</span>
+        </div>
+      </div>
+
+      <div id="courses"></div>
+    </div>
+
+    <!-- Custom Warning Modal -->
+    <div id="warningModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h3>⚠️ Prerequisite Warning</h3>
+        <p id="warningMessage">This course has prerequisites that are not completed. Are you sure you want to mark it as completed?</p>
+        <div class="modal-buttons">
+          <button id="confirmSelect" class="btn-confirm">Yes, Select Anyway</button>
+          <button id="cancelSelect" class="btn-cancel">Cancel</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="offer_script.js"></script>
+</body>
+</html>

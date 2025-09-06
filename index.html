@@ -7,38 +7,39 @@
     <link rel="stylesheet" href="mediaqueries.css" />
   </head>
   <body>
-    <h2>Course Course Recomendation System</h2>
+    <button id="themeToggleBtn" class="theme-toggle" aria-label="Toggle dark mode" title="Toggle theme">🌙</button>
 
-    <!-- Department Selector -->
-    <label for="deptSelect">Select Department:</label>
-    <select id="deptSelect">
-      <option value="">-- Choose a department --</option>
-      <option value="CSE">CSE</option>
-      <option value="EEE">EEE</option>
-      <option value="ENGLISH">ENGLISH</option>
-      <option value="BBA">BBA</option>
-      <option value="IPE">IPE</option>
-    </select>
+    <main class="container">
+      <header class="hero fade-in">
+        <h1 class="app-title">AIUB Course Recommendation System</h1>
+        <p class="subtitle">Plan smarter. Pick the right courses. Generate optimized routines effortlessly.</p>
+      </header>
 
-    <!-- Input Section Grouped Side-by-Side -->
-    <div id="courseInputs" class="hidden">
-      <div class="input-grid">
-        <div>
-          <label for="completed"
-            >Enter Completed Course IDs (e.g., 1,2,5-10):</label
-          >
-          <input id="completed" placeholder="e.g., 1, 2, 5-10" />
+      <section class="selection-card glass fade-in" style="--delay:0.1s">
+        <h2 class="section-title">Start Planning</h2>
+        <p class="helper-text">Choose your department to explore offered courses and generate a routine.</p>
+        <!-- Department Selector -->
+        <div class="form-row">
+          <label for="deptSelect">Department</label>
+          <select id="deptSelect" aria-label="Select department">
+            <option value="">-- Choose a department --</option>
+            <option value="CSE">CSE</option>
+            <option value="EEE">EEE</option>
+            <option value="ENGLISH">ENGLISH</option>
+            <option value="BBA">BBA</option>
+            <option value="IPE">IPE</option>
+          </select>
         </div>
-        <div>
-          <label for="searchName">Enter Course Name to Search:</label>
-          <input id="searchName" placeholder="e.g., Data Structures" />
-        </div>
-      </div>
 
-      <div id="courses"></div>
-    </div>
+        <!-- Action Buttons -->
+        <div class="links-stack">
+          <a href="routine.html" id="routineGeneratorBtn" class="btn secondary" data-independent="true">🗓️ Routine Generator (No Dept Needed)</a>
+          <a href="javascript:void(0)" id="offerCoursesBtn" class="btn primary disabled" aria-disabled="true">� Offered Courses (Select Dept)</a>
+        </div>
+      </section>
+    </main>
     <!-- Beautiful Developer & Download Section -->
-    <section id="dev-section">
+  <section id="dev-section" class="fade-in" style="--delay:0.2s">
       <div class="download-area">
         <h3>🎯 Get the Application</h3>
         <p class="download-description">
@@ -49,7 +50,7 @@
         <a
           href="https://github.com/basharulalammazu/AIUB-Offered-Courses/releases/download/v3.3.0/AIUBOfferedCourse-V3.3.0.zip"
           target="_blank"
-          class="download-btn"
+      class="btn accent"
         >
           ⬇️ Download for Windows
         </a>
@@ -67,9 +68,7 @@
               alt="Basharul Alam Mazu"
             />
             <h4>Basharul - Alam - Mazu</h4>
-            <a href="https://github.com/basharulalammazu" target="_blank"
-              >@basharulalammazu</a
-            >
+            <a href="https://github.com/basharulalammazu" target="_blank" class="profile-link">@basharulalammazu</a>
           </div>
           <div class="dev-card">
             <img
@@ -77,13 +76,15 @@
               alt="Md Tanjim Rahman"
             />
             <h4>Md Tanjim Rahman</h4>
-            <a href="https://github.com/mdtanjimrahman" target="_blank"
-              >@mdtanjimrahman</a
-            >
+            <a href="https://github.com/mdtanjimrahman" target="_blank" class="profile-link">@mdtanjimrahman</a>
           </div>
         </div>
       </div>
     </section>
+
+    <footer class="app-footer fade-in" style="--delay:0.3s">
+      <p>© <span id="year"></span> AIUB Course Recommendation System • Crafted with focus on student success.</p>
+    </footer>
 
     <script src="script.js"></script>
   </body>

@@ -101,6 +101,10 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
+    <script>
+      // Set PDF.js worker source
+      pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.worker.min.js';
+    </script>
   </head>
   <body>
     <div class="container">
@@ -153,16 +157,118 @@
           }
         });
 
-      function removeBrackets(text) {
-        return text.replace(/\[.*?\]/g, "").trim();
+      function parseTableFormat(lines) {
+        const parsed = [];
+        
+        console.log("Processing lines:", lines); // Debug log
+
+        // Concatenate all lines into one big text
+        const fullText = lines.join(' ');
+        
+        // Parse the full text
+        const spaceParsed = parseSpaceSeparatedFormat(fullText);
+        parsed.push(...spaceParsed);
+
+        console.log("Parsed data from space format:", parsed); // Debug log
+        return parsed;
+      }
+
+      function parseSpaceSeparatedFormat(text) {
+        const parsed = [];
+        
+        // Split by multiple spaces and filter out empty strings
+        const parts = text.split(/\s+/).filter(part => part.trim() !== '');
+        console.log("Space separated parts:", parts.slice(0, 50)); // Debug log first 50 parts
+
+        // Find the start of actual course data (after "ROOM")
+        let startIndex = 0;
+        const roomIndex = parts.indexOf("ROOM");
+        if (roomIndex !== -1) {
+          startIndex = roomIndex + 1;
+        }
+
+        // Process course entries starting from startIndex
+        for (let i = startIndex; i < parts.length - 7; i++) {
+          // Check if this part is a 5-digit CODE
+          if (/^\d{5}$/.test(parts[i])) {
+            const code = parts[i];
+            const courseId = parts[i + 1];
+            
+            // Course name starts at i+2 and continues until we find a single letter A-Z (section)
+            let courseName = '';
+            let sectionIndex = i + 2;
+            
+            while (sectionIndex < parts.length && !/^[A-Z]$/.test(parts[sectionIndex])) {
+              if (sectionIndex > i + 2) courseName += ' ';
+              courseName += parts[sectionIndex];
+              sectionIndex++;
+            }
+            
+            if (sectionIndex < parts.length - 5) {
+              const section = parts[sectionIndex];
+              const timeStart = parts[sectionIndex + 1];
+              
+              if (parts[sectionIndex + 2] === '-') {
+                const timeEnd = parts[sectionIndex + 3];
+                const day = parts[sectionIndex + 4];
+                const room = parts[sectionIndex + 5];
+                
+                const entry = {
+                  "Course Title": courseName.trim(),
+                  "Course ID": courseId,
+                  "CODE": code,
+                  Section: section,
+                  "Start Time": timeStart + ":00",
+                  "End Time": timeEnd + ":00",
+                  Day: day,
+                  Room: room,
+                  times: [{
+                    day: day,
+                    startRaw: timeStart + ":00",
+                    endRaw: timeEnd + ":00",
+                    start: convertTo24Hour(timeStart + ":00"),
+                    end: convertTo24Hour(timeEnd + ":00"),
+                    room: room
+                  }]
+                };
+                
+                parsed.push(entry);
+                console.log("Parsed entry:", entry); // Debug log
+                
+                // Skip to next course (move past this entry)
+                i = sectionIndex + 5;
+              }
+            }
+          }
+        }
+        
+        console.log("Parsed " + parsed.length + " courses from space-separated format");
+        return parsed;
       }
 
       function convertTo24Hour(time) {
-        const [timePart, modifier] = time.trim().split(/[\s]+/);
-        let [hours, minutes] = timePart.split(":").map(Number);
-        if (modifier?.toLowerCase() === "pm" && hours < 12) hours += 12;
-        if (modifier?.toLowerCase() === "am" && hours === 12) hours = 0;
+        if (!time) return 0;
+        const cleaned = time.trim();
+        const parts = cleaned.split(/\s+/); // may contain AM/PM as separate token
+        let timePart = parts[0];
+        let modifier = parts[1] ? parts[1].toLowerCase() : null;
+        // Drop trailing seconds if present (HH:MM:SS)
+        const hm = timePart.split(":");
+        let hours = parseInt(hm[0], 10);
+        let minutes = parseInt(hm[1] || '0', 10);
+        if (modifier === 'pm' && hours < 12) hours += 12;
+        if (modifier === 'am' && hours === 12) hours = 0;
+        if (!modifier) {
+          // Heuristic: schedule uses 1,2,3,4,5,6 for afternoon/evening (13-18)
+            if (hours >= 1 && hours <= 6) hours += 12; // treat as 13..18
+        }
         return hours + minutes / 60;
+      }
+
+      // Helper to normalize course titles by removing bracketed qualifiers like [FST/FE]
+      function removeBrackets(title) {
+        if (!title || typeof title !== 'string') return title;
+        return title.replace(/\[[^\]]*\]/g, '').replace(/\s+/g, ' ').trim();
       }
 
       function handleExcel(file) {
@@ -172,7 +278,28 @@
           const workbook = XLSX.read(e.target.result, { type: "binary" });
           const sheet = workbook.Sheets[workbook.SheetNames[0]];
           const json = XLSX.utils.sheet_to_json(sheet);
-          parseRows(json);
+          
+          // Convert Excel format to expected format
+          const converted = json.map(row => ({
+            "Course Title": row["COURSE"] || row["Course"],
+            "Course ID": row["Course ID"],
+            "CODE": row["CODE"],
+            Section: row["SEC"],
+            "Start Time": row["TIME"] ? row["TIME"].split("-")[0] + ":00" : "",
+            "End Time": row["TIME"] ? row["TIME"].split("-")[1] + ":00" : "",
+            Day: row["DAY"],
+            Room: row["ROOM"],
+            times: [{
+              day: row["DAY"],
+              startRaw: row["TIME"] ? row["TIME"].split("-")[0] + ":00" : "",
+              endRaw: row["TIME"] ? row["TIME"].split("-")[1] + ":00" : "",
+              start: convertTo24Hour(row["TIME"] ? row["TIME"].split("-")[0] + ":00" : ""),
+              end: convertTo24Hour(row["TIME"] ? row["TIME"].split("-")[1] + ":00" : ""),
+              room: row["ROOM"]
+            }]
+          }));
+          
+          parseRows(converted);
           hideSpinner();
         };
         reader.readAsBinaryString(file);
@@ -193,31 +320,12 @@
             text += strings + "\n";
           }
 
-          const lines = text
-            .split("\n")
-            .filter(
-              (line) =>
-                line.includes("Section") ||
-                line.includes("AM") ||
-                line.includes("PM")
-            );
+          console.log("Extracted PDF text:", text.substring(0, 200) + "..."); // Debug log (truncated)
 
-          const parsed = lines
-            .map((line) => {
-              const match = line.match(
-                /(.+?)\s+Section\s+(\S+)\s+(\w+)\s+([\d:]+\s*[APMapm]+)\s+to\s+([\d:]+\s*[APMapm]+)/
-              );
-              if (match) {
-                return {
-                  "Course Title": match[1],
-                  Section: match[2],
-                  Day: match[3],
-                  "Start Time": match[4],
-                  "End Time": match[5],
-                };
-              }
-            })
-            .filter(Boolean);
+          const lines = text.split("\n").filter(line => line.trim() !== "");
+
+          const parsed = parseTableFormat(lines);
+          console.log("Parsed data:", parsed); // Debug log
 
           parseRows(parsed);
           hideSpinner();
@@ -226,12 +334,21 @@
       }
 
       function updateCourseDropdown() {
+        console.log("Updating course dropdown with data:", scheduleData); // Debug log
+
         const uniqueTitles = [
           ...new Set(scheduleData.map((item) => item.title)),
         ];
 
+        console.log("Unique course titles:", uniqueTitles); // Debug log
+
         const multiSelect = document.getElementById("courseMultiSelect");
         multiSelect.innerHTML = "";
+
+        if (uniqueTitles.length === 0) {
+          alert("No courses found in the uploaded file. Please check the file format.");
+          return;
+        }
 
         uniqueTitles.forEach((title) => {
           const option = document.createElement("option");
@@ -246,151 +363,248 @@
             width: "resolve",
           });
         }, 0);
+
+        alert(`File uploaded successfully! Found ${uniqueTitles.length} unique courses.`);
       }
 
       function parseRows(rows) {
-        const grouped = {};
+        console.log("parseRows input:", rows); // Debug log
+
+  const grouped = {}; // key: title__section -> {title, section, times: [...]} (times already expanded below)
+
+        function expandCompositeDays(day) {
+          if (!day) return [];
+            const d = day.trim();
+            if (d === 'ST') return ['S','T'];
+            if (d === 'MW') return ['M','W'];
+            if (d === 'TH') return ['TH']; // Thursday single token
+            // Sometimes single letter already
+            return [d];
+        }
 
         rows.forEach((row) => {
-          const rawTitle = row["Course Title"] || row["Course Name"] || "";
-          const title = removeBrackets(rawTitle);
+          // Preserve bracket qualifiers (e.g., [FBA/FASS] vs [FST/FE]) so they are distinct courses
+          const title = (row["Course Title"] || "").trim();
           const section = row["Section"] || "A";
           const key = `${title}__${section}`;
-
-          const day = row["Day"] || row["Days"] || "";
-          const startRaw = row["Start Time"] || row["Starting Time"];
-          const endRaw = row["End Time"] || row["Ending Time"];
-          const capacity = row["Capacity"] || 0; // New: Assuming the capacity is available in the data
-
-          if (!title || !day || !startRaw || !endRaw) return;
-
-          const session = {
-            day,
-            startRaw,
-            endRaw,
-            start: convertTo24Hour(startRaw),
-            end: convertTo24Hour(endRaw),
-            capacity: capacity,
-          };
+          const originalTimes = row.times || [];
+          const expandedTimes = [];
+          originalTimes.forEach(t => {
+            const days = expandCompositeDays(t.day);
+            days.forEach(singleDay => {
+              // Clone & normalize
+              let startNum = convertTo24Hour(t.startRaw);
+              let endNum = convertTo24Hour(t.endRaw);
+              if (endNum <= startNum) {
+                endNum += 12; // adjust for afternoon wrap
+              }
+              expandedTimes.push({
+                ...t,
+                day: singleDay,
+                start: startNum,
+                end: endNum
+              });
+            });
+          });
 
           if (!grouped[key]) {
-            grouped[key] = {
-              title,
-              section,
-              times: [session],
-              capacity: capacity, // Store capacity for the section
-            };
+            grouped[key] = { title, section, times: expandedTimes };
           } else {
-            grouped[key].times.push(session);
+            grouped[key].times.push(...expandedTimes);
           }
         });
 
-        scheduleData = Object.values(grouped);
+        // Transform into scheduleData: [{title, sections:[{section, times:[...]}, ...]}]
+        const byTitle = {};
+        Object.values(grouped).forEach(entry => {
+          if (!byTitle[entry.title]) byTitle[entry.title] = { title: entry.title, sections: [] };
+          byTitle[entry.title].sections.push({ section: entry.section, times: entry.times });
+        });
+        scheduleData = Object.values(byTitle);
+        console.log("Final scheduleData (section grouped):", scheduleData);
+
         updateCourseDropdown();
       }
 
-      // Sort the sections based on capacity when there are conflicts
-      function generateRoutines() {
-        showSpinner();
-
-        const selectedTitles = Array.from(
-          document.getElementById("courseMultiSelect").selectedOptions
-        ).map((opt) => opt.value);
-
-        if (selectedTitles.length === 0) {
-          alert("Please select at least one course.");
-          hideSpinner();
-          return;
-        }
-
-        const courseGroups = {};
-        selectedTitles.forEach((title) => {
-          courseGroups[title] = scheduleData.filter(
-            (item) => item.title === title
-          );
-        });
-
-        const courseKeys = Object.keys(courseGroups);
-        let validRoutines = [];
-
-        function backtrack(currentRoutine, index) {
-          if (index === courseKeys.length) {
-            validRoutines.push([...currentRoutine]);
-            return;
-          }
-
-          const course = courseKeys[index];
-          const options = courseGroups[course];
-
-          // Sort options by capacity in descending order
-          options.sort((a, b) => b.capacity - a.capacity);
-
-          for (const option of options) {
-            if (!conflictsWithRoutine(currentRoutine, option)) {
-              currentRoutine.push(option);
-              backtrack(currentRoutine, index + 1);
-              currentRoutine.pop();
-            }
-          }
-        }
-
-        function conflictsWithRoutine(routine, newItem) {
-          for (const item of routine) {
-            for (const t1 of item.times) {
-              for (const t2 of newItem.times) {
-                if (
-                  t1.day === t2.day &&
-                  t1.start < t2.end &&
-                  t1.end > t2.start
-                ) {
-                  return true;
-                }
-              }
-            }
-          }
-          return false;
-        }
-
-        backtrack([], 0);
-        displayRoutines(validRoutines);
-        hideSpinner();
+      function hasConflict(a, b) {
+        if (a.day !== b.day) return false;
+        return !(a.end <= b.start || b.end <= a.start);
       }
 
-      function displayRoutines(routines) {
-        const out = document.getElementById("routineOutput");
-        out.innerHTML = `<h3>Generated ${routines.length} Valid Routine(s)</h3>`;
-
-        if (routines.length === 0) {
-          out.innerHTML += `<p style="color:red;">No possible routines found without time conflicts.</p>`;
+      function forwardChecking(
+        variables,
+        assignment,
+        domains,
+        results,
+        depth = 0
+      ) {
+        if (assignment.length === variables.length) {
+          results.push([...assignment]);
           return;
         }
 
-        routines.forEach((routine, idx) => {
-          out.innerHTML += `<h4>Routine ${idx + 1}</h4>`;
-          out.innerHTML += `<table>
-      <tr><th>Course</th><th>Section</th><th>Day</th><th>Time</th></tr>`;
-          routine.forEach((item) => {
-            item.times.forEach((t) => {
-              out.innerHTML += `
-          <tr>
-            <td>${item.title}</td>
-            <td>${item.section}</td>
-            <td>${t.day}</td>
-            <td>${t.startRaw} - ${t.endRaw}</td>
-          </tr>`;
+        const varIndex = assignment.length;
+        const variable = variables[varIndex];
+
+        for (let option of domains[variable]) {
+          let conflict = false;
+
+          for (let i = 0; i < assignment.length; i++) {
+            const other = assignment[i];
+            if (hasConflict(option, other)) {
+              conflict = true;
+              break;
+            }
+          }
+
+          if (!conflict) {
+            assignment.push(option);
+            forwardChecking(variables, assignment, domains, results, depth + 1);
+            assignment.pop();
+          }
+        }
+      }
+
+      function generateRoutines() {
+        const selectedCourses = $("#courseMultiSelect").val();
+        if (!selectedCourses.length) {
+          alert("Please select at least one course");
+          return;
+        }
+
+        // Build domains where each option = whole section with all its sessions
+        const domains = {};
+        selectedCourses.forEach(course => {
+          const courseEntry = scheduleData.find(e => e.title === course);
+          if (!courseEntry) { domains[course] = []; return; }
+          domains[course] = courseEntry.sections.map(sec => ({
+            title: courseEntry.title,
+            section: sec.section,
+            times: sec.times
+          }));
+        });
+
+        const variables = selectedCourses;
+        const results = [];
+        // Modified forward checking for section objects
+        function search(idx, current) {
+          if (idx === variables.length) { results.push([...current]); return; }
+          const course = variables[idx];
+          for (const option of domains[course]) {
+            let conflict = false;
+            for (const chosen of current) {
+              for (const t1 of option.times) {
+                for (const t2 of chosen.times) {
+                  if (hasConflict(t1, t2)) { conflict = true; break; }
+                }
+                if (conflict) break;
+              }
+              if (conflict) break;
+            }
+            if (!conflict) { current.push(option); search(idx+1, current); current.pop(); }
+          }
+        }
+        search(0, []);
+
+        // Compute idle time score (sum of gaps between sessions same day) lower is better
+        function computeIdleScore(routine) {
+          const byDay = {};
+          routine.forEach(section => {
+            section.times.forEach(t => {
+              if (!byDay[t.day]) byDay[t.day] = [];
+              byDay[t.day].push({start:t.start, end:t.end});
             });
           });
-          out.innerHTML += `</table>`;
+          let totalGap = 0;
+            Object.values(byDay).forEach(list => {
+              list.sort((a,b)=> a.start - b.start);
+              for (let i=0;i<list.length-1;i++) {
+                const gap = list[i+1].start - list[i].end;
+                if (gap > 0) totalGap += gap; // hours
+              }
+            });
+          return totalGap; // in hours
+        }
+
+        const scored = results.map(r => ({ routine: r, score: computeIdleScore(r) }));
+        scored.sort((a,b)=> a.score - b.score);
+
+        const outputDiv = document.getElementById("routineOutput");
+        outputDiv.innerHTML = "";
+
+        if (scored.length === 0) {
+          outputDiv.innerHTML =
+            "<p>No valid routines found without conflicts.</p>";
+          return;
+        }
+
+        scored.slice(0, 3).forEach((entry, index) => {
+          const routine = entry.routine;
+          const table = document.createElement("table");
+          const header = document.createElement("tr");
+          header.innerHTML =
+            "<th>Course</th><th>Section</th><th>Day</th><th>Start</th><th>End</th><th>Room</th>";
+          table.appendChild(header);
+          // Flatten sessions with course/section info
+          const flat = [];
+          routine.forEach(sectionChoice => {
+            sectionChoice.times.forEach(session => {
+              flat.push({
+                title: sectionChoice.title,
+                section: sectionChoice.section,
+                day: session.day,
+                startRaw: session.startRaw,
+                endRaw: session.endRaw,
+                room: session.room || 'N/A',
+                startNum: convertTo24Hour(session.startRaw)
+              });
+            });
+          });
+
+          // Group by same course/section/time/room to recombine multi-day patterns (e.g., S + T -> ST)
+          const groupingMap = {};
+          flat.forEach(item => {
+            const key = `${item.title}|${item.section}|${item.startRaw}|${item.endRaw}|${item.room}`;
+            if (!groupingMap[key]) {
+              groupingMap[key] = { ...item, days: [item.day] };
+            } else if (!groupingMap[key].days.includes(item.day)) {
+              groupingMap[key].days.push(item.day);
+            }
+          });
+
+          const dayOrder = ['S','M','T','W','TH','F','SA'];
+          const dayIndex = d => {
+            const idx = dayOrder.indexOf(d);
+            return idx === -1 ? 99 : idx;
+          };
+
+          const groupedFlat = Object.values(groupingMap).map(g => {
+            g.days.sort((a,b)=> dayIndex(a)-dayIndex(b));
+            // Merge consecutive common patterns specifically ST, MW
+            const dayStr = g.days.join('');
+            return { ...g, dayDisplay: dayStr, primaryDay: g.days[0] };
+          });
+
+          groupedFlat.sort((a,b)=>{
+            const di = dayIndex(a.primaryDay) - dayIndex(b.primaryDay);
+            if (di !== 0) return di;
+            return a.startNum - b.startNum;
+          });
+
+          groupedFlat.forEach(item => {
+            const row = document.createElement('tr');
+            row.innerHTML = `<td>${item.title}</td><td>${item.section}</td><td>${item.dayDisplay}</td><td>${item.startRaw}</td><td>${item.endRaw}</td><td>${item.room}</td>`;
+            table.appendChild(row);
+          });
+
+          const heading = document.createElement("h3");
+          const idleMins = Math.round(entry.score * 60);
+          heading.textContent = `🗓️ Routine Option ${index + 1} (Idle gap: ${Math.floor(idleMins/60)}h ${idleMins%60}m)`;
+
+          outputDiv.appendChild(heading);
+          outputDiv.appendChild(table);
         });
       }
-
-      // ✅ Initialize Select2 after DOM is loaded
-      window.onload = () => {
-        $("#courseMultiSelect").select2({
-          placeholder: "Search and select courses",
-          width: "resolve",
-        });
-      };
     </script>
   </body>
 </html>

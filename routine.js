@@ -15,13 +15,14 @@ function handleFileUpload(e) {
     const sheet = workbook.Sheets[workbook.SheetNames[0]];
     const json = XLSX.utils.sheet_to_json(sheet);
 
-    // Store the extracted course schedule data
+    // Convert to expected format
     scheduleData = json.map((row) => ({
-      course: row["Course Code"] || row["Course"], // adjust based on column headers
-      section: row["Section"],
-      day: row["Day"],
-      start: row["Start Time"],
-      end: row["End Time"],
+      course: row["COURSE"] || row["Course"],
+      section: row["SEC"] || row["Section"],
+      day: row["DAY"] || row["Day"],
+      start: row["TIME"] ? row["TIME"].split("-")[0] + ":00" : "",
+      end: row["TIME"] ? row["TIME"].split("-")[1] + ":00" : "",
+      room: row["ROOM"] || row["Room"],
     }));
 
     alert("File uploaded and data loaded!");
@@ -96,7 +97,7 @@ function generateRoutine() {
     return;
   }
 
-  filteredRoutines.forEach((routine, i) => {
+  filteredRoutines.slice(0, 3).forEach((routine, i) => {
     const div = document.createElement("div");
     div.className = "routine";
     div.innerHTML =
@@ -104,7 +105,7 @@ function generateRoutine() {
       routine
         .map(
           (c) =>
-            `<p>${c.course} - Section ${c.section} - ${c.day} (${c.start} to ${c.end})</p>`
+            `<p>${c.course} - Section ${c.section} - ${c.day} (${c.start} to ${c.end}) - Room: ${c.room}</p>`
         )
         .join("");
     container.appendChild(div);
