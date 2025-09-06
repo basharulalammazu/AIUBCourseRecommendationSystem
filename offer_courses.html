@@ -8,10 +8,33 @@
     <link rel="stylesheet" href="css/offer_courses.css" />
   </head>
   <body>
+    <button
+      id="themeToggleBtn"
+      class="theme-toggle"
+      aria-label="Toggle dark mode"
+      title="Toggle theme"
+    >
+      🌙
+    </button>
     <h2>Offer Courses</h2>
     <a href="index.html" class="download-btn">Back to Home</a>
 
     <div id="courseInputs">
+      <div class="filter-buttons" role="group" aria-label="Course filters">
+        <button
+          id="filterAllBtn"
+          type="button"
+          class="btn outline small filter-active"
+        >
+          All Courses
+        </button>
+        <button id="filterAvailableBtn" type="button" class="btn outline small">
+          Offered (Available)
+        </button>
+        <button id="filterCompletedBtn" type="button" class="btn outline small">
+          Completed
+        </button>
+      </div>
       <div class="input-grid">
         <div>
           <label for="completed"

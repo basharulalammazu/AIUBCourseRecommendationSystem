@@ -1,3 +1,23 @@
+// ---- Theme Initialization (shared pattern) ----
+const themeToggleBtn = document.getElementById("themeToggleBtn");
+(function initTheme() {
+  const stored = localStorage.getItem("aiub-theme");
+  const prefersDark =
+    window.matchMedia &&
+    window.matchMedia("(prefers-color-scheme: dark)").matches;
+  if (stored === "dark" || (!stored && prefersDark)) {
+    document.body.classList.add("dark");
+    if (themeToggleBtn) themeToggleBtn.textContent = "☀️";
+  }
+  if (themeToggleBtn) {
+    themeToggleBtn.addEventListener("click", () => {
+      const isDark = document.body.classList.toggle("dark");
+      localStorage.setItem("aiub-theme", isDark ? "dark" : "light");
+      themeToggleBtn.textContent = isDark ? "☀️" : "🌙";
+    });
+  }
+})();
+
 function showSpinner() {
   document.getElementById("loadingSpinner").style.display = "block";
 }

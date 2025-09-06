@@ -45,19 +45,23 @@ All logic runs fully client-side—no backend or database required (easy to host
 
 ## Features (Planned & Current)
 
-- Department-specific course catalogs (`courses_*.json`)
+- Department-specific course catalogs (`courses_*\.json`)
 - Offer courses page (`offer_courses.html`)
 - Routine visualization (`routine.html`)
 - Responsive layout (`css/mediaqueries.css`)
+- Dark / light theme toggle (persists via localStorage)
+- Course filtering buttons (All / Offered / Completed)
+- Prerequisite + credit-based availability status (green / yellow / red legend)
 - Modular JavaScript (`js/` folder)
 - Simple theming via central stylesheet
 
 ### Possible Future Enhancements
 
-- Basic filtering (credit range, prerequisite match, level)
-- Local storage of a drafted semester plan
-- Export/print selected routine
+- Advanced multi-criteria filtering (credit range, prerequisite graph, level)
+- Local storage of a personal planned course set
+- Export / print routine (PDF-friendly stylesheet)
 - GPA projection helper
+- Conflict visualization overlay on routine generator
 
 ## Project Structure
 
@@ -159,8 +163,6 @@ Need help? Channels & expectations in `SUPPORT.md`.
 
 High-level phases & milestones tracked in `ROADMAP.md`. (Inline list removed for single source of truth.)
 
-## FAQ
-
 ## Code of Conduct
 
 We follow the Contributor Covenant. Please review `CODE_OF_CONDUCT.md` to help maintain a welcoming environment.
@@ -169,6 +171,16 @@ We follow the Contributor Covenant. Please review `CODE_OF_CONDUCT.md` to help m
 
 **Q: Does this recommend courses algorithmically?**  
 Currently it's a structured presentation layer. Recommendation heuristics can be added later (e.g., prerequisite satisfaction, workload balance, credit optimization).
+
+**Q: What do the filter buttons do?**  
+All Courses = every course in the department dataset.  
+Offered (Available) = courses you can take now (prereqs & credit conditions satisfied, not already marked completed).  
+Completed = ones you've entered in the completed input field.
+
+**Q: What do the colors mean?**  
+Green = available to take.  
+Yellow = prerequisites (or credit threshold) not met.  
+Red = already completed.
 
 **Q: Can I deploy this on GitHub Pages?**  
 Yes. Push to a `gh-pages` branch or enable Pages on `main` and ensure relative asset paths remain correct.

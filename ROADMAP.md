@@ -61,8 +61,8 @@ This roadmap is aspirational and may evolve based on contributor interest and st
 
 | Version | Theme                         | Target     |
 | ------- | ----------------------------- | ---------- |
-| 0.1.0   | Initial scaffold              | ✅ 2025-09 |
-| 0.2.0   | Search + filtering            | TBD        |
+| 0.1.0   | Initial scaffold              | ✅ 2025-06 |
+| 0.2.0   | Search + filtering            | ✅ 2025-09 |
 | 0.3.0   | Planning utilities            | TBD        |
 | 0.4.0   | Recommendation engine (basic) | TBD        |
 | 0.5.0   | Testing & automation baseline | TBD        |

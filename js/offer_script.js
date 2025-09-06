@@ -5,8 +5,20 @@ const warningModal = document.getElementById("warningModal");
 const confirmSelect = document.getElementById("confirmSelect");
 const cancelSelect = document.getElementById("cancelSelect");
 const closeModal = document.querySelector(".close");
+// Theme toggle (shared logic with index)
+const themeToggleBtn = document.getElementById("themeToggleBtn");
+// Filter buttons
+const filterAllBtn = document.getElementById("filterAllBtn");
+const filterAvailableBtn = document.getElementById("filterAvailableBtn");
+const filterCompletedBtn = document.getElementById("filterCompletedBtn");
+
+let currentFilter = "all"; // all | available | completed
+
+// Local storage keys
+const THEME_KEY = "aiub-theme";
 
 let currentCourses = [];
+let myPlan = []; // removed plan feature
 let pendingCourse = null;
 
 // Modal event listeners
@@ -40,6 +52,27 @@ window.onclick = (event) => {
     pendingCourse = null;
   }
 };
+
+// Apply stored theme or system preference
+(function initTheme() {
+  const stored = localStorage.getItem(THEME_KEY);
+  const prefersDark =
+    window.matchMedia &&
+    window.matchMedia("(prefers-color-scheme: dark)").matches;
+  if (stored === "dark" || (!stored && prefersDark)) {
+    document.body.classList.add("dark");
+    if (themeToggleBtn) themeToggleBtn.textContent = "☀️";
+  }
+  if (themeToggleBtn) {
+    themeToggleBtn.addEventListener("click", () => {
+      const isDark = document.body.classList.toggle("dark");
+      localStorage.setItem(THEME_KEY, isDark ? "dark" : "light");
+      themeToggleBtn.textContent = isDark ? "☀️" : "🌙";
+    });
+  }
+})();
+
+// (My Plan removed)
 
 // Get department from URL
 const urlParams = new URLSearchParams(window.location.search);
@@ -111,7 +144,35 @@ function displayAvailableCourses() {
     return nameMatches;
   });
 
-  groupAndDisplayCourses(filteredCourses, searchTerm, completedSet);
+  // Apply high-level filter
+  const filteredByStatus = filteredCourses.filter((course) => {
+    const isCompleted = completedSet.has(course.id);
+    const hasAllPrereqs = course.prerequisites.every((pr) =>
+      completedSet.has(pr)
+    );
+    const completedCredits = completedCourses.reduce(
+      (sum, c) => sum + c.credit,
+      0
+    );
+    let available = false;
+    if (!isCompleted && hasAllPrereqs) {
+      // Special credit check rules reused
+      if (course.id === 49 && completedCredits < 100) available = false;
+      else if (
+        course.name.toLowerCase().includes("internship") &&
+        completedCredits < 140
+      )
+        available = false;
+      else available = true;
+    }
+
+    if (currentFilter === "all") return true;
+    if (currentFilter === "completed") return isCompleted;
+    if (currentFilter === "available") return available;
+    return true;
+  });
+
+  groupAndDisplayCourses(filteredByStatus, searchTerm, completedSet);
 }
 
 function groupAndDisplayCourses(courses, searchTerm, completedSet) {
@@ -275,5 +336,31 @@ function addAvailableCourse(course, completedSet) {
     });
   }
 
+  // (plan button removed)
+
   coursesDiv.appendChild(div);
 }
+
+// -------------- Filter Button Events --------------
+function setFilter(filter) {
+  currentFilter = filter;
+  [filterAllBtn, filterAvailableBtn, filterCompletedBtn].forEach(
+    (b) => b && b.classList.remove("filter-active")
+  );
+  if (filter === "all" && filterAllBtn)
+    filterAllBtn.classList.add("filter-active");
+  if (filter === "available" && filterAvailableBtn)
+    filterAvailableBtn.classList.add("filter-active");
+  if (filter === "completed" && filterCompletedBtn)
+    filterCompletedBtn.classList.add("filter-active");
+  displayAvailableCourses();
+}
+
+if (filterAllBtn)
+  filterAllBtn.addEventListener("click", () => setFilter("all"));
+if (filterAvailableBtn)
+  filterAvailableBtn.addEventListener("click", () => setFilter("available"));
+if (filterCompletedBtn)
+  filterCompletedBtn.addEventListener("click", () => setFilter("completed"));
+
+// (Plan management code removed)

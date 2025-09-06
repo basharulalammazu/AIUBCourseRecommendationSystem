@@ -271,6 +271,15 @@ body.dark .download-area h3,
 body.dark .developer-area h3 {
   color: #dbeafe;
 }
+body.dark .plan-panel {
+  background: #16222c;
+  border-color: #2a3d4d;
+  box-shadow: 0 6px 22px -6px rgba(0, 0, 0, 0.55);
+}
+body.dark .plan-item button.remove-plan {
+  background: #3a4d5c;
+  color: #e2ecf3;
+}
 
 /* Utility */
 .hidden {
@@ -518,6 +527,75 @@ input::placeholder {
 .legend-item span:last-child {
   font-size: 0.9rem;
   color: #555;
+}
+
+/* Filter Buttons */
+.filter-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 10px 0 20px;
+}
+.filter-buttons .btn.small {
+  padding: 8px 14px;
+  font-size: 0.75rem;
+}
+.filter-buttons .filter-active {
+  box-shadow: 0 0 0 2px #2563eb inset;
+}
+body.dark .filter-buttons .filter-active {
+  box-shadow: 0 0 0 2px #60a5fa inset;
+}
+
+/* Plan Panel */
+.plan-panel {
+  margin: 24px 0 10px;
+  padding: 18px 20px 22px;
+  background: #ffffff;
+  border: 1px solid #d5dde5;
+  border-radius: 14px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+}
+.plan-panel h3 {
+  margin-bottom: 12px;
+  font-size: 1.15rem;
+  color: #1d3557;
+}
+.plan-list {
+  list-style: none;
+  margin-top: 10px;
+}
+.plan-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 10px;
+  background: #f5f7fa;
+  border-radius: 8px;
+  margin-bottom: 6px;
+  font-size: 0.9rem;
+}
+.plan-item button.remove-plan {
+  border: none;
+  background: #1d3557;
+  color: #fff;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+.plan-item button.remove-plan:hover {
+  background: #0e2a47;
+}
+.plan-actions {
+  margin-top: 12px;
+  display: flex;
+  gap: 10px;
+}
+.plan-panel .btn.outline {
+  font-size: 0.75rem;
+  padding: 8px 14px;
 }
 
 /* Modal Styles */
