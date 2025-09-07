@@ -90,6 +90,25 @@ input:focus-visible {
 .color-box {
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05);
 }
+
+/* Filter Buttons */
+.filter-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 10px 0 20px;
+}
+.filter-buttons .btn.small {
+  padding: 8px 14px;
+  font-size: 0.75rem;
+}
+.filter-buttons .filter-active {
+  box-shadow: 0 0 0 2px #2563eb inset;
+}
+body.dark .filter-buttons .filter-active {
+  box-shadow: 0 0 0 2px #60a5fa inset;
+}
+
 #courses {
   margin-top: 40px;
 }

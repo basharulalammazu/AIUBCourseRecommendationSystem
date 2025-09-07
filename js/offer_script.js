@@ -20,18 +20,31 @@ let currentCourses = [];
 let myPlan = []; // removed plan feature
 let pendingCourse = null;
 
+// Debug: Log script load
+console.log("Offer script loaded");
+console.log(
+  "Warning modal initial display:",
+  getComputedStyle(warningModal).display
+);
+
 // Modal event listeners
 closeModal.onclick = () => {
+  console.log("Close button clicked, hiding warning modal");
   warningModal.style.display = "none";
   pendingCourse = null;
 };
 
 cancelSelect.onclick = () => {
+  console.log("Cancel button clicked, hiding warning modal");
   warningModal.style.display = "none";
   pendingCourse = null;
 };
 
 confirmSelect.onclick = () => {
+  console.log(
+    "Confirm button clicked, processing course:",
+    pendingCourse ? pendingCourse.id : "none"
+  );
   if (pendingCourse) {
     const currentCompleted = completedInput.value.trim();
     const newCompleted = currentCompleted
@@ -47,6 +60,7 @@ confirmSelect.onclick = () => {
 // Close modal when clicking outside
 window.onclick = (event) => {
   if (event.target === warningModal) {
+    console.log("Clicked outside modal, hiding warning modal");
     warningModal.style.display = "none";
     pendingCourse = null;
   }
@@ -292,6 +306,11 @@ function addAvailableCourse(course, completedSet) {
         displayAvailableCourses();
       } else if (!hasAllPrereqs) {
         // Show warning modal with prerequisite names
+        console.log(
+          "Prerequisites not met for course:",
+          course.id,
+          "showing warning modal"
+        );
         pendingCourse = course;
         const missingPrereqs = course.prerequisites.filter(
           (pr) => !completedSet.has(pr)
@@ -305,7 +324,7 @@ function addAvailableCourse(course, completedSet) {
         ).innerHTML = `This course requires the following prerequisites:<br><strong>${missingDetails.join(
           ", "
         )}</strong><br><br>Are you sure you want to mark it as completed?`;
-        warningModal.style.display = "block";
+        warningModal.style.display = "flex";
       } else {
         // Add the course to completed
         const currentCompleted = completedInput.value.trim();
