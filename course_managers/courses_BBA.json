@@ -277,7 +277,8 @@
     "name": "Internship",
     "credit": 3.0,
     "prerequisites": [],
-    "elective": 0
+    "elective": 0,
+    "requiredCredits": 137
   },
   {
     "id": 41,

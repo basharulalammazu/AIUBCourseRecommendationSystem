@@ -152,8 +152,12 @@ function displayAvailableCourses() {
     );
     let available = false;
     if (!isCompleted && hasAllPrereqs) {
-      // Special credit check rules reused
-      if (course.id === 49 && completedCredits < 100) available = false;
+      // Check required credits
+      const hasRequiredCredits = course.requiredCredits
+        ? completedCredits >= course.requiredCredits
+        : true;
+      // Special credit check rules
+      if (!hasRequiredCredits) available = false;
       else if (
         course.name.toLowerCase().includes("internship") &&
         completedCredits < 140
@@ -261,8 +265,11 @@ function addAvailableCourse(course, completedSet) {
   } else if (!hasAllPrereqs) {
     status = "Prerequisites not met";
     bgColor = "#fff3cd"; // Yellow
-  } else if (course.id === 49 && completedCredits < 100) {
-    status = "Not enough credits";
+  } else if (
+    course.requiredCredits &&
+    completedCredits < course.requiredCredits
+  ) {
+    status = `Not enough credits (${completedCredits}/${course.requiredCredits})`;
     bgColor = "#fff3cd";
   } else if (
     course.name.toLowerCase().includes("internship") &&
@@ -304,26 +311,38 @@ function addAvailableCourse(course, completedSet) {
         const newCompleted = ids.join(", ");
         completedInput.value = newCompleted;
         displayAvailableCourses();
-      } else if (!hasAllPrereqs) {
-        // Show warning modal with prerequisite names
+      } else if (
+        !hasAllPrereqs ||
+        (course.requiredCredits && completedCredits < course.requiredCredits)
+      ) {
+        // Show warning modal with prerequisite names and/or credit requirements
         console.log(
-          "Prerequisites not met for course:",
+          "Prerequisites or credits not met for course:",
           course.id,
           "showing warning modal"
         );
         pendingCourse = course;
-        const missingPrereqs = course.prerequisites.filter(
-          (pr) => !completedSet.has(pr)
-        );
-        const missingDetails = missingPrereqs.map((id) => {
-          const pc = currentCourses.find((c) => c.id === id);
-          return pc ? `[${id}] ${pc.name}` : id;
-        });
-        document.getElementById(
-          "warningMessage"
-        ).innerHTML = `This course requires the following prerequisites:<br><strong>${missingDetails.join(
-          ", "
-        )}</strong><br><br>Are you sure you want to mark it as completed?`;
+        let warningText = "";
+        if (!hasAllPrereqs) {
+          const missingPrereqs = course.prerequisites.filter(
+            (pr) => !completedSet.has(pr)
+          );
+          const missingDetails = missingPrereqs.map((id) => {
+            const pc = currentCourses.find((c) => c.id === id);
+            return pc ? `[${id}] ${pc.name}` : id;
+          });
+          warningText += `This course requires the following prerequisites:<br><strong>${missingDetails.join(
+            ", "
+          )}</strong><br><br>`;
+        }
+        if (
+          course.requiredCredits &&
+          completedCredits < course.requiredCredits
+        ) {
+          warningText += `This course requires ${course.requiredCredits} completed credits. You currently have ${completedCredits} credits.<br><br>`;
+        }
+        warningText += "Are you sure you want to mark it as completed?";
+        document.getElementById("warningMessage").innerHTML = warningText;
         warningModal.style.display = "flex";
       } else {
         // Add the course to completed

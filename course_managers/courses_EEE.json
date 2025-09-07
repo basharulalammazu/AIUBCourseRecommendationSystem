@@ -368,7 +368,8 @@
     "name": "CAPSTONE PROJECT 1",
     "credit": 3.0,
     "prerequisites": [],
-    "elective": 0
+    "elective": 0,
+    "requiredCredits": 105
   },
   {
     "id": 54,
