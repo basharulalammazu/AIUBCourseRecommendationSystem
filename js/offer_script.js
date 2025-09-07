@@ -5,8 +5,7 @@ const warningModal = document.getElementById("warningModal");
 const confirmSelect = document.getElementById("confirmSelect");
 const cancelSelect = document.getElementById("cancelSelect");
 const closeModal = document.querySelector(".close");
-// Theme toggle (shared logic with index)
-const themeToggleBtn = document.getElementById("themeToggleBtn");
+// Theme handled via theme.js
 // Filter buttons
 const filterAllBtn = document.getElementById("filterAllBtn");
 const filterAvailableBtn = document.getElementById("filterAvailableBtn");
@@ -53,24 +52,7 @@ window.onclick = (event) => {
   }
 };
 
-// Apply stored theme or system preference
-(function initTheme() {
-  const stored = localStorage.getItem(THEME_KEY);
-  const prefersDark =
-    window.matchMedia &&
-    window.matchMedia("(prefers-color-scheme: dark)").matches;
-  if (stored === "dark" || (!stored && prefersDark)) {
-    document.body.classList.add("dark");
-    if (themeToggleBtn) themeToggleBtn.textContent = "☀️";
-  }
-  if (themeToggleBtn) {
-    themeToggleBtn.addEventListener("click", () => {
-      const isDark = document.body.classList.toggle("dark");
-      localStorage.setItem(THEME_KEY, isDark ? "dark" : "light");
-      themeToggleBtn.textContent = isDark ? "☀️" : "🌙";
-    });
-  }
-})();
+// (Theme initialization removed – centralized)
 
 // (My Plan removed)
 

@@ -285,3 +285,88 @@ tr:hover td {
     margin-top: 18px;
   }
 }
+
+/* Dark Mode Styles */
+body.dark {
+  background: radial-gradient(circle at 30% 20%, #1e2934, #111a23 70%);
+  color: #f1f5f9;
+}
+body.dark h2 {
+  background: linear-gradient(90deg, #8ab4f8, #60a5fa, #818cf8);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+body.dark .container {
+  background: rgba(22, 32, 43, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 10px 32px -8px rgba(0, 0, 0, 0.55);
+}
+body.dark label {
+  color: #90a4b8;
+}
+body.dark input[type="file"],
+body.dark select,
+body.dark button {
+  background: #10212e;
+  color: #e2ecf3;
+  border-color: #2d4b61;
+}
+body.dark input[type="file"]:focus-visible,
+body.dark select:focus-visible {
+  border-color: #60a5fa;
+  box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.35);
+}
+body.dark button {
+  background: linear-gradient(135deg, #60a5fa, #3b82f6);
+  border-color: #3b82f6;
+}
+body.dark button:hover {
+  box-shadow: 0 8px 22px -6px rgba(0, 0, 0, 0.6);
+}
+body.dark table {
+  background: #1e2934;
+  border-color: #2d4b61;
+}
+body.dark th {
+  background: linear-gradient(135deg, #374151, #1f2937);
+  color: #f1f5f9;
+}
+body.dark td {
+  border-top-color: #374151;
+}
+body.dark tr:nth-child(even) td {
+  background: #2d3748;
+}
+body.dark tr:hover td {
+  background: #374151;
+}
+body.dark .selected-item {
+  background: #1e2934;
+  border-color: #4a5568;
+}
+body.dark #loadingSpinner p {
+  color: #90a4b8;
+}
+body.dark .select2-container--default .select2-selection--multiple {
+  background: linear-gradient(135deg, #1e2934, #2d3748 70%);
+  border-color: #4a5568 !important;
+}
+body.dark
+  .select2-container--default.select2-container--focus
+  .select2-selection--multiple {
+  border-color: #60a5fa !important;
+  box-shadow: 0 0 0 4px rgba(96, 165, 250, 0.18) !important;
+}
+body.dark
+  .select2-container--default
+  .select2-selection--multiple
+  .select2-selection__choice {
+  background: linear-gradient(135deg, #6366f1, #4338ca) !important;
+}
+body.dark .select2-dropdown {
+  background: rgba(30, 41, 59, 0.95);
+  border-color: #4a5568 !important;
+}
+body.dark .select2-results__option--highlighted {
+  background: #3b82f6 !important;
+}
