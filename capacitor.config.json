@@ -1,0 +1,9 @@
+{
+  "appId": "com.aiub.courseapp",
+  "appName": "AIUB Courses",
+  "webDir": "./",
+  "bundledWebRuntime": false,
+  "server": {
+    "androidScheme": "https"
+  }
+}

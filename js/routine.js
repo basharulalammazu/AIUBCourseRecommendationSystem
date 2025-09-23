@@ -366,6 +366,8 @@ function updateCourseDropdown() {
   );
   // Reveal hidden selection & generate button
   showSelectionControls();
+  // Attempt to restore previously selected courses now that options exist
+  restoreSelectedCourses();
 }
 function showSelectionControls() {
   const courseLabel = document.querySelector('label[for="courseMultiSelect"]');
@@ -385,11 +387,30 @@ function parseRows(rows) {
 
   function expandCompositeDays(day) {
     if (!day) return [];
-    const d = day.trim();
+    const d = day.trim().toUpperCase();
     if (d === "ST") return ["S", "T"];
     if (d === "MW") return ["M", "W"];
-    if (d === "TH") return ["TH"]; // Thursday single token
-    // Sometimes single letter already
+    if (d === "TH" || d === "THU" || d === "THUR" || d === "THURS")
+      return ["TH"]; // Thursday variations
+    // Normalize long names to short tokens used by UI filters
+    const map = {
+      SUNDAY: "S",
+      SUN: "S",
+      MON: "M",
+      MONDAY: "M",
+      TUE: "T",
+      TUES: "T",
+      TUESDAY: "T",
+      WED: "W",
+      WEDNESDAY: "W",
+      THURSDAY: "TH",
+      FRI: "F",
+      FRIDAY: "F",
+      SAT: "SA",
+      SATURDAY: "SA",
+    };
+    if (map[d]) return [map[d]];
+    // Already maybe a single token like S/M/T/W/TH/F/SA
     return [d];
   }
 
@@ -411,7 +432,7 @@ function parseRows(rows) {
         }
         expandedTimes.push({
           ...t,
-          day: singleDay,
+          day: singleDay, // now guaranteed short form compatible with day filter checkboxes
           start: startNum,
           end: endNum,
         });
@@ -439,6 +460,189 @@ function parseRows(rows) {
   console.log("Final scheduleData (section grouped):", scheduleData);
 
   updateCourseDropdown();
+}
+
+// Attach change listeners to filters to log (does not auto-regenerate to avoid confusion)
+document.addEventListener("DOMContentLoaded", () => {
+  const dayCbs = document.querySelectorAll(".day-filter");
+  dayCbs.forEach((cb) =>
+    cb.addEventListener("change", () => {
+      console.log(
+        "[Filters] Day selection changed:",
+        Array.from(document.querySelectorAll(".day-filter:checked")).map(
+          (c) => c.value
+        )
+      );
+      persistFilters();
+    })
+  );
+  const st = document.getElementById("startTimeFilter");
+  const et = document.getElementById("endTimeFilter");
+  if (st)
+    st.addEventListener("change", () => {
+      console.log("[Filters] Earliest start changed to", st.value);
+      persistFilters();
+    });
+  if (et)
+    et.addEventListener("change", () => {
+      console.log("[Filters] Latest end changed to", et.value);
+      persistFilters();
+    });
+
+  // Advanced constraint listeners
+  const maxDaysEl = document.getElementById("maxDaysInput");
+  const maxGapEl = document.getElementById("maxGapInput");
+  const lunchStartEl = document.getElementById("lunchStartInput");
+  const lunchEndEl = document.getElementById("lunchEndInput");
+  if (maxDaysEl)
+    maxDaysEl.addEventListener("change", () => {
+      console.log("[Filters] Max Days ->", maxDaysEl.value);
+      persistFilters();
+    });
+  if (maxGapEl)
+    maxGapEl.addEventListener("change", () => {
+      console.log("[Filters] Max Gap ->", maxGapEl.value);
+      persistFilters();
+    });
+  if (lunchStartEl || lunchEndEl)
+    [lunchStartEl, lunchEndEl].forEach((el) => {
+      if (!el) return;
+      el.addEventListener("change", () => {
+        console.log(
+          "[Filters] Lunch Window ->",
+          lunchStartEl && lunchStartEl.value,
+          lunchEndEl && lunchEndEl.value
+        );
+        persistFilters();
+      });
+    });
+
+  // Attempt restoration of filters from localStorage now (before courses loaded)
+  restoreFilters();
+});
+
+// ----------------- Persistence Helpers -----------------
+function persistFilters() {
+  try {
+    const data = {
+      days: Array.from(document.querySelectorAll(".day-filter")).map((cb) => ({
+        v: cb.value,
+        c: cb.checked,
+      })),
+      earliest: document.getElementById("startTimeFilter")?.value || "",
+      latest: document.getElementById("endTimeFilter")?.value || "",
+      maxDays: document.getElementById("maxDaysInput")?.value || "",
+      maxGap: document.getElementById("maxGapInput")?.value || "",
+      lunchStart: document.getElementById("lunchStartInput")?.value || "",
+      lunchEnd: document.getElementById("lunchEndInput")?.value || "",
+      topCount: document.getElementById("topCountInput")?.value || "",
+    };
+    localStorage.setItem("routineFilters", JSON.stringify(data));
+  } catch (e) {
+    console.warn("[Persist] Failed to save filters", e);
+  }
+  persistSelectedCourses();
+}
+
+function restoreFilters() {
+  try {
+    const raw = localStorage.getItem("routineFilters");
+    if (!raw) return;
+    const data = JSON.parse(raw);
+    if (data.days) {
+      const map = new Map(data.days.map((d) => [d.v, d.c]));
+      document.querySelectorAll(".day-filter").forEach((cb) => {
+        if (map.has(cb.value)) cb.checked = map.get(cb.value);
+      });
+    }
+    if (data.earliest) {
+      const el = document.getElementById("startTimeFilter");
+      if (el) el.value = data.earliest;
+    }
+    if (data.latest) {
+      const el = document.getElementById("endTimeFilter");
+      if (el) el.value = data.latest;
+    }
+    if (data.maxDays) {
+      const el = document.getElementById("maxDaysInput");
+      if (el) el.value = data.maxDays;
+    }
+    if (data.maxGap) {
+      const el = document.getElementById("maxGapInput");
+      if (el) el.value = data.maxGap;
+    }
+    if (data.lunchStart) {
+      const el = document.getElementById("lunchStartInput");
+      if (el) el.value = data.lunchStart;
+    }
+    if (data.lunchEnd) {
+      const el = document.getElementById("lunchEndInput");
+      if (el) el.value = data.lunchEnd;
+    }
+    if (data.topCount) {
+      const el = document.getElementById("topCountInput");
+      if (el) el.value = data.topCount;
+    }
+    console.log("[Persist] Filters restored");
+  } catch (e) {
+    console.warn("[Persist] Failed to restore filters", e);
+  }
+}
+
+function persistSelectedCourses() {
+  try {
+    const selected = $("#courseMultiSelect").val() || [];
+    localStorage.setItem("routineSelectedCourses", JSON.stringify(selected));
+  } catch (e) {
+    console.warn("[Persist] Failed saving courses", e);
+  }
+}
+
+function restoreSelectedCourses() {
+  try {
+    const raw = localStorage.getItem("routineSelectedCourses");
+    if (!raw) return;
+    const arr = JSON.parse(raw);
+    if (Array.isArray(arr)) {
+      $("#courseMultiSelect").val(arr).trigger("change");
+      console.log("[Persist] Selected courses restored");
+    }
+  } catch (e) {
+    console.warn("[Persist] Failed restoring courses", e);
+  }
+}
+function clearRoutineFilters() {
+  try {
+    localStorage.removeItem("routineFilters");
+    localStorage.removeItem("routineSelectedCourses");
+  } catch (e) {
+    console.warn("[Persist] clear failed", e);
+  }
+  // Reset checkboxes
+  document.querySelectorAll(".day-filter").forEach((cb) => (cb.checked = true));
+  const setVal = (id, val) => {
+    const el = document.getElementById(id);
+    if (el) el.value = val;
+  };
+  setVal("startTimeFilter", "08:00");
+  setVal("endTimeFilter", "20:00");
+  setVal("maxDaysInput", "");
+  setVal("maxGapInput", "");
+  setVal("lunchStartInput", "12:00");
+  setVal("lunchEndInput", "13:00");
+  setVal("topCountInput", "3");
+  // Clear course selections (if select2 initialized)
+  if (window.$) {
+    $("#courseMultiSelect").val(null).trigger("change");
+  } else {
+    const sel = document.getElementById("courseMultiSelect");
+    if (sel) Array.from(sel.options).forEach((o) => (o.selected = false));
+  }
+  console.log("[Persist] Filters & selections cleared");
+  const out = document.getElementById("routineOutput");
+  if (out)
+    out.innerHTML =
+      '<p style="opacity:.7">Filters reset. Re-generate to view routines.</p>';
 }
 
 function hasConflict(a, b) {
@@ -475,6 +679,26 @@ function forwardChecking(variables, assignment, domains, results, depth = 0) {
 }
 
 function generateRoutines() {
+  // Read day/time filters
+  const allowedDays = Array.from(
+    document.querySelectorAll(".day-filter:checked")
+  ).map((cb) => cb.value);
+  const earliestStartInput = document.getElementById("startTimeFilter");
+  const latestEndInput = document.getElementById("endTimeFilter");
+  const earliestStart = earliestStartInput
+    ? convertTo24Hour(earliestStartInput.value)
+    : 0; // default 00:00
+  const latestEnd = latestEndInput ? convertTo24Hour(latestEndInput.value) : 24; // default end of day
+
+  console.log(
+    "Filter constraints => Days:",
+    allowedDays,
+    "Earliest:",
+    earliestStart,
+    "Latest:",
+    latestEnd
+  );
+
   const selectedCourses = $("#courseMultiSelect").val() || [];
   if (!selectedCourses.length) {
     alert("Please select at least one course");
@@ -527,7 +751,61 @@ function generateRoutines() {
   }
   search(0, []);
 
-  function computeCompactScore(routine) {
+  // Apply filter constraints to each candidate routine (all sections chosen so far conflict-free)
+  const filteredResults = results.filter((routine) => {
+    // Each routine: array of section objects {title, section, times:[...]}
+    for (const section of routine) {
+      for (const t of section.times) {
+        // Day exclusion
+        if (allowedDays.length && !allowedDays.includes(t.day)) {
+          return false;
+        }
+        // Time window exclusion
+        if (t.start < earliestStart || t.end > latestEnd) {
+          return false;
+        }
+      }
+    }
+    return true;
+  });
+
+  console.log(
+    `Generated ${results.length} total routines, ${filteredResults.length} after applying day/time filters.`
+  );
+
+  // ----------------- Soft Constraint Inputs -----------------
+  const maxDaysInput = document.getElementById("maxDaysInput");
+  const maxGapInput = document.getElementById("maxGapInput");
+  const lunchStartEl = document.getElementById("lunchStartInput");
+  const lunchEndEl = document.getElementById("lunchEndInput");
+  const topCountEl = document.getElementById("topCountInput");
+
+  const maxDays =
+    maxDaysInput && maxDaysInput.value
+      ? parseInt(maxDaysInput.value, 10)
+      : null;
+  const maxGapHours =
+    maxGapInput && maxGapInput.value ? parseFloat(maxGapInput.value) : null;
+  const lunchStart =
+    lunchStartEl && lunchStartEl.value
+      ? convertTo24Hour(lunchStartEl.value)
+      : null;
+  const lunchEnd =
+    lunchEndEl && lunchEndEl.value ? convertTo24Hour(lunchEndEl.value) : null;
+  const topCount =
+    topCountEl && topCountEl.value
+      ? Math.min(Math.max(parseInt(topCountEl.value, 10) || 3, 1), 50)
+      : 3;
+
+  console.log("Soft constraint preferences =>", {
+    maxDays,
+    maxGapHours,
+    lunchStart,
+    lunchEnd,
+    topCount,
+  });
+
+  function scoreRoutine(routine) {
     const byDay = {};
     routine.forEach((section) => {
       section.times.forEach((t) => {
@@ -536,43 +814,126 @@ function generateRoutines() {
       });
     });
 
-    let activeDays = Object.keys(byDay).length;
-    let totalGap = 0;
-    let totalSpread = 0;
+    const activeDays = Object.keys(byDay).length;
+    let totalSpread = 0; // sum of (latest - earliest) per day
+    let totalGap = 0; // sum of gaps across all days
+    let largestGap = 0; // max single gap among all days
+    let lunchOverlapMinutes = 0; // minutes in lunch window
 
     Object.values(byDay).forEach((list) => {
       list.sort((a, b) => a.start - b.start);
-      let earliest = list[0].start;
-      let latest = list[list.length - 1].end;
-
-      // Spread = total occupied window per day
+      const earliest = list[0].start;
+      const latest = list[list.length - 1].end;
       totalSpread += latest - earliest;
-
-      // Gaps inside day
       for (let i = 0; i < list.length - 1; i++) {
-        let gap = list[i + 1].start - list[i].end;
-        if (gap > 0) totalGap += gap;
+        const gap = list[i + 1].start - list[i].end;
+        if (gap > 0) {
+          totalGap += gap;
+          if (gap > largestGap) largestGap = gap;
+        }
       }
     });
 
-    // Weighted score: fewer days first, then less spread, then less gap
-    return activeDays * 1000 + totalSpread * 100 + totalGap;
+    // Lunch overlap calculation (soft penalty). We'll treat numeric hours * 60 for precision.
+    if (lunchStart !== null && lunchEnd !== null) {
+      const windowStart = lunchStart;
+      const windowEnd = lunchEnd;
+      routine.forEach((section) => {
+        section.times.forEach((t) => {
+          const overlap = Math.max(
+            0,
+            Math.min(t.end, windowEnd) - Math.max(t.start, windowStart)
+          );
+          lunchOverlapMinutes += overlap * 60; // convert hours -> minutes
+        });
+      });
+    }
+
+    // Base components (lower better):
+    // activeDays, totalSpread, totalGap
+    let score = 0;
+    const WEIGHTS = {
+      activeDays: 1000, // strong preference to reduce active days
+      spread: 100, // compact daily window
+      gaps: 50, // reduce idle time
+      overDayPenalty: 1200, // penalty per day beyond maxDays
+      largeGapPenalty: 400, // penalty applied if largestGap exceeds maxGapHours
+      lunchPerMinute: 2, // penalty per lunch-overlap minute
+    };
+
+    score += activeDays * WEIGHTS.activeDays;
+    score += totalSpread * WEIGHTS.spread;
+    score += totalGap * WEIGHTS.gaps;
+
+    let penalties = { overDays: 0, gap: 0, lunch: 0 };
+
+    if (maxDays && activeDays > maxDays) {
+      const over = activeDays - maxDays;
+      const p = over * WEIGHTS.overDayPenalty;
+      score += p;
+      penalties.overDays = p;
+    }
+    if (maxGapHours !== null && largestGap > maxGapHours) {
+      const gapOver = largestGap - maxGapHours; // hours over
+      const p = gapOver * WEIGHTS.largeGapPenalty;
+      score += p;
+      penalties.gap = p;
+    }
+    if (lunchOverlapMinutes > 0) {
+      const p = lunchOverlapMinutes * WEIGHTS.lunchPerMinute;
+      score += p;
+      penalties.lunch = p;
+    }
+
+    return {
+      score,
+      components: {
+        activeDays,
+        totalSpread,
+        totalGap,
+        largestGap,
+        lunchOverlapMinutes,
+        penalties,
+      },
+    };
   }
 
-  const scored = results.map((r) => ({
-    routine: r,
-    score: computeCompactScore(r),
-  }));
+  const baseSet = filteredResults; // after strict conflict + day/time filter only
+  let infoBanner = null; // no advanced hard filtering now
+  const scored = baseSet.map((r) => {
+    const meta = scoreRoutine(r);
+    return { routine: r, score: meta.score, meta };
+  });
   scored.sort((a, b) => a.score - b.score);
 
   const outputDiv = document.getElementById("routineOutput");
   outputDiv.innerHTML = "";
   if (scored.length === 0) {
-    outputDiv.innerHTML = "<p>No valid routines found without conflicts.</p>";
+    let reason = "No valid routines found without conflicts.";
+    if (results.length === 0) {
+      reason =
+        "No conflict-free combination of the selected course sections exists (before applying filters).";
+    } else if (filteredResults.length === 0) {
+      reason =
+        "All conflict-free combinations were excluded by day/time window filters.";
+    }
+    outputDiv.innerHTML = `<p>${reason}</p>`;
     return;
   }
 
-  scored.slice(0, 3).forEach((entry, index) => {
+  if (infoBanner) {
+    const note = document.createElement("div");
+    note.style.margin = "8px 0 12px";
+    note.style.padding = "8px 12px";
+    note.style.border = "1px solid #eab308";
+    note.style.background = "#fef9c3";
+    note.style.borderRadius = "6px";
+    note.style.fontSize = "0.9rem";
+    note.textContent = infoBanner;
+    outputDiv.appendChild(note);
+  }
+
+  scored.slice(0, topCount).forEach((entry, index) => {
     const routine = entry.routine;
     const groups = {};
     routine.forEach((sectionChoice) => {
@@ -611,8 +972,24 @@ function generateRoutines() {
     }
 
     const heading = document.createElement("h3");
-    heading.textContent = `🗓️ Routine Option ${index + 1}`;
+    const comp = entry.meta.components;
+    heading.textContent = `🗓️ Routine Option ${
+      index + 1
+    } (Score ${entry.score.toFixed(1)})`;
     outputDiv.appendChild(heading);
+
+    // Debug summary (optional, hidden if no penalties)
+    if (comp.penalties.overDays || comp.penalties.gap || comp.penalties.lunch) {
+      const pen = document.createElement("div");
+      pen.style.fontSize = "0.75rem";
+      pen.style.opacity = "0.75";
+      pen.textContent = `Penalties -> Days: ${comp.penalties.overDays.toFixed(
+        0
+      )}, Gap: ${comp.penalties.gap.toFixed(
+        0
+      )}, Lunch: ${comp.penalties.lunch.toFixed(0)}`;
+      outputDiv.appendChild(pen);
+    }
 
     const table = document.createElement("table");
     const thead = document.createElement("thead");

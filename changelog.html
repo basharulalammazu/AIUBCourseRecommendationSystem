@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Changelog • AIUB Course Recommendation System</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0f172a" />
+    <meta name="app-version" content="3.3.0" />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="apple-touch-icon" href="icons/icon-192.png" />
+    <link
+      id="app-favicon"
+      rel="icon"
+      type="image/png"
+      href="icons/icon-192.png"
+    />
+    <link
+      id="app-maskable"
+      rel="icon"
+      type="image/png"
+      purpose="maskable"
+      href="icons/maskable-512.png"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+      body {
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica,
+          Arial, sans-serif;
+        margin: 0;
+        background: #0f172a;
+        color: #e2e8f0;
+        line-height: 1.5;
+      }
+      header {
+        padding: 1.25rem 1rem 0.5rem;
+        text-align: center;
+      }
+      h1 {
+        margin: 0.25rem 0 0.5rem;
+        font-size: 1.65rem;
+        letter-spacing: 0.5px;
+      }
+      .version-badge {
+        display: inline-block;
+        background: #1e293b;
+        border: 1px solid #334155;
+        padding: 0.25rem 0.6rem;
+        border-radius: 999px;
+        font-size: 0.7rem;
+        letter-spacing: 0.5px;
+        color: #38bdf8;
+      }
+      main {
+        max-width: 860px;
+        margin: 0 auto;
+        padding: 0 1rem 3rem;
+      }
+      section {
+        background: #132238;
+        border: 1px solid #223247;
+        border-radius: 14px;
+        padding: 1rem 1.1rem 1.1rem;
+        margin-top: 1rem;
+        box-shadow: 0 4px 12px -3px rgba(0, 0, 0, 0.4);
+      }
+      h2 {
+        font-size: 1.05rem;
+        margin: 0.15rem 0 0.65rem;
+        display: flex;
+        gap: 0.4rem;
+        align-items: center;
+      }
+      h2 span.tag {
+        font-size: 0.55rem;
+        text-transform: uppercase;
+        background: #164e63;
+        color: #67e8f9;
+        padding: 2px 6px;
+        border-radius: 6px;
+        letter-spacing: 0.5px;
+      }
+      ul {
+        margin: 0.4rem 0 0.2rem 1.15rem;
+        padding: 0;
+      }
+      li {
+        margin: 0.25rem 0;
+        font-size: 0.85rem;
+      }
+      .category {
+        font-size: 0.6rem;
+        font-weight: 600;
+        letter-spacing: 0.7px;
+        opacity: 0.75;
+        margin-top: 0.75rem;
+        text-transform: uppercase;
+      }
+      footer {
+        text-align: center;
+        font-size: 0.65rem;
+        opacity: 0.55;
+        margin-top: 2.25rem;
+      }
+      a {
+        color: #38bdf8;
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      nav {
+        position: sticky;
+        top: 0;
+        background: linear-gradient(#0f172acc, #0f172ab3);
+        backdrop-filter: blur(6px);
+        padding: 0.4rem 0.75rem;
+        display: flex;
+        gap: 0.75rem;
+        justify-content: center;
+        flex-wrap: wrap;
+        border-bottom: 1px solid #1e293b;
+      }
+      nav a {
+        font-size: 0.65rem;
+        padding: 0.35rem 0.6rem;
+        border: 1px solid #1e293b;
+        border-radius: 8px;
+        background: #132238;
+      }
+      nav a:hover {
+        background: #1e293b;
+      }
+      .offline-note {
+        font-size: 0.55rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        background: #1e293b;
+        padding: 4px 8px;
+        border-radius: 6px;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+      }
+      @media (max-width: 640px) {
+        h1 {
+          font-size: 1.35rem;
+        }
+        section {
+          padding: 0.9rem 0.85rem;
+        }
+        li {
+          font-size: 0.8rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav id="toc"></nav>
+    <header>
+      <h1>Changelog</h1>
+      <div class="version-badge" id="currentVersion">v3.3.0</div>
+      <div id="offlineState" class="offline-note" style="display: none">
+        ⚠ Offline copy
+      </div>
+      <p
+        style="
+          font-size: 0.75rem;
+          opacity: 0.6;
+          max-width: 560px;
+          margin: 0.5rem auto 0;
+        "
+      >
+        All notable changes to this project. When offline you see the last
+        cached version; reconnect and refresh to fetch latest.
+      </p>
+    </header>
+    <main id="log">
+      <section id="v3-3-0">
+        <h2>3.3.0 <span class="tag">Latest</span></h2>
+        <div class="category">Added</div>
+        <ul>
+          <li>
+            Settings modal consolidating cache management, update, reset and
+            version info.
+          </li>
+          <li>
+            PWA enhancements: dark/light dynamic icons, offline fallback,
+            install prompts.
+          </li>
+          <li>Changelog page (this page) cached for offline viewing.</li>
+          <li>
+            Soft scoring for routines (penalty-based) with Top N selection.
+          </li>
+          <li>Platform install guidance buttons (Android/iOS).</li>
+        </ul>
+        <div class="category">Changed</div>
+        <ul>
+          <li>
+            Advanced constraints converted from hard filters to weighted soft
+            penalties.
+          </li>
+          <li>Unified theme + improved modal styling baseline.</li>
+        </ul>
+        <div class="category">Fixed</div>
+        <ul>
+          <li>Day name normalization preventing missed matches.</li>
+          <li>Update detection UI duplication issues minimized.</li>
+        </ul>
+      </section>
+
+      <section id="v3-2-x">
+        <h2>3.2.x</h2>
+        <div class="category">Added</div>
+        <ul>
+          <li>Clear saved filters button.</li>
+          <li>Persistence of selected courses & filters via localStorage.</li>
+        </ul>
+        <div class="category">Fixed</div>
+        <ul>
+          <li>
+            Routine generation performance improvements & better gap handling.
+          </li>
+        </ul>
+      </section>
+
+      <section id="v3-1-x">
+        <h2>3.1.x</h2>
+        <div class="category">Added</div>
+        <ul>
+          <li>Advanced constraints (Max Days, Max Gap, Lunch Window).</li>
+        </ul>
+        <div class="category">Changed</div>
+        <ul>
+          <li>Refined routine scoring heuristics for balance.</li>
+        </ul>
+      </section>
+
+      <section id="v3-0-0">
+        <h2>3.0.0</h2>
+        <div class="category">Added</div>
+        <ul>
+          <li>
+            Initial public release with offered courses & routine generator
+            base.
+          </li>
+        </ul>
+      </section>
+
+      <footer>
+        <p>Generated locally • <a href="index.html">Back to App</a></p>
+      </footer>
+    </main>
+    <script>
+      // Build TOC
+      const toc = document.getElementById("toc");
+      const sections = [...document.querySelectorAll("main section")];
+      sections.forEach((sec) => {
+        const id = sec.id;
+        const h2 = sec.querySelector("h2");
+        if (!id || !h2) return;
+        const a = document.createElement("a");
+        a.href = "#" + id;
+        a.textContent = h2.textContent.split(" ")[0];
+        toc.appendChild(a);
+      });
+      // Offline indicator
+      function updateOnline() {
+        document.getElementById("offlineState").style.display = navigator.onLine
+          ? "none"
+          : "inline-flex";
+      }
+      window.addEventListener("online", updateOnline);
+      window.addEventListener("offline", updateOnline);
+      updateOnline();
+      // Sync version badge with meta (if changed later)
+      const metaV = document.querySelector('meta[name="app-version"]');
+      if (metaV) {
+        document.getElementById("currentVersion").textContent =
+          "v" + metaV.getAttribute("content");
+      }
+    </script>
+  </body>
+</html>

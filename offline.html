@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Offline | AIUB Course App</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        background: #0f172a;
+        color: #f1f5f9;
+        font-family: system-ui, Arial, sans-serif;
+        padding: 1rem;
+        text-align: center;
+      }
+      .box {
+        max-width: 480px;
+      }
+      .box h1 {
+        font-size: 1.6rem;
+        margin-bottom: 0.75rem;
+      }
+      .box p {
+        line-height: 1.4;
+      }
+      .retry-btn {
+        margin-top: 1rem;
+        padding: 0.6rem 1rem;
+        border: 1px solid #38bdf8;
+        background: #1e293b;
+        color: #e2e8f0;
+        border-radius: 6px;
+        cursor: pointer;
+      }
+      .retry-btn:hover {
+        background: #334155;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box">
+      <h1>You're Offline</h1>
+      <p>
+        The app is still installed locally. Some features (like new file
+        uploads) need an internet connection. Reconnect and try again.
+      </p>
+      <button class="retry-btn" onclick="window.location.reload()">
+        Try Again
+      </button>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,20 @@
+{
+  "name": "aiub-course-app",
+  "version": "1.0.0",
+  "private": true,
+  "description": "AIUB Course Recommendation & Routine PWA with Capacitor wrapper",
+  "scripts": {
+    "build": "echo 'Static site - no build step'",
+    "cap:add": "npx cap add android && npx cap add ios",
+    "cap:copy": "npx cap copy",
+    "cap:open:android": "npx cap open android",
+    "cap:open:ios": "npx cap open ios"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^5.0.0"
+  },
+  "dependencies": {
+    "@capacitor/android": "^5.0.0",
+    "@capacitor/ios": "^5.0.0"
+  }
+}
