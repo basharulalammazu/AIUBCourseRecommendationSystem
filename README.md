@@ -65,7 +65,7 @@ All logic runs fully client-side—no backend or database required (easy to host
 
 ## Project Structure
 
-```
+````
 index.html                # Landing / main hub
 offer_courses.html         # Page for viewing offered courses
 routine.html               # Page for routine visualization
@@ -75,10 +75,7 @@ course_managers/           # JSON data for each department
 	...
 css/                       # Stylesheets
 js/                        # Page-specific & shared scripts
-```
-
 ## Installation
-
 Basic steps kept brief here—see `INSTALLATION.md` for full detail.
 
 1. Clone: `git clone https://github.com/basharulalammazu/AIUBCourseRecommendationSystem.git`
@@ -99,7 +96,7 @@ Course data lives under `course_managers/` as JSON. A typical record might look 
   "prerequisites": ["NONE"],
   "category": "Core"
 }
-```
+````
 
 If you add new JSON files:
 
@@ -130,9 +127,6 @@ If you add new JSON files:
 
 Contributions are welcome! To propose improvements:
 
-1. Fork the repo
-2. Create a feature branch (`feat/add-filtering`)
-3. Commit changes with clear messages
 4. Open a Pull Request describing the changes & rationale
 
 Please read the `CODE_OF_CONDUCT.md` before contributing.
@@ -176,7 +170,6 @@ Currently it's a structured presentation layer. Recommendation heuristics can be
 All Courses = every course in the department dataset.  
 Offered (Available) = courses you can take now (prereqs & credit conditions satisfied, not already marked completed).  
 Completed = ones you've entered in the completed input field.
-
 **Q: What do the colors mean?**  
 Green = available to take.  
 Yellow = prerequisites (or credit threshold) not met.  

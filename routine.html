@@ -3,14 +3,6 @@
   <head>
     <meta charset="UTF-8" />
     <title>Routine Generator</title>
-    <meta name="theme-color" content="#0f172a" />
-    <link rel="manifest" href="manifest.webmanifest" />
-    <link rel="apple-touch-icon" href="icons/icon-192.png" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta
-      name="apple-mobile-web-app-status-bar-style"
-      content="black-translucent"
-    />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <!-- Select2 CSS -->
@@ -89,7 +81,7 @@
             >
             <input type="time" id="startTimeFilter" value="08:00" />
             <label for="endTimeFilter">Latest End (HH:MM 24h)</label>
-            <input type="time" id="endTimeFilter" value="17:20" />
+            <input type="time" id="endTimeFilter" value="20:00" />
             <small style="display: block; margin-top: 4px; color: #64748b"
               >Classes must start at or after earliest and finish by
               latest.</small
@@ -171,22 +163,7 @@
       <div id="loadingSpinner"></div>
     </div>
 
-    <button
-      id="installAppBtn"
-      style="
-        display: none;
-        position: fixed;
-        bottom: 1rem;
-        right: 1rem;
-        z-index: 50;
-      "
-      class="btn accent"
-      onclick="triggerInstallPrompt()"
-    >
-      ⬇️ Install App
-    </button>
     <script src="js/theme.js"></script>
     <script src="js/routine.js"></script>
-    <script src="js/pwa.js"></script>
   </body>
 </html>

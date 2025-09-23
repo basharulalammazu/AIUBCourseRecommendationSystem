@@ -366,8 +366,6 @@ function updateCourseDropdown() {
   );
   // Reveal hidden selection & generate button
   showSelectionControls();
-  // Attempt to restore previously selected courses now that options exist
-  restoreSelectedCourses();
 }
 function showSelectionControls() {
   const courseLabel = document.querySelector('label[for="courseMultiSelect"]');
@@ -473,21 +471,18 @@ document.addEventListener("DOMContentLoaded", () => {
           (c) => c.value
         )
       );
-      persistFilters();
     })
   );
   const st = document.getElementById("startTimeFilter");
   const et = document.getElementById("endTimeFilter");
   if (st)
-    st.addEventListener("change", () => {
-      console.log("[Filters] Earliest start changed to", st.value);
-      persistFilters();
-    });
+    st.addEventListener("change", () =>
+      console.log("[Filters] Earliest start changed to", st.value)
+    );
   if (et)
-    et.addEventListener("change", () => {
-      console.log("[Filters] Latest end changed to", et.value);
-      persistFilters();
-    });
+    et.addEventListener("change", () =>
+      console.log("[Filters] Latest end changed to", et.value)
+    );
 
   // Advanced constraint listeners
   const maxDaysEl = document.getElementById("maxDaysInput");
@@ -495,155 +490,26 @@ document.addEventListener("DOMContentLoaded", () => {
   const lunchStartEl = document.getElementById("lunchStartInput");
   const lunchEndEl = document.getElementById("lunchEndInput");
   if (maxDaysEl)
-    maxDaysEl.addEventListener("change", () => {
-      console.log("[Filters] Max Days ->", maxDaysEl.value);
-      persistFilters();
-    });
+    maxDaysEl.addEventListener("change", () =>
+      console.log("[Filters] Max Days ->", maxDaysEl.value)
+    );
   if (maxGapEl)
-    maxGapEl.addEventListener("change", () => {
-      console.log("[Filters] Max Gap ->", maxGapEl.value);
-      persistFilters();
-    });
+    maxGapEl.addEventListener("change", () =>
+      console.log("[Filters] Max Gap ->", maxGapEl.value)
+    );
   if (lunchStartEl || lunchEndEl)
-    [lunchStartEl, lunchEndEl].forEach((el) => {
-      if (!el) return;
-      el.addEventListener("change", () => {
-        console.log(
-          "[Filters] Lunch Window ->",
-          lunchStartEl && lunchStartEl.value,
-          lunchEndEl && lunchEndEl.value
-        );
-        persistFilters();
-      });
-    });
-
-  // Attempt restoration of filters from localStorage now (before courses loaded)
-  restoreFilters();
+    [lunchStartEl, lunchEndEl].forEach(
+      (el) =>
+        el &&
+        el.addEventListener("change", () =>
+          console.log(
+            "[Filters] Lunch Window ->",
+            lunchStartEl && lunchStartEl.value,
+            lunchEndEl && lunchEndEl.value
+          )
+        )
+    );
 });
-
-// ----------------- Persistence Helpers -----------------
-function persistFilters() {
-  try {
-    const data = {
-      days: Array.from(document.querySelectorAll(".day-filter")).map((cb) => ({
-        v: cb.value,
-        c: cb.checked,
-      })),
-      earliest: document.getElementById("startTimeFilter")?.value || "",
-      latest: document.getElementById("endTimeFilter")?.value || "",
-      maxDays: document.getElementById("maxDaysInput")?.value || "",
-      maxGap: document.getElementById("maxGapInput")?.value || "",
-      lunchStart: document.getElementById("lunchStartInput")?.value || "",
-      lunchEnd: document.getElementById("lunchEndInput")?.value || "",
-      topCount: document.getElementById("topCountInput")?.value || "",
-    };
-    localStorage.setItem("routineFilters", JSON.stringify(data));
-  } catch (e) {
-    console.warn("[Persist] Failed to save filters", e);
-  }
-  persistSelectedCourses();
-}
-
-function restoreFilters() {
-  try {
-    const raw = localStorage.getItem("routineFilters");
-    if (!raw) return;
-    const data = JSON.parse(raw);
-    if (data.days) {
-      const map = new Map(data.days.map((d) => [d.v, d.c]));
-      document.querySelectorAll(".day-filter").forEach((cb) => {
-        if (map.has(cb.value)) cb.checked = map.get(cb.value);
-      });
-    }
-    if (data.earliest) {
-      const el = document.getElementById("startTimeFilter");
-      if (el) el.value = data.earliest;
-    }
-    if (data.latest) {
-      const el = document.getElementById("endTimeFilter");
-      if (el) el.value = data.latest;
-    }
-    if (data.maxDays) {
-      const el = document.getElementById("maxDaysInput");
-      if (el) el.value = data.maxDays;
-    }
-    if (data.maxGap) {
-      const el = document.getElementById("maxGapInput");
-      if (el) el.value = data.maxGap;
-    }
-    if (data.lunchStart) {
-      const el = document.getElementById("lunchStartInput");
-      if (el) el.value = data.lunchStart;
-    }
-    if (data.lunchEnd) {
-      const el = document.getElementById("lunchEndInput");
-      if (el) el.value = data.lunchEnd;
-    }
-    if (data.topCount) {
-      const el = document.getElementById("topCountInput");
-      if (el) el.value = data.topCount;
-    }
-    console.log("[Persist] Filters restored");
-  } catch (e) {
-    console.warn("[Persist] Failed to restore filters", e);
-  }
-}
-
-function persistSelectedCourses() {
-  try {
-    const selected = $("#courseMultiSelect").val() || [];
-    localStorage.setItem("routineSelectedCourses", JSON.stringify(selected));
-  } catch (e) {
-    console.warn("[Persist] Failed saving courses", e);
-  }
-}
-
-function restoreSelectedCourses() {
-  try {
-    const raw = localStorage.getItem("routineSelectedCourses");
-    if (!raw) return;
-    const arr = JSON.parse(raw);
-    if (Array.isArray(arr)) {
-      $("#courseMultiSelect").val(arr).trigger("change");
-      console.log("[Persist] Selected courses restored");
-    }
-  } catch (e) {
-    console.warn("[Persist] Failed restoring courses", e);
-  }
-}
-function clearRoutineFilters() {
-  try {
-    localStorage.removeItem("routineFilters");
-    localStorage.removeItem("routineSelectedCourses");
-  } catch (e) {
-    console.warn("[Persist] clear failed", e);
-  }
-  // Reset checkboxes
-  document.querySelectorAll(".day-filter").forEach((cb) => (cb.checked = true));
-  const setVal = (id, val) => {
-    const el = document.getElementById(id);
-    if (el) el.value = val;
-  };
-  setVal("startTimeFilter", "08:00");
-  setVal("endTimeFilter", "20:00");
-  setVal("maxDaysInput", "");
-  setVal("maxGapInput", "");
-  setVal("lunchStartInput", "12:00");
-  setVal("lunchEndInput", "13:00");
-  setVal("topCountInput", "3");
-  // Clear course selections (if select2 initialized)
-  if (window.$) {
-    $("#courseMultiSelect").val(null).trigger("change");
-  } else {
-    const sel = document.getElementById("courseMultiSelect");
-    if (sel) Array.from(sel.options).forEach((o) => (o.selected = false));
-  }
-  console.log("[Persist] Filters & selections cleared");
-  const out = document.getElementById("routineOutput");
-  if (out)
-    out.innerHTML =
-      '<p style="opacity:.7">Filters reset. Re-generate to view routines.</p>';
-}
 
 function hasConflict(a, b) {
   if (a.day !== b.day) return false;
@@ -897,7 +763,6 @@ function generateRoutines() {
       },
     };
   }
-
   const baseSet = filteredResults; // after strict conflict + day/time filter only
   let infoBanner = null; // no advanced hard filtering now
   const scored = baseSet.map((r) => {

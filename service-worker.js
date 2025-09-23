@@ -1,11 +1,11 @@
-// Basic service worker for offline caching
-const CACHE_NAME = "aiub-courses-v2"; // bumped to include changelog and new assets
+// Basic service worker for offline caching & update channel
+const APP_VERSION = "1.0.0";
+const CACHE_NAME = "aiub-courses-v1";
 const CORE_ASSETS = [
   "./",
   "index.html",
   "offer_courses.html",
   "routine.html",
-  "changelog.html",
   "css/style.css",
   "css/offer_courses.css",
   "css/routine.css",
@@ -35,7 +35,7 @@ self.addEventListener("activate", (event) => {
   );
 });
 
-// Listen for manual skip waiting trigger
+// Listen for skip waiting message
 self.addEventListener("message", (event) => {
   if (event.data === "SKIP_WAITING") {
     self.skipWaiting();

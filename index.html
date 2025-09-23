@@ -88,6 +88,34 @@
         >
           ⬇️ Download for Windows
         </a>
+        <div
+          class="mobile-downloads"
+          style="margin-top: 1rem; display: flex; flex-wrap: wrap; gap: 0.6rem"
+        >
+          <a
+            href="#"
+            class="btn secondary"
+            id="androidDownloadBtn"
+            title="Android APK coming soon"
+            style="opacity: 0.7; cursor: not-allowed"
+            >🤖 Android (Soon)</a
+          >
+          <a
+            href="#"
+            class="btn secondary"
+            id="iosDownloadBtn"
+            title="iOS build coming soon"
+            style="opacity: 0.7; cursor: not-allowed"
+            >🍎 iOS (Soon)</a
+          >
+          <button
+            class="btn outline"
+            id="pwaInstallShortcut"
+            style="display: none"
+          >
+            ⬇️ Install PWA
+          </button>
+        </div>
       </div>
 
       <div class="developer-area">
@@ -132,23 +160,202 @@
         with focus on student success.
       </p>
     </footer>
-
-    <button
-      id="installAppBtn"
-      style="
-        display: none;
-        position: fixed;
-        bottom: 1rem;
-        right: 1rem;
-        z-index: 50;
-      "
-      class="btn accent"
-      onclick="triggerInstallPrompt()"
-    >
-      ⬇️ Install App
+    <button id="openSettingsBtn" class="fab-btn" aria-label="Settings">
+      ⚙️
     </button>
+
+    <!-- Settings / Update Modal -->
+    <div
+      id="settingsModal"
+      class="modal hidden"
+      aria-hidden="true"
+      role="dialog"
+      aria-modal="true"
+    >
+      <div class="modal-panel" role="document">
+        <button
+          class="close-btn"
+          id="closeSettingsBtn"
+          aria-label="Close settings"
+        >
+          ✕
+        </button>
+        <h2 class="modal-title">App Settings</h2>
+        <div class="modal-section">
+          <h3>Version</h3>
+          <p>Current Version: <span id="appVersion">1.0.0</span></p>
+          <p id="updateStatus" class="muted">Status: up to date</p>
+          <button id="checkUpdatesBtn" class="btn small">
+            Check for Updates
+          </button>
+          <button id="applyUpdateBtn" class="btn small warning hidden">
+            Apply Update & Reload
+          </button>
+        </div>
+        <div class="modal-section">
+          <h3>Cache</h3>
+          <button id="clearCacheBtn" class="btn outline small">
+            Clear Cached Assets
+          </button>
+        </div>
+        <div class="modal-section">
+          <h3>Install</h3>
+          <button id="installAppBtn" class="btn small" style="display: none">
+            Install App
+          </button>
+        </div>
+        <div class="modal-section">
+          <h3>Info</h3>
+          <a
+            id="changelogLink"
+            href="changelog.html"
+            class="link subtle"
+            target="_blank"
+            >View Changelog (v<span class="ver-inline">1.0.0</span>)</a
+          >
+          <button
+            id="resetAllBtn"
+            class="btn danger small"
+            style="margin-top: 0.75rem"
+          >
+            Reset All Saved Data
+          </button>
+        </div>
+      </div>
+      <div class="modal-backdrop" tabindex="-1"></div>
+    </div>
     <script src="js/theme.js"></script>
     <script src="js/script.js"></script>
     <script src="js/pwa.js"></script>
+    <script>
+      // Settings modal & SW update logic (index specific)
+      (function () {
+        const body = document.body;
+        const modal = document.getElementById("settingsModal");
+        const openBtn = document.getElementById("openSettingsBtn");
+        const closeBtn = document.getElementById("closeSettingsBtn");
+        const backdrop = modal.querySelector(".modal-backdrop");
+        const checkBtn = document.getElementById("checkUpdatesBtn");
+        const applyBtn = document.getElementById("applyUpdateBtn");
+        const statusEl = document.getElementById("updateStatus");
+        const installBtn = document.getElementById("installAppBtn");
+        const clearCacheBtn = document.getElementById("clearCacheBtn");
+        const resetBtn = document.getElementById("resetAllBtn");
+        const changelogLink = document.getElementById("changelogLink");
+
+        function openModal() {
+          modal.classList.remove("hidden");
+          modal.setAttribute("aria-hidden", "false");
+          body.style.overflow = "hidden";
+        }
+        function closeModal() {
+          modal.classList.add("hidden");
+          modal.setAttribute("aria-hidden", "true");
+          body.style.overflow = "";
+        }
+        openBtn.addEventListener("click", openModal);
+        closeBtn.addEventListener("click", closeModal);
+        backdrop.addEventListener("click", closeModal);
+        document.addEventListener("keydown", (e) => {
+          if (e.key === "Escape" && !modal.classList.contains("hidden"))
+            closeModal();
+        });
+
+        // Offline detection for changelog link
+        function updateOnlineState() {
+          if (!navigator.onLine) {
+            changelogLink.style.display = "none";
+          } else {
+            changelogLink.style.display = "inline";
+          }
+        }
+        window.addEventListener("online", updateOnlineState);
+        window.addEventListener("offline", updateOnlineState);
+        updateOnlineState();
+
+        // Update check logic
+        let newWorker = null;
+        if ("serviceWorker" in navigator) {
+          navigator.serviceWorker.getRegistration().then((reg) => {
+            if (!reg) return;
+            reg.addEventListener("updatefound", () => {
+              newWorker = reg.installing;
+              newWorker.addEventListener("statechange", () => {
+                if (
+                  newWorker.state === "installed" &&
+                  navigator.serviceWorker.controller
+                ) {
+                  statusEl.textContent = "Status: Update ready";
+                  applyBtn.classList.remove("hidden");
+                }
+              });
+            });
+          });
+        }
+        checkBtn.addEventListener("click", () => {
+          statusEl.textContent = "Status: Checking...";
+          if ("serviceWorker" in navigator) {
+            navigator.serviceWorker.getRegistration().then((reg) => {
+              if (!reg) {
+                statusEl.textContent = "Status: No SW registered";
+                return;
+              }
+              reg.update().then(() => {
+                setTimeout(() => {
+                  if (!applyBtn.classList.contains("hidden")) {
+                    statusEl.textContent = "Status: Update available";
+                  } else {
+                    statusEl.textContent = "Status: Up to date";
+                  }
+                }, 1200);
+              });
+            });
+          }
+        });
+        applyBtn.addEventListener("click", () => {
+          navigator.serviceWorker.getRegistration().then((reg) => {
+            if (!reg) return;
+            if (reg.waiting) {
+              reg.waiting.postMessage("SKIP_WAITING");
+              statusEl.textContent = "Status: Applying update...";
+              setTimeout(() => window.location.reload(), 1000);
+            }
+          });
+        });
+
+        clearCacheBtn.addEventListener("click", async () => {
+          if (!confirm("Clear cached assets?")) return;
+          const keys = await caches.keys();
+          for (const k of keys) await caches.delete(k);
+          statusEl.textContent = "Status: Cache cleared. Reload recommended.";
+        });
+
+        resetBtn.addEventListener("click", () => {
+          if (!confirm("Reset all saved data (localStorage) and reload?"))
+            return;
+          localStorage.clear();
+          location.reload();
+        });
+
+        // PWA install shortcut in downloads section
+        const pwaShortcut = document.getElementById("pwaInstallShortcut");
+        if (window.matchMedia("(display-mode: standalone)").matches) {
+          // Already installed: hide install shortcut & mark placeholders
+          if (pwaShortcut) pwaShortcut.style.display = "none";
+          const androidBtn = document.getElementById("androidDownloadBtn");
+          const iosBtn = document.getElementById("iosDownloadBtn");
+          if (androidBtn)
+            androidBtn.textContent = "🤖 Android (Installed via PWA)";
+          if (iosBtn) iosBtn.textContent = "🍎 iOS (Installed via PWA)";
+        }
+        // Hook deferred prompt from pwa.js (if defined globally later)
+        window.addEventListener("pwa-install-available", () => {
+          if (pwaShortcut) {
+            pwaShortcut.style.display = "inline-flex";
+            pwaShortcut.addEventListener("click", () => triggerInstallPrompt());
+          }
+        });
+      })();
+    </script>
   </body>
 </html>

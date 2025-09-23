@@ -163,7 +163,6 @@
     transform: scale(1) translateY(0);
   }
 }
-
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -198,6 +197,173 @@ body.dark .close {
 
 body.dark .close:hover {
   color: #e2e8f0;
+}
+
+/* ================= New Settings Modal & FAB (PWA) ================= */
+.fab-btn {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  z-index: 60;
+  background: linear-gradient(135deg, #1e293b, #334155);
+  color: #f1f5f9;
+  border: 1px solid #475569;
+  border-radius: 50%;
+  width: 54px;
+  height: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+  font-size: 1.35rem;
+  backdrop-filter: blur(6px);
+}
+.fab-btn:hover {
+  background: linear-gradient(135deg, #334155, #475569);
+}
+
+/* Mobile full-width buttons except inside settings modal */
+@media (max-width: 720px) {
+  body:not(.settings-open) .btn {
+    width: 100%;
+  }
+  body.settings-open #settingsModal .btn {
+    width: auto;
+  }
+}
+
+/* Bottom sheet style modal wrapper overrides (distinct from existing .modal) */
+#settingsModal.modal {
+  display: none;
+}
+#settingsModal.modal:not(.hidden) {
+  display: flex;
+}
+#settingsModal .modal-panel {
+  width: 100%;
+  max-width: 520px;
+  background: #1e293b;
+  color: #e2e8f0;
+  border-radius: 18px 18px 0 0;
+  padding: 1.25rem 1.1rem 2.4rem;
+  box-shadow: 0 -4px 18px rgba(0, 0, 0, 0.5);
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  z-index: 2;
+}
+@media (min-width: 600px) {
+  #settingsModal .modal-panel {
+    border-radius: 14px;
+    margin-top: 5vh;
+    align-self: center;
+  }
+}
+#settingsModal .modal-title {
+  margin: 0 0 0.75rem;
+  font-size: 1.25rem;
+}
+#settingsModal .modal-section {
+  margin-bottom: 1.1rem;
+}
+#settingsModal .modal-section h3 {
+  margin: 0.9rem 0 0.5rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  opacity: 0.9;
+  font-weight: 700;
+  position: relative;
+}
+#settingsModal .modal-section h3:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 42px;
+  height: 2px;
+  background: linear-gradient(90deg, #3b82f6, #0ea5e9);
+  border-radius: 2px;
+  opacity: 0.6;
+}
+
+/* Utility to mark settings open for mobile width scoping */
+body.settings-open #settingsModal .btn.small {
+  width: auto;
+}
+
+#settingsModal .modal-section p,
+#settingsModal .modal-section a {
+  font-size: 0.8rem;
+}
+#settingsModal .modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(2px);
+  z-index: 1;
+}
+#settingsModal .close-btn {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.6rem;
+  background: #0f172a;
+  color: #e2e8f0;
+  border: 1px solid #334155;
+  border-radius: 8px;
+  padding: 0.35rem 0.55rem;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+#settingsModal .close-btn:hover {
+  background: #1e293b;
+}
+.btn.small {
+  font-size: 0.65rem;
+  padding: 0.45rem 0.6rem;
+  line-height: 1;
+}
+.btn.warning {
+  background: #f59e0b;
+  border-color: #d97706;
+  color: #fff;
+}
+.btn.danger {
+  background: #dc2626;
+  border-color: #b91c1c;
+  color: #fff;
+}
+.btn.outline {
+  background: transparent;
+  border: 1px solid #64748b;
+  color: #e2e8f0;
+}
+.btn.outline:hover {
+  background: #334155;
+}
+.muted {
+  opacity: 0.7;
+  font-size: 0.7rem;
+}
+.link.subtle {
+  font-size: 0.7rem;
+  opacity: 0.8;
+}
+.link.subtle:hover {
+  opacity: 1;
+}
+.ver-inline {
+  font-weight: 600;
+}
+body.dark-mode #settingsModal .modal-panel {
+  background: #0f172a;
+}
+body.dark-mode .fab-btn {
+  background: linear-gradient(135deg, #334155, #475569);
+}
+body.dark-mode .fab-btn:hover {
+  background: linear-gradient(135deg, #475569, #64748b);
 }
 
 /* Filter Buttons */
