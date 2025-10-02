@@ -10,17 +10,30 @@ const CORE_ASSETS = [
   "css/offer_courses.css",
   "css/routine.css",
   "css/mediaqueries.css",
+  "css/index.css",
   "js/script.js",
   "js/offer_script.js",
   "js/routine.js",
   "js/theme.js",
+  "js/pwa.js",
   "manifest.webmanifest",
   "offline.html",
 ];
 
 self.addEventListener("install", (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => cache.addAll(CORE_ASSETS))
+    caches.open(CACHE_NAME).then(async (cache) => {
+      // Cache assets one by one, skip if any fail
+      const promises = CORE_ASSETS.map(async (asset) => {
+        try {
+          await cache.add(asset);
+          console.log(`[SW] Cached: ${asset}`);
+        } catch (error) {
+          console.warn(`[SW] Failed to cache: ${asset}`, error);
+        }
+      });
+      await Promise.allSettled(promises);
+    })
   );
 });
 

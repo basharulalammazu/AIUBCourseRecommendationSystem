@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PWA Icon Generator</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 20px;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+      canvas {
+        border: 1px solid #ccc;
+        margin: 10px 0;
+      }
+      button {
+        padding: 10px 20px;
+        margin: 5px;
+        background: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      button:hover {
+        background: #0056b3;
+      }
+      .icon-preview {
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+      }
+      .icon-item {
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>AIUB Course System - PWA Icon Generator</h1>
+    <p>This tool generates the required PWA icons for your app installation.</p>
+
+    <div class="icon-preview">
+      <div class="icon-item">
+        <h3>192x192 Icon</h3>
+        <canvas id="canvas192" width="192" height="192"></canvas>
+        <br /><button onclick="downloadIcon(192)">Download 192px Icon</button>
+      </div>
+      <div class="icon-item">
+        <h3>512x512 Icon</h3>
+        <canvas id="canvas512" width="512" height="512"></canvas>
+        <br /><button onclick="downloadIcon(512)">Download 512px Icon</button>
+      </div>
+      <div class="icon-item">
+        <h3>512x512 Maskable</h3>
+        <canvas id="canvasMaskable" width="512" height="512"></canvas>
+        <br /><button onclick="downloadMaskable()">
+          Download Maskable Icon
+        </button>
+      </div>
+    </div>
+
+    <button onclick="generateAllIcons()">Generate All Icons</button>
+    <button onclick="downloadAll()">Download All Icons</button>
+
+    <script>
+      function createIcon(canvas, size, isMaskable = false) {
+        const ctx = canvas.getContext("2d");
+
+        // Clear canvas
+        ctx.clearRect(0, 0, size, size);
+
+        // Background
+        const gradient = ctx.createLinearGradient(0, 0, size, size);
+        gradient.addColorStop(0, "#1d3557");
+        gradient.addColorStop(1, "#004e92");
+        ctx.fillStyle = gradient;
+        ctx.fillRect(0, 0, size, size);
+
+        // If maskable, add safe area padding
+        const safeZone = isMaskable ? size * 0.1 : 0;
+        const contentSize = size - safeZone * 2;
+        const centerX = size / 2;
+        const centerY = size / 2;
+
+        // AIUB text
+        ctx.fillStyle = "#ffffff";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+
+        // Adjust font size based on icon size
+        const fontSize = contentSize * 0.15;
+        ctx.font = `bold ${fontSize}px Arial`;
+
+        // Main text
+        ctx.fillText("AIUB", centerX, centerY - fontSize * 0.3);
+
+        // Subtitle
+        ctx.font = `${fontSize * 0.4}px Arial`;
+        ctx.fillText("COURSES", centerX, centerY + fontSize * 0.4);
+
+        // Icon decoration (book/education symbol)
+        ctx.beginPath();
+        ctx.strokeStyle = "#ffffff";
+        ctx.lineWidth = size * 0.01;
+        const bookSize = contentSize * 0.1;
+        ctx.rect(
+          centerX - bookSize,
+          centerY - contentSize * 0.25,
+          bookSize * 2,
+          bookSize * 1.5
+        );
+        ctx.stroke();
+
+        // Book pages
+        for (let i = 1; i <= 3; i++) {
+          ctx.beginPath();
+          ctx.moveTo(
+            centerX - bookSize * 0.8,
+            centerY - contentSize * 0.25 + i * bookSize * 0.3
+          );
+          ctx.lineTo(
+            centerX + bookSize * 0.8,
+            centerY - contentSize * 0.25 + i * bookSize * 0.3
+          );
+          ctx.stroke();
+        }
+      }
+
+      function generateAllIcons() {
+        const canvas192 = document.getElementById("canvas192");
+        const canvas512 = document.getElementById("canvas512");
+        const canvasMaskable = document.getElementById("canvasMaskable");
+
+        createIcon(canvas192, 192);
+        createIcon(canvas512, 512);
+        createIcon(canvasMaskable, 512, true);
+      }
+
+      function downloadIcon(size) {
+        const canvas = document.getElementById("canvas" + size);
+        const link = document.createElement("a");
+        link.download = `icon-${size}.png`;
+        link.href = canvas.toDataURL();
+        link.click();
+      }
+
+      function downloadMaskable() {
+        const canvas = document.getElementById("canvasMaskable");
+        const link = document.createElement("a");
+        link.download = "maskable-512.png";
+        link.href = canvas.toDataURL();
+        link.click();
+      }
+
+      function downloadAll() {
+        downloadIcon(192);
+        downloadIcon(512);
+        downloadMaskable();
+      }
+
+      // Generate icons on page load
+      window.onload = generateAllIcons;
+    </script>
+  </body>
+</html>
