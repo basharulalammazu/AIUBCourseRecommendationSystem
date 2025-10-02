@@ -255,37 +255,32 @@ function addAvailableCourse(course, completedSet) {
   }, 0);
 
   let status = "Available";
-  let bgColor = "#e6ffe6"; // Green
+  let statusClass = "available";
   let clickable = true;
 
   if (isCompleted) {
     status = "Completed";
-    bgColor = "#ffe6e6"; // Red
+    statusClass = "completed";
     clickable = true; // Allow toggling
   } else if (!hasAllPrereqs) {
     status = "Prerequisites not met";
-    bgColor = "#fff3cd"; // Yellow
+    statusClass = "prerequisites-not-met";
   } else if (
     course.requiredCredits &&
     completedCredits < course.requiredCredits
   ) {
     status = `Not enough credits (${completedCredits}/${course.requiredCredits})`;
-    bgColor = "#fff3cd";
+    statusClass = "insufficient-credits";
   } else if (
     course.name.toLowerCase().includes("internship") &&
     completedCredits < 140
   ) {
     status = "Not enough credits";
-    bgColor = "#fff3cd";
+    statusClass = "insufficient-credits";
   }
 
   const div = document.createElement("div");
-  div.className = "course-card";
-  div.style.border = "1px solid #ccc";
-  div.style.borderRadius = "8px";
-  div.style.padding = "10px";
-  div.style.margin = "10px 0";
-  div.style.backgroundColor = bgColor;
+  div.className = `course course-card ${statusClass}`;
   if (clickable) {
     div.style.cursor = "pointer";
   }
