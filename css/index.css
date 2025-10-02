@@ -281,6 +281,46 @@ body.dark .plan-item button.remove-plan {
   color: #e2ecf3;
 }
 
+/* Dark mode for dev-section */
+body.dark #dev-section {
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 32px -8px rgba(0, 0, 0, 0.4);
+  padding: 2rem;
+  margin-top: 3rem;
+}
+body.dark .download-area,
+body.dark .developer-area {
+  background: rgba(30, 41, 59, 0.3);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 1.5rem;
+}
+body.dark .download-description,
+body.dark .dev-intro {
+  color: #94a3b8;
+}
+body.dark .dev-card {
+  background: rgba(51, 65, 85, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+body.dark .dev-card:hover {
+  background: rgba(51, 65, 85, 0.6);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+}
+body.dark .dev-card img {
+  border-color: #60a5fa;
+}
+body.dark .dev-card h4 {
+  color: #e2e8f0;
+}
+body.dark .dev-card a {
+  color: #93c5fd;
+}
+
 /* Utility */
 .hidden {
   display: none !important;
