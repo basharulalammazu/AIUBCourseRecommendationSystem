@@ -1,7 +1,10 @@
 // Theme handled by theme.js
 
-function showSpinner() {
-  document.getElementById("loadingSpinner").style.display = "block";
+function showSpinner(message = "Loading, please wait...") {
+  const spinner = document.getElementById("loadingSpinner");
+  const text = spinner.querySelector("p");
+  if (text) text.textContent = message;
+  spinner.style.display = "block";
 }
 function hideSpinner() {
   document.getElementById("loadingSpinner").style.display = "none";
@@ -220,10 +223,11 @@ function removeBrackets(title) {
 }
 
 function handleExcel(file) {
-  showSpinner();
+  showSpinner("Reading Excel file...");
   const reader = new FileReader();
   reader.onload = function (e) {
     try {
+      showSpinner("Parsing Excel data...");
       const data = new Uint8Array(e.target.result);
       const workbook = XLSX.read(data, { type: "array" });
       const sheet = workbook.Sheets[workbook.SheetNames[0]];
@@ -326,6 +330,7 @@ function handleExcel(file) {
       });
 
       console.log("Converted Excel rows:", converted);
+      showSpinner("Processing courses...");
       parseRows(converted);
       hideSpinner();
     } catch (err) {
@@ -343,10 +348,11 @@ function handleExcel(file) {
 }
 
 function handleCSV(file) {
-  showSpinner();
+  showSpinner("Reading CSV file...");
   const reader = new FileReader();
   reader.onload = function (e) {
     try {
+      showSpinner("Parsing CSV data...");
       const text = e.target.result;
       // simple CSV parse: split lines, use first row as headers
       const lines = text.split(/\r?\n/).filter((l) => l.trim() !== "");
@@ -397,6 +403,7 @@ function handleCSV(file) {
           ],
         };
       });
+      showSpinner("Processing courses...");
       parseRows(converted);
     } catch (err) {
       console.error("CSV parsing failed:", err);
@@ -412,9 +419,10 @@ function handleCSV(file) {
 }
 
 async function handlePDF(file) {
-  showSpinner();
+  showSpinner("Reading PDF file...");
   const reader = new FileReader();
   reader.onload = async function () {
+    showSpinner("Extracting text from PDF...");
     const typedarray = new Uint8Array(reader.result);
     const pdf = await pdfjsLib.getDocument({ data: typedarray }).promise;
     let text = "";
@@ -433,6 +441,7 @@ async function handlePDF(file) {
     const parsed = parseTableFormat(lines);
     console.log("Parsed data:", parsed); // Debug log
 
+    showSpinner("Processing courses...");
     parseRows(parsed);
     hideSpinner();
   };
@@ -471,10 +480,6 @@ function updateCourseDropdown() {
     });
   }, 0);
 
-  showPopup(
-    "Upload complete",
-    `File uploaded successfully! Found ${uniqueTitles.length} unique courses.`
-  );
   // Reveal hidden selection & generate button
   showSelectionControls();
 }

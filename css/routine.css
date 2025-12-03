@@ -378,6 +378,15 @@ body.dark #scheduleFilters input[type="time"]:focus-visible {
   margin: 0;
   padding: 2px 4px;
 }
+/* Light mode search field */
+.select2-container--default .select2-search--inline .select2-search__field {
+  background: transparent;
+  border: none;
+  outline: 0;
+  box-shadow: none;
+  -webkit-appearance: textfield;
+  appearance: textfield;
+}
 @media (max-width: 880px) {
   body {
     padding: 34px 18px;
@@ -478,6 +487,16 @@ body.dark .select2-dropdown {
 }
 body.dark .select2-results__option--highlighted {
   background: #3b82f6 !important;
+}
+/* Dark mode search field */
+body.dark .select2-container--default .select2-search--inline .select2-search__field {
+  background: transparent;
+  border: none;
+  outline: 0;
+  box-shadow: none;
+  -webkit-appearance: textfield;
+  appearance: textfield;
+  color: white;
 }
 
 /* Popup modal styles (used instead of alert()) */
