@@ -479,3 +479,87 @@ body.dark .select2-dropdown {
 body.dark .select2-results__option--highlighted {
   background: #3b82f6 !important;
 }
+
+/* Popup modal styles (used instead of alert()) */
+.app-popup.hidden {
+  display: none;
+}
+.app-popup {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  pointer-events: none;
+}
+.app-popup-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 15, 25, 0.55);
+  backdrop-filter: blur(2px);
+}
+.app-popup-panel {
+  position: relative;
+  max-width: 520px;
+  width: calc(100% - 40px);
+  background: linear-gradient(180deg, #ffffff, #fbfdff);
+  color: #02203a;
+  border-radius: 12px;
+  padding: 18px 18px 14px 18px;
+  box-shadow: 0 10px 30px rgba(2, 32, 58, 0.25);
+  z-index: 2;
+  pointer-events: auto;
+}
+.app-popup h3 {
+  margin: 0 0 8px 0;
+  font-size: 1.05rem;
+}
+.app-popup .app-popup-close {
+  position: absolute;
+  right: 10px;
+  top: 8px;
+  background: transparent;
+  border: none;
+  font-size: 1.05rem;
+  cursor: pointer;
+}
+.app-popup .app-popup-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 12px;
+}
+.app-popup .btn {
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.app-popup .btn.primary {
+  background: #0078d4;
+  color: #fff;
+  border: none;
+}
+
+/* Dark mode variant */
+body.dark .app-popup-panel {
+  background: linear-gradient(180deg, #061524, #03121a);
+  color: #e6f6ff;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+}
+body.dark .app-popup-backdrop {
+  background: rgba(0, 0, 0, 0.6);
+}
+body.dark .app-popup .btn.primary {
+  background: #1890ff;
+}
+
+@media (max-width: 420px) {
+  .app-popup-panel {
+    padding: 14px;
+    border-radius: 10px;
+  }
+  .app-popup h3 {
+    font-size: 1rem;
+  }
+}

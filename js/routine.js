@@ -7,6 +7,18 @@ function hideSpinner() {
   document.getElementById("loadingSpinner").style.display = "none";
 }
 
+// Popup helpers (replacement for alert())
+// Modal wrappers that delegate to AppModal if present
+function showPopup(title, message) {
+  if (window.AppModal) return AppModal.alert(title, message);
+  return Promise.resolve(window.alert(message));
+}
+function showConfirm(title, message, buttons) {
+  if (window.AppModal) return AppModal.confirm(title, message, { buttons });
+  // fallback to native confirm synchronously
+  return Promise.resolve(window.confirm(message));
+}
+
 let scheduleData = [];
 
 document
@@ -15,16 +27,31 @@ document
     const file = e.target.files[0];
     if (!file) return;
 
+    // show basic file info to user
+    const infoEl = document.getElementById("fileInfo");
+    if (infoEl)
+      infoEl.textContent = `Selected: ${file.name} (${formatFileSize(
+        file.size
+      )})`;
+
     const ext = file.name.split(".").pop().toLowerCase();
 
-    if (ext === "xlsx") {
+    if (ext === "xlsx" || ext === "xls") {
       handleExcel(file);
+    } else if (ext === "csv") {
+      handleCSV(file);
     } else if (ext === "pdf") {
       handlePDF(file);
     } else {
-      alert("Unsupported file type");
+      showPopup("Unsupported file", "Please upload .xlsx, .xls, .csv or .pdf");
     }
   });
+
+function formatFileSize(bytes) {
+  if (bytes < 1024) return bytes + " B";
+  if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + " KB";
+  return (bytes / (1024 * 1024)).toFixed(2) + " MB";
+}
 
 function parseTableFormat(lines) {
   const parsed = [];
@@ -196,110 +223,192 @@ function handleExcel(file) {
   showSpinner();
   const reader = new FileReader();
   reader.onload = function (e) {
-    const workbook = XLSX.read(e.target.result, { type: "binary" });
-    const sheet = workbook.Sheets[workbook.SheetNames[0]];
-    const json = XLSX.utils.sheet_to_json(sheet);
-    // Filter out Freshman status rows
-    const filtered = json.filter((row) => {
-      const statusVal = (row["Status"] || row["STATUS"] || "")
-        .toString()
-        .trim()
-        .toLowerCase();
-      return statusVal !== "freshman";
-    });
-    if (filtered.length !== json.length) {
-      console.log(
-        `Filtered out ${
-          json.length - filtered.length
-        } Freshman rows from Excel input.`
-      );
-    }
-    // Detect format type
-    // Format A (old): columns COURSE / SEC / TIME / DAY / ROOM
-    // Format B (new sample): Class ID, Course Code, Status, Capacity, Count, Course Title, Section, Faculty, Type, Day, Start Time, End Time, Room, Department
-    function normalizeDay(d) {
-      if (!d) return d;
-      const dl = d.toString().trim().toLowerCase();
-      if (dl.startsWith("sun")) return "SUN";
-      if (dl.startsWith("mon")) return "MON";
-      if (dl.startsWith("tue")) return "TUE";
-      if (dl.startsWith("wed")) return "WED";
-      if (dl.startsWith("thu")) return "THU";
-      if (dl.startsWith("fri")) return "FRI";
-      if (dl.startsWith("sat")) return "SAT";
-      return d; // already maybe S/M/T etc.
-    }
+    try {
+      const data = new Uint8Array(e.target.result);
+      const workbook = XLSX.read(data, { type: "array" });
+      const sheet = workbook.Sheets[workbook.SheetNames[0]];
+      const json = XLSX.utils.sheet_to_json(sheet);
+      // Filter out Freshman status rows
+      const filtered = json.filter((row) => {
+        const statusVal = (row["Status"] || row["STATUS"] || "")
+          .toString()
+          .trim()
+          .toLowerCase();
+        return statusVal !== "freshman";
+      });
+      if (filtered.length !== json.length) {
+        console.log(
+          `Filtered out ${
+            json.length - filtered.length
+          } Freshman rows from Excel input.`
+        );
+      }
+      // Detect format type
+      // Format A (old): columns COURSE / SEC / TIME / DAY / ROOM
+      // Format B (new sample): Class ID, Course Code, Status, Capacity, Count, Course Title, Section, Faculty, Type, Day, Start Time, End Time, Room, Department
+      function normalizeDay(d) {
+        if (!d) return d;
+        const dl = d.toString().trim().toLowerCase();
+        if (dl.startsWith("sun")) return "SUN";
+        if (dl.startsWith("mon")) return "MON";
+        if (dl.startsWith("tue")) return "TUE";
+        if (dl.startsWith("wed")) return "WED";
+        if (dl.startsWith("thu")) return "THU";
+        if (dl.startsWith("fri")) return "FRI";
+        if (dl.startsWith("sat")) return "SAT";
+        return d; // already maybe S/M/T etc.
+      }
 
-    const converted = filtered.map((row) => {
-      const hasNewHeaders =
-        Object.prototype.hasOwnProperty.call(row, "Course Title") &&
-        Object.prototype.hasOwnProperty.call(row, "Start Time");
-      if (hasNewHeaders) {
-        const rawTitle =
-          row["Course Title"] || row["COURSE"] || row["Course"] || "";
-        const section = row["Section"] || row["SEC"] || "";
-        const title =
-          rawTitle.length > 4
-            ? rawTitle.slice(0, -(section.length + 2)).trim()
-            : rawTitle; // remove last 4 chars
-        const dayRaw = row["Day"] || row["DAY"] || "";
-        const day = normalizeDay(dayRaw);
-        const startRaw = (row["Start Time"] || "").toString().trim();
-        const endRaw = (row["End Time"] || "").toString().trim();
+      const converted = filtered.map((row) => {
+        const hasNewHeaders =
+          Object.prototype.hasOwnProperty.call(row, "Course Title") &&
+          Object.prototype.hasOwnProperty.call(row, "Start Time");
+        if (hasNewHeaders) {
+          const rawTitle =
+            row["Course Title"] || row["COURSE"] || row["Course"] || "";
+          const section = row["Section"] || row["SEC"] || "";
+          const title =
+            rawTitle.length > 4
+              ? rawTitle.slice(0, -(section.length + 2)).trim()
+              : rawTitle; // remove last 4 chars
+          const dayRaw = row["Day"] || row["DAY"] || "";
+          const day = normalizeDay(dayRaw);
+          const startRaw = (row["Start Time"] || "").toString().trim();
+          const endRaw = (row["End Time"] || "").toString().trim();
+          return {
+            "Course Title": title,
+            "Course ID": row["Course ID"] || row["Class ID"] || "",
+            CODE: row["Course Code"] || row["CODE"] || "",
+            Section: section,
+            Day: day,
+            Room: row["Room"] || row["ROOM"] || "",
+            Count: row["Count"] || row["COUNT"] || null,
+            times: [
+              {
+                day: day,
+                startRaw: startRaw,
+                endRaw: endRaw,
+                start: convertTo24Hour(startRaw),
+                end: convertTo24Hour(endRaw),
+                room: row["Room"] || row["ROOM"] || "",
+              },
+            ],
+          };
+        } else {
+          // Fallback to old format
+          const time = row["TIME"] || "";
+          const start = time.includes("-") ? time.split("-")[0].trim() : "";
+          const end = time.includes("-") ? time.split("-")[1].trim() : "";
+          const startRaw = start ? start + ":00" : "";
+          const endRaw = end ? end + ":00" : "";
+          return {
+            "Course Title": (function () {
+              const rt = row["COURSE"] || row["Course"] || "";
+              return rt.length > 4 ? rt.slice(0, -4).trim() : rt;
+            })(),
+            "Course ID": row["Course ID"] || "",
+            CODE: row["CODE"] || "",
+            Section: row["SEC"] || "",
+            Day: row["DAY"] || "",
+            Room: row["ROOM"] || "",
+            times: [
+              {
+                day: row["DAY"] || "",
+                startRaw: startRaw,
+                endRaw: endRaw,
+                start: convertTo24Hour(startRaw),
+                end: convertTo24Hour(endRaw),
+                room: row["ROOM"] || "",
+              },
+            ],
+          };
+        }
+      });
+
+      console.log("Converted Excel rows:", converted);
+      parseRows(converted);
+      hideSpinner();
+    } catch (err) {
+      console.error("Excel parsing failed:", err);
+      showPopup(
+        "Excel parse error",
+        "Failed to parse Excel file. Try saving as .xlsx and re-uploading."
+      );
+    } finally {
+      hideSpinner();
+    }
+  };
+  // More compatible: read as ArrayBuffer
+  reader.readAsArrayBuffer(file);
+}
+
+function handleCSV(file) {
+  showSpinner();
+  const reader = new FileReader();
+  reader.onload = function (e) {
+    try {
+      const text = e.target.result;
+      // simple CSV parse: split lines, use first row as headers
+      const lines = text.split(/\r?\n/).filter((l) => l.trim() !== "");
+      if (lines.length === 0) throw new Error("Empty CSV");
+      const headers = lines[0].split(",").map((h) => h.trim());
+      const rows = lines.slice(1).map((ln) => {
+        const cols = ln.split(",");
+        const obj = {};
+        headers.forEach((h, i) => (obj[h] = cols[i] ? cols[i].trim() : ""));
+        return obj;
+      });
+      // Filter out Freshman status rows
+      const filtered = rows.filter((row) => {
+        const statusVal = (row["Status"] || row["STATUS"] || "")
+          .toString()
+          .trim()
+          .toLowerCase();
+        return statusVal !== "freshman";
+      });
+      if (filtered.length !== rows.length) {
+        console.log(
+          `Filtered out ${
+            rows.length - filtered.length
+          } Freshman rows from CSV input.`
+        );
+      }
+      // mimic sheet rows for parseRows
+      const converted = filtered.map((row) => {
+        // try to map common CSV columns to the sheet format
         return {
-          "Course Title": title,
+          "Course Title":
+            row["Course Title"] || row["COURSE"] || row["Course"] || "",
           "Course ID": row["Course ID"] || row["Class ID"] || "",
           CODE: row["Course Code"] || row["CODE"] || "",
-          Section: section,
-          Day: day,
+          Section: row["Section"] || row["SEC"] || "",
+          Day: row["Day"] || row["DAY"] || "",
           Room: row["Room"] || row["ROOM"] || "",
+          Count: row["Count"] || row["COUNT"] || null,
           times: [
             {
-              day: day,
-              startRaw: startRaw,
-              endRaw: endRaw,
-              start: convertTo24Hour(startRaw),
-              end: convertTo24Hour(endRaw),
+              day: row["Day"] || row["DAY"] || "",
+              startRaw: row["Start Time"] || row["Start"] || "",
+              endRaw: row["End Time"] || row["End"] || "",
+              start: convertTo24Hour(row["Start Time"] || row["Start"] || ""),
+              end: convertTo24Hour(row["End Time"] || row["End"] || ""),
               room: row["Room"] || row["ROOM"] || "",
             },
           ],
         };
-      } else {
-        // Fallback to old format
-        const time = row["TIME"] || "";
-        const start = time.includes("-") ? time.split("-")[0].trim() : "";
-        const end = time.includes("-") ? time.split("-")[1].trim() : "";
-        const startRaw = start ? start + ":00" : "";
-        const endRaw = end ? end + ":00" : "";
-        return {
-          "Course Title": (function () {
-            const rt = row["COURSE"] || row["Course"] || "";
-            return rt.length > 4 ? rt.slice(0, -4).trim() : rt;
-          })(),
-          "Course ID": row["Course ID"] || "",
-          CODE: row["CODE"] || "",
-          Section: row["SEC"] || "",
-          Day: row["DAY"] || "",
-          Room: row["ROOM"] || "",
-          times: [
-            {
-              day: row["DAY"] || "",
-              startRaw: startRaw,
-              endRaw: endRaw,
-              start: convertTo24Hour(startRaw),
-              end: convertTo24Hour(endRaw),
-              room: row["ROOM"] || "",
-            },
-          ],
-        };
-      }
-    });
-
-    console.log("Converted Excel rows:", converted);
-    parseRows(converted);
-    hideSpinner();
+      });
+      parseRows(converted);
+    } catch (err) {
+      console.error("CSV parsing failed:", err);
+      showPopup(
+        "CSV parse error",
+        "Failed to parse CSV file. Ensure it has headers and is UTF-8 encoded."
+      );
+    } finally {
+      hideSpinner();
+    }
   };
-  reader.readAsBinaryString(file);
+  reader.readAsText(file, "UTF-8");
 }
 
 async function handlePDF(file) {
@@ -341,7 +450,8 @@ function updateCourseDropdown() {
   multiSelect.innerHTML = "";
 
   if (uniqueTitles.length === 0) {
-    alert(
+    showPopup(
+      "No courses found",
       "No courses found in the uploaded file. Please check the file format."
     );
     return;
@@ -361,7 +471,8 @@ function updateCourseDropdown() {
     });
   }, 0);
 
-  alert(
+  showPopup(
+    "Upload complete",
     `File uploaded successfully! Found ${uniqueTitles.length} unique courses.`
   );
   // Reveal hidden selection & generate button
@@ -417,6 +528,7 @@ function parseRows(rows) {
     const title = (row["Course Title"] || "").trim();
     const section = row["Section"] || "A";
     const key = `${title}__${section}`;
+    const count = row["Count"] || null;
     const originalTimes = row.times || [];
     const expandedTimes = [];
     originalTimes.forEach((t) => {
@@ -438,7 +550,7 @@ function parseRows(rows) {
     });
 
     if (!grouped[key]) {
-      grouped[key] = { title, section, times: expandedTimes };
+      grouped[key] = { title, section, count, times: expandedTimes };
     } else {
       grouped[key].times.push(...expandedTimes);
     }
@@ -451,6 +563,7 @@ function parseRows(rows) {
       byTitle[entry.title] = { title: entry.title, sections: [] };
     byTitle[entry.title].sections.push({
       section: entry.section,
+      count: entry.count,
       times: entry.times,
     });
   });
@@ -567,7 +680,7 @@ function generateRoutines() {
 
   const selectedCourses = $("#courseMultiSelect").val() || [];
   if (!selectedCourses.length) {
-    alert("Please select at least one course");
+    showPopup("Select courses", "Please select at least one course");
     return;
   }
 
@@ -582,6 +695,7 @@ function generateRoutines() {
     domains[course] = courseEntry.sections.map((sec) => ({
       title: courseEntry.title,
       section: sec.section,
+      count: sec.count,
       times: sec.times,
     }));
   });
@@ -685,6 +799,16 @@ function generateRoutines() {
     let totalGap = 0; // sum of gaps across all days
     let largestGap = 0; // max single gap among all days
     let lunchOverlapMinutes = 0; // minutes in lunch window
+    
+    // Calculate minimum seat count score (prioritize sections with fewer seats)
+    let totalSeatCount = 0;
+    let sectionsWithCount = 0;
+    routine.forEach((section) => {
+      if (section.count !== null && section.count !== undefined && !isNaN(section.count)) {
+        totalSeatCount += parseInt(section.count, 10);
+        sectionsWithCount++;
+      }
+    });
 
     Object.values(byDay).forEach((list) => {
       list.sort((a, b) => a.start - b.start);
@@ -696,6 +820,15 @@ function generateRoutines() {
         if (gap > 0) {
           totalGap += gap;
           if (gap > largestGap) largestGap = gap;
+        }
+      }
+
+      // Popup backdrop click to close
+      const popup = document.getElementById("appPopup");
+      if (popup) {
+        const backdrop = popup.querySelector(".app-popup-backdrop");
+        if (backdrop) {
+          backdrop.addEventListener("click", () => hidePopup());
         }
       }
     });
@@ -716,12 +849,13 @@ function generateRoutines() {
     }
 
     // Base components (lower better):
-    // activeDays, totalSpread, totalGap
+    // activeDays, totalSpread, totalGap, totalSeatCount
     let score = 0;
     const WEIGHTS = {
       activeDays: 1000, // strong preference to reduce active days
       spread: 100, // compact daily window
       gaps: 50, // reduce idle time
+      seatCount: 200, // prioritize sections with fewer available seats (lower count = higher priority)
       overDayPenalty: 1200, // penalty per day beyond maxDays
       largeGapPenalty: 400, // penalty applied if largestGap exceeds maxGapHours
       lunchPerMinute: 2, // penalty per lunch-overlap minute
@@ -730,6 +864,7 @@ function generateRoutines() {
     score += activeDays * WEIGHTS.activeDays;
     score += totalSpread * WEIGHTS.spread;
     score += totalGap * WEIGHTS.gaps;
+    score += totalSeatCount * WEIGHTS.seatCount; // Lower seat count = lower score = higher priority
 
     let penalties = { overDays: 0, gap: 0, lunch: 0 };
 
@@ -759,6 +894,8 @@ function generateRoutines() {
         totalGap,
         largestGap,
         lunchOverlapMinutes,
+        totalSeatCount,
+        sectionsWithCount,
         penalties,
       },
     };
@@ -807,6 +944,7 @@ function generateRoutines() {
         groups[key] = {
           title: sectionChoice.title,
           section: sectionChoice.section,
+          count: sectionChoice.count,
           sessions: [],
         };
       sectionChoice.times.forEach((session) => {
@@ -858,8 +996,11 @@ function generateRoutines() {
 
     const table = document.createElement("table");
     const thead = document.createElement("thead");
+    // Check if any group has count data
+    const hasCount = Object.values(groups).some(g => g.count !== null && g.count !== undefined);
+    const countHeader = hasCount ? "<th>Seats</th>" : "";
     thead.innerHTML =
-      "<tr><th>Course Title</th><th>Section</th><th>Day</th><th>Start</th><th>End</th><th>Room</th></tr>";
+      `<tr><th>Course Title</th><th>Section</th>${countHeader}<th>Day</th><th>Start</th><th>End</th><th>Room</th></tr>`;
     table.appendChild(thead);
     const tbody = document.createElement("tbody");
     Object.values(groups)
@@ -869,7 +1010,8 @@ function generateRoutines() {
           const tr = document.createElement("tr");
           const startDisp = cleanTime(s.startRaw);
           const endDisp = cleanTime(s.endRaw);
-          tr.innerHTML = `<td>${group.title}</td><td>${group.section}</td><td>${s.day}</td><td>${startDisp}</td><td>${endDisp}</td><td>${s.room}</td>`;
+          const countCell = hasCount ? `<td>${group.count !== null && group.count !== undefined ? group.count : 'N/A'}</td>` : "";
+          tr.innerHTML = `<td>${group.title}</td><td>${group.section}</td>${countCell}<td>${s.day}</td><td>${startDisp}</td><td>${endDisp}</td><td>${s.room}</td>`;
           tbody.appendChild(tr);
         });
       });

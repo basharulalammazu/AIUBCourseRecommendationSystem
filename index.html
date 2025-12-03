@@ -2,11 +2,16 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
     <title>AIUB Course Recomendation System</title>
     <meta name="theme-color" content="#0f172a" />
     <link rel="manifest" href="manifest.webmanifest" />
     <link rel="apple-touch-icon" href="icons/icon-192.png" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
     <meta
       name="apple-mobile-web-app-status-bar-style"
       content="black-translucent"
@@ -102,7 +107,6 @@
           <a href="install-guide.html" class="btn secondary">
             📖 How to Install on Mobile
           </a>
-          <a href="create-icons.html" class="btn outline"> 🎨 Create Icons </a>
         </div>
       </div>
 
@@ -215,6 +219,7 @@
     <script src="js/theme.js"></script>
     <script src="js/script.js"></script>
     <script src="js/pwa.js"></script>
+    <script src="js/modal.js"></script>
     <script>
       // Settings modal & SW update logic (index specific)
       (function () {
@@ -312,15 +317,28 @@
         });
 
         clearCacheBtn.addEventListener("click", async () => {
-          if (!confirm("Clear cached assets?")) return;
+          const ok = await (window.AppModal
+            ? AppModal.confirm(
+                "Clear cached assets?",
+                "This will remove all cached assets used for offline. Continue?"
+              )
+            : Promise.resolve(confirm("Clear cached assets?")));
+          if (!ok) return;
           const keys = await caches.keys();
           for (const k of keys) await caches.delete(k);
           statusEl.textContent = "Status: Cache cleared. Reload recommended.";
         });
 
-        resetBtn.addEventListener("click", () => {
-          if (!confirm("Reset all saved data (localStorage) and reload?"))
-            return;
+        resetBtn.addEventListener("click", async () => {
+          const ok = await (window.AppModal
+            ? AppModal.confirm(
+                "Reset saved data?",
+                "Reset all saved data (localStorage) and reload?"
+              )
+            : Promise.resolve(
+                confirm("Reset all saved data (localStorage) and reload?")
+              ));
+          if (!ok) return;
           localStorage.clear();
           location.reload();
         });
