@@ -1,11 +1,13 @@
 // Basic service worker for offline caching & update channel
-const APP_VERSION = "1.0.0";
-const CACHE_NAME = "aiub-courses-v1";
+const APP_VERSION = "2.0.0";
+const CACHE_NAME = `aiub-courses-v${APP_VERSION}`;
 const CORE_ASSETS = [
   "./",
   "index.html",
   "offer_courses.html",
   "routine.html",
+  "install-guide.html",
+  "create-icons.html",
   "css/style.css",
   "css/offer_courses.css",
   "css/routine.css",
@@ -16,6 +18,7 @@ const CORE_ASSETS = [
   "js/routine.js",
   "js/theme.js",
   "js/pwa.js",
+  "js/modal.js",
   "manifest.webmanifest",
   "offline.html",
 ];
@@ -44,6 +47,15 @@ self.addEventListener("activate", (event) => {
         keys.filter((k) => k !== CACHE_NAME).map((k) => caches.delete(k))
       );
       self.clients.claim();
+      
+      // Notify all clients about the new version
+      const clients = await self.clients.matchAll();
+      clients.forEach(client => {
+        client.postMessage({
+          type: 'VERSION_UPDATE',
+          version: APP_VERSION
+        });
+      });
     })
   );
 });
@@ -52,6 +64,11 @@ self.addEventListener("activate", (event) => {
 self.addEventListener("message", (event) => {
   if (event.data === "SKIP_WAITING") {
     self.skipWaiting();
+  } else if (event.data === "GET_VERSION") {
+    event.ports[0].postMessage({
+      version: APP_VERSION,
+      cacheName: CACHE_NAME
+    });
   }
 });
 

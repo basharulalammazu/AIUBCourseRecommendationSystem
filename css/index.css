@@ -8,11 +8,23 @@
 /* Body Styling */
 body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  padding: 20px;
+  padding: 16px 12px;
   background: radial-gradient(circle at 25% 15%, #ffffff, #e9eef5 60%, #dfe6ed);
   color: #1f2a37;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
+}
+
+@media (min-width: 480px) {
+  body {
+    padding: 18px 16px;
+  }
+}
+
+@media (min-width: 768px) {
+  body {
+    padding: 20px;
+  }
 }
 
 /* Heading */
@@ -51,7 +63,19 @@ h1.app-title {
 /* Hero */
 .hero {
   text-align: center;
-  padding: 10px 0 30px;
+  padding: 8px 0 20px;
+}
+
+@media (min-width: 480px) {
+  .hero {
+    padding: 10px 0 25px;
+  }
+}
+
+@media (min-width: 768px) {
+  .hero {
+    padding: 10px 0 30px;
+  }
 }
 
 /* Card / Glass */
@@ -62,23 +86,65 @@ h1.app-title {
   border: 1px solid rgba(255, 255, 255, 0.6);
   box-shadow: 0 4px 12px rgba(30, 58, 90, 0.08),
     0 8px 32px -8px rgba(30, 58, 90, 0.15);
-  border-radius: 24px;
-  padding: 34px 38px 42px;
+  border-radius: 18px;
+  padding: 20px 16px 26px;
+}
+
+@media (min-width: 480px) {
+  .glass {
+    border-radius: 20px;
+    padding: 24px 20px 30px;
+  }
+}
+
+@media (min-width: 768px) {
+  .glass {
+    border-radius: 24px;
+    padding: 34px 38px 42px;
+  }
 }
 .selection-card {
   margin: 0 auto;
   max-width: 650px;
 }
 .section-title {
-  font-size: 1.35rem;
+  font-size: 1.15rem;
   font-weight: 600;
   margin-bottom: 6px;
   color: #16324c;
 }
+
+@media (min-width: 480px) {
+  .section-title {
+    font-size: 1.25rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .section-title {
+    font-size: 1.35rem;
+  }
+}
+
 .helper-text {
-  font-size: 0.92rem;
+  font-size: 0.875rem;
   color: #516173;
-  margin-bottom: 22px;
+  margin-bottom: 18px;
+  line-height: 1.6;
+}
+
+@media (min-width: 480px) {
+  .helper-text {
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+  }
+}
+
+@media (min-width: 768px) {
+  .helper-text {
+    font-size: 0.92rem;
+    margin-bottom: 22px;
+  }
 }
 
 /* Form Row */
@@ -107,20 +173,38 @@ h1.app-title {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  padding: 12px 22px;
+  padding: 14px 20px;
+  min-height: 48px;
   font-weight: 600;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   font-family: inherit;
   border: 1px solid var(--btn-border);
   background: var(--btn-bg);
   color: var(--btn-color);
-  border-radius: 14px;
+  border-radius: 12px;
   cursor: pointer;
   text-decoration: none;
-  line-height: 1;
+  line-height: 1.2;
   position: relative;
   transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: var(--btn-shadow);
+  width: 100%;
+}
+
+@media (min-width: 480px) {
+  .btn {
+    font-size: 0.925rem;
+    padding: 13px 20px;
+  }
+}
+
+@media (min-width: 768px) {
+  .btn {
+    font-size: 0.95rem;
+    padding: 12px 22px;
+    border-radius: 14px;
+    width: auto;
+  }
 }
 .btn:hover {
   transform: translateY(-3px);
@@ -158,9 +242,17 @@ h1.app-title {
 }
 .links-stack {
   display: flex;
-  flex-wrap: wrap;
-  gap: 14px;
+  flex-direction: column;
+  gap: 12px;
   margin-top: 8px;
+}
+
+@media (min-width: 768px) {
+  .links-stack {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 14px;
+  }
 }
 
 /* Theme Toggle */
@@ -288,7 +380,6 @@ body.dark #dev-section {
   border-radius: 20px;
   border: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow: 0 8px 32px -8px rgba(0, 0, 0, 0.4);
-  padding: 2rem;
   margin-top: 3rem;
 }
 body.dark .download-area,
@@ -328,20 +419,6 @@ body.dark .dev-card a {
 
 /* Responsive tweaks */
 @media (max-width: 720px) {
-  .glass {
-    padding: 28px 26px 34px;
-    border-radius: 20px;
-  }
-  .hero {
-    padding-bottom: 10px;
-  }
-  .links-stack {
-    flex-direction: column;
-    align-items: stretch;
-  }
-  .btn {
-    width: 100%;
-  }
   .theme-toggle {
     width: 42px;
     height: 42px;
@@ -351,34 +428,30 @@ body.dark .dev-card a {
 
 /* Ultra-small devices tweaks */
 @media (max-width: 480px) {
-  body {
-    padding: 12px;
-  }
   h1.app-title {
-    font-size: clamp(1.6rem, 7vw, 2.2rem);
-  }
-  .selection-card.glass {
-    padding: 22px 18px 26px;
+    font-size: clamp(1.5rem, 7vw, 2.2rem);
+    letter-spacing: -0.5px;
   }
   .subtitle {
-    font-size: 0.95rem;
+    font-size: 0.875rem;
+    padding: 0 4px;
   }
   .form-row label {
     font-size: 0.75rem;
   }
-  .btn {
-    padding: 12px 16px;
-    font-size: 0.9rem;
-  }
-  #dev-section {
-    padding: 24px 12px;
-  }
   .theme-toggle {
-    top: 12px;
-    right: 12px;
+    top: 10px;
+    right: 10px;
     width: 38px;
     height: 38px;
     font-size: 0.95rem;
+  }
+  .fab-btn {
+    width: 50px;
+    height: 50px;
+    font-size: 1.2rem;
+    bottom: 0.75rem;
+    right: 0.75rem;
   }
 }
 
@@ -470,33 +543,86 @@ input::placeholder {
 
 /* Enhanced Developer & Download Section */
 #dev-section {
-  margin-top: 60px;
-  padding: 40px 20px;
+  margin-top: 40px;
   background: linear-gradient(135deg, #e0ecf8, #fdfdfd);
-  border-radius: 16px;
+  border-radius: 14px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
   text-align: center;
 }
 
+@media (min-width: 480px) {
+  #dev-section {
+    padding: 32px 20px;
+    border-radius: 16px;
+  }
+}
+
+@media (min-width: 768px) {
+  #dev-section {
+    margin-top: 60px;
+    padding: 40px 20px;
+  }
+}
+
 .download-area,
 .developer-area {
-  margin-bottom: 40px;
+  margin-bottom: 30px;
+}
+
+@media (min-width: 768px) {
+  .download-area,
+  .developer-area {
+    margin-bottom: 40px;
+  }
 }
 
 .download-area h3,
 .developer-area h3 {
-  font-size: 1.8rem;
-  margin-bottom: 10px;
+  font-size: 1.4rem;
+  margin-bottom: 8px;
   color: #1d3557;
+}
+
+@media (min-width: 480px) {
+  .download-area h3,
+  .developer-area h3 {
+    font-size: 1.6rem;
+    margin-bottom: 10px;
+  }
+}
+
+@media (min-width: 768px) {
+  .download-area h3,
+  .developer-area h3 {
+    font-size: 1.8rem;
+  }
 }
 
 .download-description,
 .dev-intro {
   max-width: 600px;
-  margin: 0 auto 20px;
-  font-size: 1.05rem;
+  margin: 0 auto 16px;
+  font-size: 0.95rem;
   color: #444;
   line-height: 1.6;
+  padding: 0 8px;
+}
+
+@media (min-width: 480px) {
+  .download-description,
+  .dev-intro {
+    font-size: 1rem;
+    margin: 0 auto 18px;
+  }
+}
+
+@media (min-width: 768px) {
+  .download-description,
+  .dev-intro {
+    font-size: 1.05rem;
+    margin: 0 auto 20px;
+    padding: 0;
+  }
 }
 
 .download-btn {
@@ -516,21 +642,45 @@ input::placeholder {
 }
 
 .dev-cards {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 30px;
-  margin-top: 20px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  margin-top: 16px;
+  max-width: 280px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (min-width: 480px) {
+  .dev-cards {
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 100%;
+    gap: 24px;
+  }
+}
+
+@media (min-width: 768px) {
+  .dev-cards {
+    gap: 30px;
+    margin-top: 20px;
+  }
 }
 
 .dev-card {
   background: #ffffff;
   border-radius: 14px;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.07);
-  padding: 20px;
-  width: 250px;
+  padding: 18px;
+  width: 100%;
   transition: transform 0.3s ease;
   text-align: center;
+}
+
+@media (min-width: 768px) {
+  .dev-card {
+    padding: 20px;
+    max-width: 250px;
+  }
 }
 
 .dev-card:hover {
